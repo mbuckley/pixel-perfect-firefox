@@ -121,22 +121,24 @@ FBL.ns(function() {
                 this.context = context;
                 this.document = doc;
                 var existingEle = this.document.getElementById("pixelperfect-wrapper");
-                if(existingEle == undefined) {
-	                this.panelNode = doc.createElement("div");
-	                this.panelNode.setAttribute("id", "pixelperfect-wrapper");
-	                this.panelNode.ownerPanel = this;
-	                this.panelNode.innerHTML = pixelPerfect.fileUtils.readPanelHTML();
-	                doc.body.appendChild(this.panelNode);
-	
-	                pixelPerfect.utils.loadCss("chrome://pixelperfect/content/pixelperfect.css", this.document);
-	                pixelPerfect.utils.loadJs("chrome://pixelperfect/content/panelActions.js", this.document);
-	
-	                pixelPerfect.utils.loadRequiredJsIntoToMainBrowserOverlay();
-	                var currentOverlayFiles = pixelPerfect.fileUtils.getCurrentOverlayFiles();
-	                for (i = 0; i < currentOverlayFiles.length; i++) {
-	                    var currentOverlay = currentOverlayFiles[i];
-	                    pixelPerfect.utils.createOverlayEyeElement(currentOverlay, this.document);
-	                }
+                if(existingEle != undefined) {
+                	doc.removeChild(existingEle);
+                }
+                
+                this.panelNode = doc.createElement("div");
+                this.panelNode.setAttribute("id", "pixelperfect-wrapper");
+                this.panelNode.ownerPanel = this;
+                this.panelNode.innerHTML = pixelPerfect.fileUtils.readPanelHTML();
+                doc.body.appendChild(this.panelNode);
+
+                pixelPerfect.utils.loadCss("chrome://pixelperfect/content/pixelperfect.css", this.document);
+                pixelPerfect.utils.loadJs("chrome://pixelperfect/content/panelActions.js", this.document);
+
+                pixelPerfect.utils.loadRequiredJsIntoToMainBrowserOverlay();
+                var currentOverlayFiles = pixelPerfect.fileUtils.getCurrentOverlayFiles();
+                for (i = 0; i < currentOverlayFiles.length; i++) {
+                    var currentOverlay = currentOverlayFiles[i];
+                    pixelPerfect.utils.createOverlayEyeElement(currentOverlay, this.document);
                 }
 
             },
