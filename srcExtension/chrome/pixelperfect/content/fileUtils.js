@@ -104,11 +104,11 @@ pixelPerfect.fileUtils = function () {
             },
             
             getUserOverlayPath: function() {
-                return this.firefoxProfileRootFolder() + 'extensions' + this.directorySeperator + 'pixelperfectplugin@openhouseconcept.com' + this.directorySeperator + 'chrome/pixelperfect/content' + this.directorySeperator + 'user_overlays' + this.directorySeperator;
+                return this.firefoxProfileRootFolder() + 'extensions' + this.directorySeperator + 'pixelperfectplugin@openhouseconcepts.com' + this.directorySeperator + 'chrome/pixelperfect/content' + this.directorySeperator + 'user_overlays' + this.directorySeperator;
             },
             
             getContentRootFolder: function() {
-                return this.firefoxProfileRootFolder() + 'extensions' + this.directorySeperator + 'pixelperfectplugin@openhouseconcept.com' + this.directorySeperator + 'chrome/pixelperfect/content';
+                return this.firefoxProfileRootFolder() + 'extensions' + this.directorySeperator + 'pixelperfectplugin@openhouseconcepts.com' + this.directorySeperator + 'chrome/pixelperfect/content';
             },
             
             readPanelHTML: function() {

@@ -203,7 +203,7 @@ pixelPerfect.panelActions = function(){
             var file = Components.classes["@mozilla.org/file/local;1"].createInstance(Components.interfaces.nsILocalFile);
             if (!file) 
                 return false;
-            var userOverlayPath = this.getFirefoxProfileRootFolder() + 'extensions' + this.directorySeperator + 'pixelperfectplugin@openhouseconcept.com' + this.directorySeperator + 'chrome/pixelperfect/content' + this.directorySeperator + 'user_overlays' + this.directorySeperator;
+            var userOverlayPath = this.getFirefoxProfileRootFolder() + 'extensions' + this.directorySeperator + 'pixelperfectplugin@openhouseconcepts.com' + this.directorySeperator + 'chrome/pixelperfect/content' + this.directorySeperator + 'user_overlays' + this.directorySeperator;
             
             file.initWithPath(userOverlayPath + fileToDelete);
             
