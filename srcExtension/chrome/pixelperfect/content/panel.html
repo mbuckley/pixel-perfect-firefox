@@ -1,0 +1,37 @@
+<div id="comp">
+    <h2>Layer Comps</h2>
+    <div id="overlay-scroll">
+        <ul id="overlay-list"></ul>
+    </div>
+</div>
+<div id="options">
+    <h2>Layer Comp Options</h2>
+    <h3>Opacity</h3>
+    <div id="opacity-toggle">
+        <div id="ctl-opacity-down" class="bt-left" onclick="pixelPerfect.panelActions.decreaseOpacity();"></div>
+        <div class="numbers" id="ctl-opacity-numbers">0.5</div>
+        <div id="ctl-opacity-up" class="bt-right" onclick="pixelPerfect.panelActions.increaseOpacity();"></div>
+    </div>
+    <h3>Position (try dragging)</h3>
+    <div id="opacity-toggle">
+        <div class="bt-left" onclick="pixelPerfect.panelActions.leftArrowMove();"></div>
+        <div id="ctl-left-position" class="numbers">0</div>
+        <div class="bt-right" onclick="pixelPerfect.panelActions.rightArrowMove();"></div>
+    </div>
+    <div id="position-toggle">
+        <div class="bt-up" onclick="pixelPerfect.panelActions.topArrowMove();"></div>
+        <div id="ctl-top-position" class="numbers">0</div>
+        <div class="bt-down" onclick="pixelPerfect.panelActions.bottomArrowMove();"></div>
+    </div>
+</div>
+<div id="info">
+    <h2>Get Started</h2>
+    <p>
+        Pixel Perfect is a firefox firebug extension that allows web developers to easily overlay a web composition over top of the developed html. 
+        Switching the composition on and off allows the developer to see how many pixels they are off while in development.</p>
+    <p>
+        To get started, click on the "Add overlay" button to add your design composition.</p>
+    <p>
+        For more information, please refer to the "Help" menu, or visit <a href="http://www.pixelperfectplugin.com" target="_blank">http://www.pixelperfectplugin.com</a></p>
+    <img src="chrome://pixelperfect/content/images/logo-mini.jpg" alt="" />
+</div>
