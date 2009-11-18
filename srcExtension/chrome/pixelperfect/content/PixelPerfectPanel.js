@@ -140,7 +140,6 @@ FBL.ns(function() {
                     var currentOverlay = currentOverlayFiles[i];
                     pixelPerfect.utils.createOverlayEyeElement(currentOverlay, this.document);
                 }
-
             },
 
             // Borrowed from YSlow
@@ -156,7 +155,6 @@ FBL.ns(function() {
 
             // Return an option menu item.
             optionMenuPixelPerfect: function(label, option) {
-
                 if (typeof Firebug.prefDomain === 'undefined') { // FB before 1.2
                     var value = Firebug.getPref(option);
                     return {
@@ -182,6 +180,5 @@ FBL.ns(function() {
 
         Firebug.registerModule(Firebug.PixelPerfectModule);
         Firebug.registerPanel(PixelPerfectPanel);
-
     }
 });
