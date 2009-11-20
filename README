@@ -5,3 +5,5 @@ composition over top of the developed HTML.
 By toggling the composition on and off, the developer can visually see how many pixels they are off in development. 
 Pixel Perfect also has an opacity option so that you can view the HTML below the composition. 
 By being able to see both the composition and the HTML you can now simultaneously use Firebug while Pixel Perfect is still in action.
+
+Official Mozilla Addons Page: https://addons.mozilla.org/en-US/firefox/addon/7943
