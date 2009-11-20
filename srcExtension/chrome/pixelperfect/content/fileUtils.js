@@ -97,7 +97,9 @@ pixelPerfect.fileUtils = function () {
                   if(entry.isFile()) {
                     var filePath = entry.path;
                     var justFileName = filePath.substring(filePath.lastIndexOf(this.directorySeperator) + 1, filePath.length);
-                    array.push(justFileName);
+                    if(justFileName != ".leave") {
+                    	array.push(justFileName);
+                    }
                   }
                 }
                 return array;

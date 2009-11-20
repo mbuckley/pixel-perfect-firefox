@@ -6,8 +6,7 @@
     <em:iconURL>chrome://pixelperfect/content/images/logo_32x32.png</em:iconURL>
     <em:homepageURL>http://www.pixelperfectplugin.com/</em:homepageURL>
 		<em:id>pixelperfectplugin@openhouseconcepts.com</em:id>
-		<em:version>1.5.0</em:version>
-		<em:updateURL/>
+		<em:version>1.5.5</em:version>
 		<em:type>2</em:type>
 		<em:targetApplication>
 			<RDF:Description>

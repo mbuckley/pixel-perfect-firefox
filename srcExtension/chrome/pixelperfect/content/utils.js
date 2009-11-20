@@ -128,8 +128,8 @@ pixelPerfect.utils = function () {
             },
             
             fireEyeClickEvent: function(eyeEleId, doc) {
-            	if(eyeEleId != '') {
-	            	var fireOnThisEye = doc.getElementById(eyeEleId);
+            	var fireOnThisEye = doc.getElementById(eyeEleId);
+            	if(fireOnThisEye != null && eyeEleId != undefined && eyeEleId != '') {
 	            	var evObj = doc.createEvent('MouseEvents');
 	            	evObj.initEvent( 'click', true, true );
 	            	fireOnThisEye.dispatchEvent(evObj);
