@@ -106,17 +106,18 @@ pixelPerfect.fileUtils = function () {
             },
             
             getUserOverlayPath: function() {
-                return this.firefoxProfileRootFolder() + 'extensions' + this.directorySeperator + 'pixelperfectplugin@openhouseconcepts.com' + this.directorySeperator + 'chrome/pixelperfect/content' + this.directorySeperator + 'user_overlays' + this.directorySeperator;
+                return this.firefoxProfileRootFolder() + 'extensions' + this.directorySeperator + 'pixelperfectplugin@openhouseconcepts.com' + this.directorySeperator + 'chrome' + this.directorySeperator + 'pixelperfect' + this.directorySeperator + 'content' + this.directorySeperator + 'user_overlays' + this.directorySeperator;
             },
             
             getContentRootFolder: function() {
-                return this.firefoxProfileRootFolder() + 'extensions' + this.directorySeperator + 'pixelperfectplugin@openhouseconcepts.com' + this.directorySeperator + 'chrome/pixelperfect/content';
+                return this.firefoxProfileRootFolder() + 'extensions' + this.directorySeperator + 'pixelperfectplugin@openhouseconcepts.com' + this.directorySeperator + 'chrome' + this.directorySeperator + 'pixelperfect' + this.directorySeperator + 'content';
             },
             
             readPanelHTML: function() {
                 var file = Components.classes["@mozilla.org/file/local;1"]
                   .createInstance(Components.interfaces.nsILocalFile);
                 if (!file) return false;
+                
                 file.initWithPath(this.getContentRootFolder() + this.directorySeperator + "panel.html");
 
                 var data = "";

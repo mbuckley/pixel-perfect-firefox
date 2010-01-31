@@ -6,7 +6,7 @@
     <em:iconURL>chrome://pixelperfect/content/images/logo_32x32.png</em:iconURL>
     <em:homepageURL>http://www.pixelperfectplugin.com/</em:homepageURL>
 		<em:id>pixelperfectplugin@openhouseconcepts.com</em:id>
-		<em:version>1.5.5</em:version>
+		<em:version>1.5.6</em:version>
 		<em:type>2</em:type>
 		<em:targetApplication>
 			<RDF:Description>
@@ -15,5 +15,5 @@
 				<em:minVersion>3.0</em:minVersion>
 			</RDF:Description>
 		</em:targetApplication>
-  </RDF:Description>
+  <em:optionsURL/><em:aboutURL/><em:hidden/></RDF:Description>
 </RDF>
