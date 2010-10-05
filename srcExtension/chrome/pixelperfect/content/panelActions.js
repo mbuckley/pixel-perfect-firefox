@@ -204,7 +204,8 @@ pixelPerfect.panelActions = function(){
             if (!file) 
                 return false;
             var userOverlayPath = this.getFirefoxProfileRootFolder() + 'extensions' + this.directorySeperator + 'pixelperfectplugin@openhouseconcepts.com' + this.directorySeperator + 'chrome/pixelperfect/content' + this.directorySeperator + 'user_overlays' + this.directorySeperator;
-            
+            userOverlayPath = userOverlayPath.replace(/\\|\//g,"\\\\");
+			
             file.initWithPath(userOverlayPath + fileToDelete);
             
             try {
