@@ -10,7 +10,7 @@ pixelPerfect.publicDocument = function () {
 
     // public
     return {
-        notifyPanelOverlayPositionHasChanged: function() {
+        notifyPanelOverlayPositionHasChanged: function(overlayLocked) {
             if ("createEvent" in document) {
                 var element = document.getElementById("ppoc");
                 if (element == null) {
@@ -26,7 +26,7 @@ pixelPerfect.publicDocument = function () {
                 element.dispatchEvent(evt);
             }
         },
-        notifyToSaveLastPosition: function() {
+        notifyToSaveLastPosition: function(overlayLocked) {
             if ("createEvent" in document) {
                 var element = document.getElementById("ppoc");
                 if (element == null) {

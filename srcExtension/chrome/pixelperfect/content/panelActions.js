@@ -7,10 +7,10 @@ if (typeof pixelPerfect.panelActions == "undefined") {
 
 pixelPerfect.panelActions = function(){
     // private
-    var x = window.content;
-    
-    var opacity = 0.5;
-    var overlayDivId = 'pp_overlay';
+    var x = window.content,
+        opacity = 0.5,
+        overlayDivId = 'pp_overlay',
+        overlayLocked = false;
     
     // public
     return {
@@ -138,19 +138,20 @@ pixelPerfect.panelActions = function(){
             imageDimensions = this.getImageDimensions(chromeToOverlayUrl);
             var width = imageDimensions[0];
             var height = imageDimensions[1];
-            divPixelPerfect.setAttribute("style", "z-index: 1000");
+            divPixelPerfect.setAttribute("style", "z-index: " + document.getElementById('z-index-input').value);
             divPixelPerfect.style.background = 'url(' + chromeToOverlayUrlNoSpaces + ') no-repeat';
             divPixelPerfect.style.width = width;
             divPixelPerfect.style.height = height;
+
             divPixelPerfect.style.opacity = opacity;
             divPixelPerfect.style.MozOpacity = opacity;
             divPixelPerfect.style.position = 'absolute';
             divPixelPerfect.style.top = this.getPref("pixelPerfect.lastYPos") + 'px';
             divPixelPerfect.style.left = this.getPref("pixelPerfect.lastXPos") + 'px';
-			divPixelPerfect.style.cursor = 'all-scroll';
+			       divPixelPerfect.style.cursor = 'all-scroll';
             
             
-            var draggableScriptId = "draggable_script";
+            var draggableScriptId = "draggable-script";
             
             var existingDraggableScript = x.document.getElementById(draggableScriptId);
             this.removeChildElement(existingDraggableScript, pageBody);
@@ -160,7 +161,6 @@ pixelPerfect.panelActions = function(){
             var savedOpacity = this.getPref("pixelPerfect.opacity");
             opacity = this.roundNumber(savedOpacity, 1);
             this.updateOverlayOpacity();
-            
             
             var draggablePP = x.document.createElement("script");
             draggablePP.setAttribute("type", "text/javascript");
@@ -316,6 +316,33 @@ pixelPerfect.panelActions = function(){
             this.moveY(newYPos);
         },
         
+        togglePositionLock: function(chkEle) {
+          overlayLocked = chkEle.checked;
+          this.updateDragStatus();
+        },
+        
+        updateZIndex: function(zIndexInputEle) {
+          var ppOverlayEle = x.document.getElementById(overlayDivId);
+          ppOverlayEle.style.zIndex = zIndexInputEle.value;
+          return false;
+        },
+        
+        updateDragStatus: function() {
+          var pageBody = x.document.getElementsByTagName("body")[0];
+          //remove previous
+          var updateDragStatusScriptID = "update-drag-status";
+          var existingDragStatusScript = x.document.getElementById(updateDragStatusScriptID);
+          this.removeChildElement(existingDragStatusScript, pageBody);
+          
+          // add new drag status (which will lock/unlock dragging based on state of overlayLocked instance)
+          var dragStatusScript = x.document.createElement("script");
+          dragStatusScript.setAttribute("type", "text/javascript");
+          dragStatusScript.setAttribute("id", updateDragStatusScriptID);
+          dragStatusScript.innerHTML = "Drag.disabled = " + overlayLocked;
+          
+          this.appendScriptElementAsChild(dragStatusScript, pageBody);
+        },
+        
         moveX: function(xPos){
             this.moveElement(xPos, this.findPixelPerfectYPos());
         },
@@ -325,14 +352,15 @@ pixelPerfect.panelActions = function(){
         },
         
         moveElement: function(xPos, yPos){
-            this.updatePanelDisplayOfXAndY(xPos, yPos);
-            this.setPrefValue("pixelPerfect.lastXPos", xPos);
-            this.setPrefValue("pixelPerfect.lastYPos", yPos);
-            
-            pp_overlay = x.document.getElementById(overlayDivId);
-            pp_overlay.style.top = yPos + 'px';
-            pp_overlay.style.left = xPos + 'px';
-            
+            if(!overlayLocked) {
+              this.updatePanelDisplayOfXAndY(xPos, yPos);
+              this.setPrefValue("pixelPerfect.lastXPos", xPos);
+              this.setPrefValue("pixelPerfect.lastYPos", yPos);
+              
+              pp_overlay = x.document.getElementById(overlayDivId);
+              pp_overlay.style.top = yPos + 'px';
+              pp_overlay.style.left = xPos + 'px';
+            }
         },
         
         findPixelPerfectXPos: function(){

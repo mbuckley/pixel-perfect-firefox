@@ -95,14 +95,14 @@ FBL.ns(function() {
             },
 
             pixelPerfectHelp: function(menuitem) {
-                if ("Pixel Pefect FAQ" == menuitem.label) {
-                    gBrowser.selectedTab = gBrowser.addTab("http://www.pixelperfectplugin.com/faqs");
+                if ("Pixel Perfect Home" == menuitem.label) {
+                	gBrowser.selectedTab = gBrowser.addTab("http://openhouseconcept.com/projects/pixelperfect/");
+                }
+                else if ("File an issue" == menuitem.label) {
+                    gBrowser.selectedTab = gBrowser.addTab("https://github.com/openhouseconcept/PixelPerfect/issues");
                 }
                 else if ("Send Feedback" == menuitem.label) {
-                    gBrowser.selectedTab = gBrowser.addTab("http://www.pixelperfectplugin.com/contact");
-                }
-                else if ("Pixel Perfect Home" == menuitem.label) {
-                	gBrowser.selectedTab = gBrowser.addTab("http://www.pixelperfectplugin.com");
+                    gBrowser.selectedTab = gBrowser.addTab("http://openhouseconcept.com/projects/pixelperfect/contact");
                 }
             }
         });
@@ -123,10 +123,12 @@ FBL.ns(function() {
                 var existingEle = this.document.getElementById("pixelperfect-wrapper");
                 if(existingEle != undefined) {
                 	doc.removeChild(existingEle);
+                	existingEle.parentNode.removeChild(existingEle);
                 }
                 
                 this.panelNode = doc.createElement("div");
                 this.panelNode.setAttribute("id", "pixelperfect-wrapper");
+                this.panelNode.setAttribute("class", "container_12");
                 this.panelNode.ownerPanel = this;
                 this.panelNode.innerHTML = pixelPerfect.fileUtils.readPanelHTML();
                 doc.body.appendChild(this.panelNode);

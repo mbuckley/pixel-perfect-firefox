@@ -1,10 +1,338 @@
+/* 960 grid (http://960.gs/)*/
+/* Containers
+----------------------------------------------------------------------------------------------------*/
+.container_12 {margin-left: auto; margin-right: auto; width: 960px;}
+
+/* Grid >> Global
+----------------------------------------------------------------------------------------------------*/
+
+.grid_1,
+.grid_2,
+.grid_3,
+.grid_4,
+.grid_5,
+.grid_6,
+.grid_7,
+.grid_8,
+.grid_9,
+.grid_10,
+.grid_11,
+.grid_12 {
+  display:inline;
+  float: left;
+  position: relative;
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
+/* Grid >> Children (Alpha ~ First, Omega ~ Last)
+----------------------------------------------------------------------------------------------------*/
+
+.alpha {
+  margin-left: 0;
+}
+
+.omega {
+  margin-right: 0;
+}
+
+/* Grid >> 12 Columns
+----------------------------------------------------------------------------------------------------*/
+
+.container_12 .grid_1 {
+  width:60px;
+}
+
+.container_12 .grid_2 {
+  width:140px;
+}
+
+.container_12 .grid_3 {
+  width:220px;
+}
+
+.container_12 .grid_4 {
+  width:300px;
+}
+
+.container_12 .grid_5 {
+  width:380px;
+}
+
+.container_12 .grid_6 {
+  width:460px;
+}
+
+.container_12 .grid_7 {
+  width:540px;
+}
+
+.container_12 .grid_8 {
+  width:620px;
+}
+
+.container_12 .grid_9 {
+  width:700px;
+}
+
+.container_12 .grid_10 {
+  width:780px;
+}
+
+.container_12 .grid_11 {
+  width:860px;
+}
+
+.container_12 .grid_12 {
+  width:940px;
+}
+
+
+
+/* Prefix Extra Space >> 12 Columns
+----------------------------------------------------------------------------------------------------*/
+
+.container_12 .prefix_1 {
+  padding-left:80px;
+}
+
+.container_12 .prefix_2 {
+  padding-left:160px;
+}
+
+.container_12 .prefix_3 {
+  padding-left:240px;
+}
+
+.container_12 .prefix_4 {
+  padding-left:320px;
+}
+
+.container_12 .prefix_5 {
+  padding-left:400px;
+}
+
+.container_12 .prefix_6 {
+  padding-left:480px;
+}
+
+.container_12 .prefix_7 {
+  padding-left:560px;
+}
+
+.container_12 .prefix_8 {
+  padding-left:640px;
+}
+
+.container_12 .prefix_9 {
+  padding-left:720px;
+}
+
+.container_12 .prefix_10 {
+  padding-left:800px;
+}
+
+.container_12 .prefix_11 {
+  padding-left:880px;
+}
+
+
+
+/* Suffix Extra Space >> 12 Columns
+----------------------------------------------------------------------------------------------------*/
+
+.container_12 .suffix_1 {
+  padding-right:80px;
+}
+
+.container_12 .suffix_2 {
+  padding-right:160px;
+}
+
+.container_12 .suffix_3 {
+  padding-right:240px;
+}
+
+.container_12 .suffix_4 {
+  padding-right:320px;
+}
+
+.container_12 .suffix_5 {
+  padding-right:400px;
+}
+
+.container_12 .suffix_6 {
+  padding-right:480px;
+}
+
+.container_12 .suffix_7 {
+  padding-right:560px;
+}
+
+.container_12 .suffix_8 {
+  padding-right:640px;
+}
+
+.container_12 .suffix_9 {
+  padding-right:720px;
+}
+
+.container_12 .suffix_10 {
+  padding-right:800px;
+}
+
+.container_12 .suffix_11 {
+  padding-right:880px;
+}
+
+
+
+/* Push Space >> 12 Columns
+----------------------------------------------------------------------------------------------------*/
+
+.container_12 .push_1 {
+  left:80px;
+}
+
+.container_12 .push_2 {
+  left:160px;
+}
+
+.container_12 .push_3 {
+  left:240px;
+}
+
+.container_12 .push_4 {
+  left:320px;
+}
+
+.container_12 .push_5 {
+  left:400px;
+}
+
+.container_12 .push_6 {
+  left:480px;
+}
+
+.container_12 .push_7 {
+  left:560px;
+}
+
+.container_12 .push_8 {
+  left:640px;
+}
+
+.container_12 .push_9 {
+  left:720px;
+}
+
+.container_12 .push_10 {
+  left:800px;
+}
+
+.container_12 .push_11 {
+  left:880px;
+}
+
+
+
+/* Pull Space >> 12 Columns
+----------------------------------------------------------------------------------------------------*/
+
+.container_12 .pull_1 {
+  left:-80px;
+}
+
+.container_12 .pull_2 {
+  left:-160px;
+}
+
+.container_12 .pull_3 {
+  left:-240px;
+}
+
+.container_12 .pull_4 {
+  left:-320px;
+}
+
+.container_12 .pull_5 {
+  left:-400px;
+}
+
+.container_12 .pull_6 {
+  left:-480px;
+}
+
+.container_12 .pull_7 {
+  left:-560px;
+}
+
+.container_12 .pull_8 {
+  left:-640px;
+}
+
+.container_12 .pull_9 {
+  left:-720px;
+}
+
+.container_12 .pull_10 {
+  left:-800px;
+}
+
+.container_12 .pull_11 {
+  left:-880px;
+}
+
+
+
+
+/* Clear Floated Elements
+----------------------------------------------------------------------------------------------------*/
+
+/* http://sonspring.com/journal/clearing-floats */
+
+.clear {
+  clear: both;
+  display: block;
+  overflow: hidden;
+  visibility: hidden;
+  width: 0;
+  height: 0;
+}
+
+/* http://perishablepress.com/press/2008/02/05/lessons-learned-concerning-the-clearfix-css-hack */
+
+.clearfix:after {
+  clear: both;
+  content: ' ';
+  display: block;
+  font-size: 0;
+  line-height: 0;
+  visibility: hidden;
+  width: 0;
+  height: 0;
+}
+
+.clearfix {
+  display: inline-block;
+}
+
+* html .clearfix {
+  height: 1%;
+}
+
+.clearfix {
+  display: block;
+}
+
+
 #pixelPerfectIcon { list-style-image: url(chrome://pixelperfect/content/images/logo_16x16.png); cursor: pointer; }
 
-#pixelperfect-wrapper { margin:0px 0 0 0px; padding:0; overflow: auto; width: 100%; background: #F0F0F0; font-family: arial; font-size: 10px; }
+#pixelperfect-wrapper { margin:0px 0 0 0px; padding:0; overflow: auto; width: 100%; font-family: arial,sans-serif; font-size: 10px; }
 #pixelperfect-wrapper h2 {font-size: 11px;}
 #pixelperfect-wrapper h3 {margin:4px 0px 6px 0px; font-size: 11px; font-weight: normal;}
 #pixelperfect-wrapper p {font-size: 10px; color: #333; line-height: 1.3;}
-#comp {width: 280px; padding:0 0 0 20px; float: left;}
+#comp {}
   #comp ul {width: 250px; background: #E1E1E1; list-style: none; margin:0; padding:0;}
   #comp ul li {width: 250px; height: 40px; background: url(chrome://pixelperfect/content/images/bg-comp-loc.gif) no-repeat top left;}
       .eye {width: 50px; float: left;}
@@ -14,11 +342,15 @@
           .mini-comp img {margin: 9px 0 0 1px;}
       .comp-location {padding:14px 0 0 0; float: left;}
       .comp-delete {padding: 25px 0 0 0; float: right; cursor: pointer; width: 10px; height: 11px; background: url(chrome://pixelperfect/content/images/trash.gif) no-repeat center left;}
-#options {width: 180px; float: left;}
+#options {}
   #opacity-toggle {height:18px; width:81px; background: url(chrome://pixelperfect/content/images/bg-opacity-toggle.gif) no-repeat top left;}
   #opacity-toggle:hover {background: url(chrome://pixelperfect/content/images/bg-opacity-toggle-over.gif) no-repeat top left;}
-  #position-toggle {height:18px; width:81px; margin:10px 0 0 0; background: url(chrome://pixelperfect/content/images/bg-position-toggle.gif) no-repeat top left;}
-  #position-toggle:hover {background: url(chrome://pixelperfect/content/images/bg-position-toggle-over.gif) no-repeat top left;}
+  
+  #position-toggle-y {float: left; height:18px; width:81px; background: url(chrome://pixelperfect/content/images/bg-opacity-toggle.gif) no-repeat top left;}
+  #position-toggle-y:hover {background: url(chrome://pixelperfect/content/images/bg-opacity-toggle-over.gif) no-repeat top left;}
+  
+  #position-toggle-x {float: left; height:18px; width:81px; margin:0; background: url(chrome://pixelperfect/content/images/bg-position-toggle.gif) no-repeat top left;}
+  #position-toggle-x:hover {background: url(chrome://pixelperfect/content/images/bg-position-toggle-over.gif) no-repeat top left;}
       .bt-left  {height:18px; width: 12px; float: left; cursor: pointer;}
       .bt-left:hover {background: url(chrome://pixelperfect/content/images/bg-left-arrow.gif) no-repeat top left;}
       .bt-right {height:18px; width: 12px; float: left; cursor: pointer;}
@@ -28,6 +360,14 @@
       .bt-down {height:18px; width: 12px; float: left; cursor: pointer;}
       .bt-down:hover {background: url(chrome://pixelperfect/content/images/bg-down-arrow.gif) no-repeat top left;}
       .numbers  {margin: 4px 0px 0 0; text-align: center; width: 44px; float: left;}
-#info {width: 360px; padding:0 20px 0 20px; background: #F0F0F0; float: left;}
+  #position-lock {height: 18px; width: 81px; margin: 10px 0 0 0; padding: 20px 0 0 0;}
+    #position-lock input {padding: 0; margin: 0 5px 0 0;}
+    #position-lock h3 {padding: 0; margin: 0; display: inline;}
+  #zindex-settings {}
+    #zindex-settings h3 {display: inline;}
+    #zindex-settings input {width: 50px; text-align: right;}
+    #zindex-settings button {width: 60px; height: 25px;}
+  #options hr {width: 75%; margin: 10px 0 10px 0; color: #C0C0C0; background-color: #C0C0C0;}
+#info {}
 
 #overlay-scroll{ width: 265px; height: 175px; overflow: auto; }

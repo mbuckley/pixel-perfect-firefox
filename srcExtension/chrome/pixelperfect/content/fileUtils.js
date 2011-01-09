@@ -20,7 +20,6 @@ pixelPerfect.fileUtils = function () {
                 } catch (e) {
                     alert("error");
                 }
-
                 // determine the file-separator
                 if (path.search(/\\/) != -1) {
                     this.initializeDirectorySeperator("\\");
@@ -89,28 +88,31 @@ pixelPerfect.fileUtils = function () {
 
                 // file is the given directory (nsIFile)
                 var entries = file.directoryEntries;
-                var array = [];
+                var overlayArr = [];
                 while(entries.hasMoreElements())
                 {
                   var entry = entries.getNext();
                   entry.QueryInterface(Components.interfaces.nsIFile);
                   if(entry.isFile()) {
                     var filePath = entry.path;
-                    var justFileName = filePath.substring(filePath.lastIndexOf(this.directorySeperator) + 1, filePath.length);
-                    if(justFileName != ".leave") {
-                    	array.push(justFileName);
+                    var fileName = filePath.split(this.directorySeperator).pop();
+                    if(fileName !== ".leave") {
+                      overlayArr.push(fileName);
                     }
                   }
                 }
-                return array;
+                return overlayArr;
             },
             
             getUserOverlayPath: function() {
-                return this.firefoxProfileRootFolder() + 'extensions' + this.directorySeperator + 'pixelperfectplugin@openhouseconcepts.com' + this.directorySeperator + 'chrome' + this.directorySeperator + 'pixelperfect' + this.directorySeperator + 'content' + this.directorySeperator + 'user_overlays' + this.directorySeperator;
+                //return this.firefoxProfileRootFolder() + 'extensions' + this.directorySeperator + 'pixelperfectplugin@openhouseconcepts.com' + this.directorySeperator + 'chrome' + this.directorySeperator + 'pixelperfect' + this.directorySeperator + 'content' + this.directorySeperator + 'user_overlays' + this.directorySeperator;
+                return '/home/mbuckley/firefox_addons/PixelPerfect/srcExtension/chrome/pixelperfect/content/user_overlays/';
             },
             
             getContentRootFolder: function() {
-                return this.firefoxProfileRootFolder() + 'extensions' + this.directorySeperator + 'pixelperfectplugin@openhouseconcepts.com' + this.directorySeperator + 'chrome' + this.directorySeperator + 'pixelperfect' + this.directorySeperator + 'content';
+                this.firefoxProfileRootFolder();
+                //return this.firefoxProfileRootFolder() + 'extensions' + this.directorySeperator + 'pixelperfectplugin@openhouseconcepts.com' + this.directorySeperator + 'chrome' + this.directorySeperator + 'pixelperfect' + this.directorySeperator + 'content';
+                return '/home/mbuckley/firefox_addons/PixelPerfect/srcExtension/chrome/pixelperfect/content/';
             },
             
             readPanelHTML: function() {

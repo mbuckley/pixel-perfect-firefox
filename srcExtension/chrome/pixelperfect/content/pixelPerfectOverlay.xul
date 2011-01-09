@@ -21,11 +21,11 @@
                                tooltiptext="&pixelperfect.toolbarbutton.addoverlay.hover;" command="cmd_addOverlay"/> 
                 <toolbarbutton label="Help" id="pixelPerfectHelpMenu" type="menu" class="toolbar-text-button">
                     <menupopup>
-                        <menuitem label="Pixel Pefect FAQ" oncommand="Firebug.PixelPerfectModule.pixelPerfectHelp(this)"/>
+                        <menuitem label="Pixel Perfect Home" oncommand="Firebug.PixelPerfectModule.pixelPerfectHelp(this)"/>
+                        <menuseparator/>
+                        <menuitem label="File an issue" oncommand="Firebug.PixelPerfectModule.pixelPerfectHelp(this)"/>
                         <menuseparator/>
                         <menuitem label="Send Feedback" oncommand="Firebug.PixelPerfectModule.pixelPerfectHelp(this)"/>
-                        <menuseparator/>
-                        <menuitem label="Pixel Perfect Home" oncommand="Firebug.PixelPerfectModule.pixelPerfectHelp(this)"/>
                     </menupopup>
                  </toolbarbutton>
             </hbox>
