@@ -7,28 +7,23 @@ pixelPerfect.fileUtils = function () {
         return  { 
             directorySeperator: "",
         
-            firefoxProfileRootFolder: function() {
+            getFirefoxProfileRootFolder: function() {
                 try {
-                    netscape.security.PrivilegeManager.enablePrivilege("UniversalXPConnect");
-                } catch (e) {
+                  netscape.security.PrivilegeManager.enablePrivilege("UniversalXPConnect");
+                } 
+                catch (e) {
                     alert("Permission to save file was denied.");
                 }
-                // get the path to the user's home (profile) directory
-                const DIR_SERVICE = new Components.Constructor("@mozilla.org/file/directory_service;1","nsIProperties");
-                try { 
-                    path=(new DIR_SERVICE()).get("ProfD", Components.interfaces.nsIFile).path; 
-                } catch (e) {
+                // get the nsIFile obj => user's home (profile) directory
+                const DIR_SERVICE = new Components.Constructor("@mozilla.org/file/directory_service;1", "nsIProperties");
+                var nsIFileObj;
+                try {
+                    nsIFileObj = (new DIR_SERVICE()).get("ProfD", Components.interfaces.nsIFile);
+                }
+                catch (e) {
                     alert("error");
                 }
-                // determine the file-separator
-                if (path.search(/\\/) != -1) {
-                    this.initializeDirectorySeperator("\\");
-                    path = path + this.directorySeperator;
-                } else {
-                    this.initializeDirectorySeperator("/");
-                    path = path + this.directorySeperator;
-                }
-                return path;
+                return nsIFileObj;
             },
 
             initializeDirectorySeperator: function(seperator) {
@@ -48,14 +43,12 @@ pixelPerfect.fileUtils = function () {
                 var filePath = '';
 
                 if (res == nsIFilePicker.returnOK){
-                  var thefile = fp.file;
-                  filePath = fp.file.path;
-                  var fileName = filePath.substring(filePath.lastIndexOf(this.directorySeperator) + 1, filePath.length);     
+                  var sourceFile = fp.file;
                 }
-                return [filePath, fileName];
+                return sourceFile;
             },
             
-            copyFile: function(sourcefile,destdir) {
+            copyFile: function(sourcefile) {
                 // get a component for the file to copy
                 var aFile = Components.classes["@mozilla.org/file/local;1"]
                   .createInstance(Components.interfaces.nsILocalFile);
@@ -67,8 +60,9 @@ pixelPerfect.fileUtils = function () {
                 if (!aDir) return false;
 
                 // next, assign URLs to the file components
-                aFile.initWithPath(sourcefile);
-                aDir.initWithPath(destdir);
+                var userOverlayPathStr = this.getUserOverlayPath().path;
+                aFile.initWithPath(sourcefile.path);
+                aDir.initWithPath(userOverlayPathStr);
 
                 // finally, copy the file, without renaming it
                 try {
@@ -77,6 +71,7 @@ pixelPerfect.fileUtils = function () {
                   // file already exists.
                   // add error logging lib here
                 }
+                alert("uploaded fileName: " + sourcefile.path);
             },
             
             getCurrentOverlayFiles: function() {
@@ -84,7 +79,9 @@ pixelPerfect.fileUtils = function () {
                 var file = Components.classes["@mozilla.org/file/local;1"]
                   .createInstance(Components.interfaces.nsILocalFile);
                 if (!file) return false;
-                file.initWithPath(this.getUserOverlayPath());
+                
+                var userOverlayPathStr = this.getUserOverlayPath().path;
+                file.initWithPath(userOverlayPathStr);
 
                 // file is the given directory (nsIFile)
                 var entries = file.directoryEntries;
@@ -95,7 +92,7 @@ pixelPerfect.fileUtils = function () {
                   entry.QueryInterface(Components.interfaces.nsIFile);
                   if(entry.isFile()) {
                     var filePath = entry.path;
-                    var fileName = filePath.split(this.directorySeperator).pop();
+                    var fileName = filePath.replace(userOverlayPathStr, '').substring(1);
                     if(fileName !== ".leave") {
                       overlayArr.push(fileName);
                     }
@@ -105,23 +102,33 @@ pixelPerfect.fileUtils = function () {
             },
             
             getUserOverlayPath: function() {
-                // return '/home/mbuckley/firefox_addons/PixelPerfect/srcExtension/chrome/pixelperfect/content/user_overlays/';
-                return this.firefoxProfileRootFolder() + 'extensions' + this.directorySeperator + 'pixelperfectplugin@openhouseconcepts.com' + this.directorySeperator + 'chrome' + this.directorySeperator + 'pixelperfect' + this.directorySeperator + 'content' + this.directorySeperator + 'user_overlays' + this.directorySeperator;
+                var userOverlayPath = this.getFirefoxProfileRootFolder().clone();
+                userOverlayPath.append('extensions');
+                userOverlayPath.append('pixelperfectplugin@openhouseconcepts.com');
+                userOverlayPath.append('chrome');
+                userOverlayPath.append('pixelperfect');
+                userOverlayPath.append('content');
+                userOverlayPath.append('user_overlays');
+                return userOverlayPath;
             },
             
-            getContentRootFolder: function() {
-                // this.firefoxProfileRootFolder();
-                // return '/home/mbuckley/firefox_addons/PixelPerfect/srcExtension/chrome/pixelperfect/content/';
-                return this.firefoxProfileRootFolder() + 'extensions' + this.directorySeperator + 'pixelperfectplugin@openhouseconcepts.com' + this.directorySeperator + 'chrome' + this.directorySeperator + 'pixelperfect' + this.directorySeperator + 'content';
+            getPanelHTMLFilePath: function() {
+                var panelHTMLPath = this.getFirefoxProfileRootFolder().clone();
+                panelHTMLPath.append('extensions');
+                panelHTMLPath.append('pixelperfectplugin@openhouseconcepts.com');
+                panelHTMLPath.append('chrome');
+                panelHTMLPath.append('pixelperfect');
+                panelHTMLPath.append('content');
+                panelHTMLPath.append('panel.html');
+                return panelHTMLPath;
             },
             
             readPanelHTML: function() {
                 var file = Components.classes["@mozilla.org/file/local;1"]
                   .createInstance(Components.interfaces.nsILocalFile);
                 if (!file) return false;
+                file.initWithPath(this.getPanelHTMLFilePath().path);
                 
-                file.initWithPath(this.getContentRootFolder() + this.directorySeperator + "panel.html");
-
                 var data = "";
                 var fstream = Components.classes["@mozilla.org/network/file-input-stream;1"]
                                         .createInstance(Components.interfaces.nsIFileInputStream);

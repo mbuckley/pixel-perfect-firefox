@@ -14,8 +14,6 @@ pixelPerfect.panelActions = function(){
     
     // public
     return {
-        directorySeperator: "",
-        
         getPrefValue: function(name){
         
             const PrefService = Components.classes["@mozilla.org/preferences-service;1"];
@@ -213,25 +211,23 @@ pixelPerfect.panelActions = function(){
                 pageBody.removeChild(pixelperfect);
             }
             
-            
             var eyeDiv = document.getElementById(eyeLiId);
             document.getElementById("overlay-list").removeChild(eyeDiv);
             this.deleteFile(fileName);
         },
         
         deleteFile: function(fileToDelete){
-            // get a component for the file to copy
-            var file = Components.classes["@mozilla.org/file/local;1"].createInstance(Components.interfaces.nsILocalFile);
-            if (!file) 
-                return false;
-            var userOverlayPath = this.getFirefoxProfileRootFolder() + 'extensions' + this.directorySeperator + 'pixelperfectplugin@openhouseconcepts.com' + this.directorySeperator + 'chrome/pixelperfect/content' + this.directorySeperator + 'user_overlays' + this.directorySeperator;
-            userOverlayPath = userOverlayPath.replace(/\\|\//g,"\\\\");
-			
-            file.initWithPath(userOverlayPath + fileToDelete);
-            
+            var deleteFile = this.getFirefoxProfileRootFolder().clone();
+            deleteFile.append('extensions');
+            deleteFile.append('pixelperfectplugin@openhouseconcepts.com');
+            deleteFile.append('chrome');
+            deleteFile.append('pixelperfect');
+            deleteFile.append('content');
+            deleteFile.append('user_overlays');
+            deleteFile.append(fileToDelete);
             try {
-                file.remove(false);
-            } 
+                deleteFile.remove(false);
+            }
             catch (e) {
                 alert(e);
             }
@@ -258,30 +254,16 @@ pixelPerfect.panelActions = function(){
             catch (e) {
                 alert("Permission to save file was denied.");
             }
-            // get the path to the user's home (profile) directory
+            // get the nsIFile obj => user's home (profile) directory
             const DIR_SERVICE = new Components.Constructor("@mozilla.org/file/directory_service;1", "nsIProperties");
+            var nsIFileObj;
             try {
-                path = (new DIR_SERVICE()).get("ProfD", Components.interfaces.nsIFile).path;
-            } 
+                nsIFileObj = (new DIR_SERVICE()).get("ProfD", Components.interfaces.nsIFile);
+            }
             catch (e) {
                 alert("error");
             }
-            // determine the file-separator
-            if (path.search(/\\/) != -1) {
-                this.initializeDirectorySeperator("\\");
-                path = path + this.directorySeperator;
-            }
-            else {
-                this.initializeDirectorySeperator("/");
-                path = path + this.directorySeperator;
-            }
-            return path;
-        },
-        
-        initializeDirectorySeperator: function(seperator){
-            if (this.directorySeperator == null || this.directorySeperator == "") {
-                this.directorySeperator = seperator;
-            }
+            return nsIFileObj;
         },
         
         increaseOpacity: function(){

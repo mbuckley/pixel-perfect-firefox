@@ -69,9 +69,9 @@ FBL.ns(function() {
 
             addOverlay: function()
             {
-                var fileInfo = pixelPerfect.fileUtils.chooseFile();
-                pixelPerfect.fileUtils.copyFile(fileInfo[0], pixelPerfect.fileUtils.getUserOverlayPath());
-                pixelPerfect.utils.createOverlayEyeElement(fileInfo[1], FirebugContext.getPanel("pixelPerfect").document);
+                var sourceFile = pixelPerfect.fileUtils.chooseFile();
+                var fileName = pixelPerfect.fileUtils.copyFile(sourceFile);
+                //pixelPerfect.utils.createOverlayEyeElement(fileName, FirebugContext.getPanel("pixelPerfect").document);
             },
 
             onClickIcon: function(context, event, ele)

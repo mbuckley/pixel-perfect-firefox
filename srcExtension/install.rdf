@@ -8,6 +8,7 @@
 		<em:id>pixelperfectplugin@openhouseconcepts.com</em:id>
 		<em:version>1.6.0</em:version>
 		<em:type>2</em:type>
+		<em:unpack>true</em:unpack>
 		<em:targetApplication>
 			<RDF:Description>
 				<em:id>{ec8030f7-c20a-464f-9b0e-13a3a9e97384}</em:id>
