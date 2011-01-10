@@ -4,9 +4,7 @@ if ( typeof pixelPerfect.fileUtils == "undefined") {
 
 pixelPerfect.fileUtils = function () {
         // public
-        return  { 
-            directorySeperator: "",
-        
+        return  {
             getFirefoxProfileRootFolder: function() {
                 try {
                   netscape.security.PrivilegeManager.enablePrivilege("UniversalXPConnect");
@@ -26,12 +24,6 @@ pixelPerfect.fileUtils = function () {
                 return nsIFileObj;
             },
 
-            initializeDirectorySeperator: function(seperator) {
-                if(this.directorySeperator == null || this.directorySeperator == ""){
-                  this.directorySeperator = seperator;
-                }
-            },
-            
             chooseFile: function() {
                 var nsIFilePicker = Components.interfaces.nsIFilePicker;
                 var fp = Components.classes["@mozilla.org/filepicker;1"]
@@ -71,7 +63,7 @@ pixelPerfect.fileUtils = function () {
                   // file already exists.
                   // add error logging lib here
                 }
-                alert("uploaded fileName: " + sourcefile.path);
+                return aFile.leafName;
             },
             
             getCurrentOverlayFiles: function() {

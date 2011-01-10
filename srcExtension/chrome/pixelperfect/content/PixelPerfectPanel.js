@@ -71,7 +71,7 @@ FBL.ns(function() {
             {
                 var sourceFile = pixelPerfect.fileUtils.chooseFile();
                 var fileName = pixelPerfect.fileUtils.copyFile(sourceFile);
-                //pixelPerfect.utils.createOverlayEyeElement(fileName, FirebugContext.getPanel("pixelPerfect").document);
+                pixelPerfect.utils.createOverlayEyeElement(fileName, FirebugContext.getPanel("pixelPerfect").document);
             },
 
             onClickIcon: function(context, event, ele)
