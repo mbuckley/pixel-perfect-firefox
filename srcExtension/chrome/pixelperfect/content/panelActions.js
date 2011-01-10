@@ -32,6 +32,7 @@ pixelPerfect.panelActions = function(){
                 prefName = prefDomain + "." + name;
             
             var type = prefs.getPrefType(prefName);
+            
             if (type == nsIPrefBranch.PREF_STRING) {
                 return prefs.getCharPref(prefName);
             }
@@ -39,10 +40,11 @@ pixelPerfect.panelActions = function(){
                 if (type == nsIPrefBranch.PREF_INT) {
                     return prefs.getIntPref(prefName);
                 }
-                else 
+                else {
                     if (type == nsIPrefBranch.PREF_BOOL) {
                         return prefs.getBoolPref(prefName);
                     }
+               }
         },
         
         setPrefValue: function(name, value){
@@ -56,25 +58,29 @@ pixelPerfect.panelActions = function(){
             var prefName;
             if (name.indexOf("browser.") != -1) 
                 prefName = name;
-            else 
+            else {
                 prefName = prefDomain + "." + name;
+            }
             
             var type = prefs.getPrefType(prefName);
             if (type == nsIPrefBranch.PREF_STRING) {
                 prefs.setCharPref(prefName, value);
             }
-            else 
+            else {
                 if (type == nsIPrefBranch.PREF_INT) {
                     prefs.setIntPref(prefName, value);
-                }
-                else 
+                } 
+                else {
                     if (type == nsIPrefBranch.PREF_BOOL) {
-                        prefs.setBoolPrefPref(prefName, value);
+                        prefs.setBoolPref(prefName, value);
                     }
-                    else 
+                    else { 
                         if (type == nsIPrefBranch.PREF_INVALID) {
                             throw "Invalid preference: " + prefName;
                         }
+                    }
+                }
+            }
         },
         
         // Wrapper for getting preferences with a default.
@@ -122,6 +128,8 @@ pixelPerfect.panelActions = function(){
                     this.setPrefValue("pixelPerfect.lastXPos", '0');
                     this.setPrefValue("pixelPerfect.lastYPos", '0');
                     this.setPrefValue("pixelPerfect.opacity", '0.5');
+                    this.setPrefValue("pixelPerfect.zIndex", '1000');
+                    this.setPrefValue("pixelPerfect.overlayLocked", false);
                     this.turnOnOverlay(chromeToOverlayUrl, chromeToOverlayUrlNoSpaces, pageBody, overlayUrl);
                     eyeDiv.setAttribute("class", "eye-on-img");
                 }
@@ -135,10 +143,23 @@ pixelPerfect.panelActions = function(){
             var divPixelPerfect = x.document.createElement("div");
             divPixelPerfect.setAttribute("id", overlayDivId);
             
+            // updateZIndex from pref
+            var zIndexTextInputEle = document.getElementById('z-index-input');
+            var savedZIndex = this.getPref("pixelPerfect.zIndex");
+            zIndexTextInputEle.value = savedZIndex;
+            
+            // update overlayLocked Attribute from pref
+            var overlayLockedChkEle = document.getElementById('position-lock-chk');
+            overlayLocked = this.getPref("pixelPerfect.overlayLocked");
+            this.updateDragStatus();
+            overlayLockedChkEle.checked = overlayLocked;
+            
+            // update locked status from pref
+            
             imageDimensions = this.getImageDimensions(chromeToOverlayUrl);
             var width = imageDimensions[0];
             var height = imageDimensions[1];
-            divPixelPerfect.setAttribute("style", "z-index: " + document.getElementById('z-index-input').value);
+            divPixelPerfect.setAttribute("style", "z-index: " + zIndexTextInputEle.value);
             divPixelPerfect.style.background = 'url(' + chromeToOverlayUrlNoSpaces + ') no-repeat';
             divPixelPerfect.style.width = width;
             divPixelPerfect.style.height = height;
@@ -319,12 +340,13 @@ pixelPerfect.panelActions = function(){
         togglePositionLock: function(chkEle) {
           overlayLocked = chkEle.checked;
           this.updateDragStatus();
+          this.setPrefValue("pixelPerfect.overlayLocked", overlayLocked);
         },
         
         updateZIndex: function(zIndexInputEle) {
           var ppOverlayEle = x.document.getElementById(overlayDivId);
           ppOverlayEle.style.zIndex = zIndexInputEle.value;
-          return false;
+          this.setPrefValue("pixelPerfect.zIndex", zIndexInputEle.value);
         },
         
         updateDragStatus: function() {

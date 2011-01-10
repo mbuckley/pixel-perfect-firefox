@@ -55,7 +55,7 @@ pixelPerfect.setPrefValue = function(name, value) {
 		prefs.setIntPref(prefName, value);
 	}
 	else if (type == nsIPrefBranch.PREF_BOOL) {
-		prefs.setBoolPrefPref(prefName, value);
+		prefs.setBoolPref(prefName, value);
 	}
 	else if(type == nsIPrefBranch.PREF_INVALID) {
 		throw "Invalid preference: " + prefName;

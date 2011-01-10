@@ -105,14 +105,14 @@ pixelPerfect.fileUtils = function () {
             },
             
             getUserOverlayPath: function() {
-                //return this.firefoxProfileRootFolder() + 'extensions' + this.directorySeperator + 'pixelperfectplugin@openhouseconcepts.com' + this.directorySeperator + 'chrome' + this.directorySeperator + 'pixelperfect' + this.directorySeperator + 'content' + this.directorySeperator + 'user_overlays' + this.directorySeperator;
-                return '/home/mbuckley/firefox_addons/PixelPerfect/srcExtension/chrome/pixelperfect/content/user_overlays/';
+                // return '/home/mbuckley/firefox_addons/PixelPerfect/srcExtension/chrome/pixelperfect/content/user_overlays/';
+                return this.firefoxProfileRootFolder() + 'extensions' + this.directorySeperator + 'pixelperfectplugin@openhouseconcepts.com' + this.directorySeperator + 'chrome' + this.directorySeperator + 'pixelperfect' + this.directorySeperator + 'content' + this.directorySeperator + 'user_overlays' + this.directorySeperator;
             },
             
             getContentRootFolder: function() {
-                this.firefoxProfileRootFolder();
-                //return this.firefoxProfileRootFolder() + 'extensions' + this.directorySeperator + 'pixelperfectplugin@openhouseconcepts.com' + this.directorySeperator + 'chrome' + this.directorySeperator + 'pixelperfect' + this.directorySeperator + 'content';
-                return '/home/mbuckley/firefox_addons/PixelPerfect/srcExtension/chrome/pixelperfect/content/';
+                // this.firefoxProfileRootFolder();
+                // return '/home/mbuckley/firefox_addons/PixelPerfect/srcExtension/chrome/pixelperfect/content/';
+                return this.firefoxProfileRootFolder() + 'extensions' + this.directorySeperator + 'pixelperfectplugin@openhouseconcepts.com' + this.directorySeperator + 'chrome' + this.directorySeperator + 'pixelperfect' + this.directorySeperator + 'content';
             },
             
             readPanelHTML: function() {
