@@ -144,39 +144,11 @@ FBL.ns(function() {
                 }
             },
 
-            // Borrowed from YSlow
-            // This is called EVERY time the options menu is opened.
-            // Return an array of menu option objects.
-            getOptionsMenuItems: function()
-            {
+            getOptionsMenuItems: function() {
                 return [
-                    this.optionMenuPixelPerfect("Hide statusbar info", "pixelPerfect.hidestatusbar"),
-                    this.optionMenuPixelPerfect("Hide overlay when inspecting", "pixelPerfect.hidewhenfocuslost"),
+                    optionMenu("Hide statusbar info", "pixelPerfect.hidestatusbar"),
+                    optionMenu("Hide overlay when inspecting", "pixelPerfect.hidewhenfocuslost")
                 ];
-            },
-
-            // Return an option menu item.
-            optionMenuPixelPerfect: function(label, option) {
-                if (typeof Firebug.prefDomain === 'undefined') { // FB before 1.2
-                    var value = Firebug.getPref(option);
-                    return {
-                        label: label,
-                        nol10n: true,
-                        type: "checkbox",
-                        checked: value,
-                        command: bindFixed(Firebug.setPref, Firebug, option, !value)
-                    };
-                }
-
-                var value = Firebug.getPref(Firebug.prefDomain, option);
-                // bindFixed is from Firebug. It helps to pass the args along.
-                return {
-                    label: label,
-                    nol10n: true,
-                    type: "checkbox",
-                    checked: value,
-                    command: bindFixed(Firebug.setPref, this, Firebug.prefDomain, option, !value)
-                };
             }
         });
 
