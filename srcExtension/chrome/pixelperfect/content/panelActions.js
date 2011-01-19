@@ -249,12 +249,6 @@ pixelPerfect.panelActions = function(){
         },
         
         getFirefoxProfileRootFolder: function(){
-            try {
-                netscape.security.PrivilegeManager.enablePrivilege("UniversalXPConnect");
-            } 
-            catch (e) {
-                alert("Permission to save file was denied.");
-            }
             // get the nsIFile obj => user's home (profile) directory
             const DIR_SERVICE = new Components.Constructor("@mozilla.org/file/directory_service;1", "nsIProperties");
             var nsIFileObj;
