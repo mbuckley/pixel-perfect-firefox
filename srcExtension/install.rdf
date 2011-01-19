@@ -16,5 +16,5 @@
 				<em:minVersion>3.0</em:minVersion>
 			</RDF:Description>
 		</em:targetApplication>
-  <em:optionsURL/><em:aboutURL/><em:hidden/></RDF:Description>
+  </RDF:Description>
 </RDF>
