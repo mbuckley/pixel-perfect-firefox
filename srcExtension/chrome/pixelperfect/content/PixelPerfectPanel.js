@@ -6,7 +6,7 @@ FBL.ns(function() {
             initialize: function() {
                 this.initPrefs();
                 this.addEventListeners();
-                pixelPerfect.utils.toggleStatusBar(pixelPerfect.getPref("pixelPerfect.hidestatusbar"));
+                pixelPerfect.utils.toggleStatusBar(Firebug.getPref(Firebug.prefDomain, "pixelPerfect.hidestatusbar"));
             },
 
             initPrefs: function() {
@@ -29,7 +29,7 @@ FBL.ns(function() {
             },
             
             reloadLastOverlayListener: function(evt) {
-            	pixelPerfect.utils.fireEyeClickEvent("eye_" + pixelPerfect.getPrefValue("pixelPerfect.lastOverlayFileName"), FirebugContext.getPanel("pixelPerfect").document);
+            	pixelPerfect.utils.fireEyeClickEvent("eye_" + Firebug.getPref(Firebug.prefDomain, "pixelPerfect.lastOverlayFileName"), FirebugContext.getPanel("pixelPerfect").document);
             },
 
             updateAbsolutePositionControls: function(xPos, yPos) {
@@ -57,11 +57,12 @@ FBL.ns(function() {
                     Firebug.setPref('defaultPanelName', 'console');
                 }
             },
+            
             showPanel: function(browser, panel)
             {
                 var isPixelPerfectExtension = panel && panel.name == "pixelPerfect";
                 var PixelPerfectExtensionButtons = browser.chrome.$("fbPixelPerfectPanelButtons");
-                if (pixelPerfect.getPref("pixelPerfect.hidewhenfocuslost")) {
+                if (Firebug.getPref(Firebug.prefDomain, "pixelPerfect.hidewhenfocuslost")) {
                     pixelPerfect.utils.setVisibilityForOverlay(isPixelPerfectExtension);
                 }
                 collapse(PixelPerfectExtensionButtons, !isPixelPerfectExtension);
@@ -89,9 +90,9 @@ FBL.ns(function() {
             },
 
             saveLastPosition: function(xPos, yPos, opacity) {
-                pixelPerfect.setPrefValue("pixelPerfect.lastXPos", xPos);
-                pixelPerfect.setPrefValue("pixelPerfect.lastYPos", yPos);
-                pixelPerfect.setPrefValue("pixelPerfect.opacity", opacity);
+                Firebug.setPref(Firebug.prefDomain, "pixelPerfect.lastXPos", xPos);
+                Firebug.setPref(Firebug.prefDomain, "pixelPerfect.lastYPos", yPos);
+                Firebug.setPref(Firebug.prefDomain, "pixelPerfect.opacity", opacity);
             },
 
             pixelPerfectHelp: function(menuitem) {
@@ -128,7 +129,6 @@ FBL.ns(function() {
                 
                 this.panelNode = doc.createElement("div");
                 this.panelNode.setAttribute("id", "pixelperfect-wrapper");
-                this.panelNode.setAttribute("class", "container_12");
                 this.panelNode.ownerPanel = this;
                 this.panelNode.innerHTML = pixelPerfect.fileUtils.readPanelHTML();
                 doc.body.appendChild(this.panelNode);
@@ -145,10 +145,49 @@ FBL.ns(function() {
             },
 
             getOptionsMenuItems: function() {
-                return [
-                    optionMenu("Hide statusbar info", "pixelPerfect.hidestatusbar"),
-                    optionMenu("Hide overlay when inspecting", "pixelPerfect.hidewhenfocuslost")
-                ];
+                var menuOptions = [];
+                /**
+                 * Given a menu item name and a function, add a menu item which calls that
+                 * function when selected.
+                 *
+                 * @param {string} label The text of the menu item.
+                 * @param {Function} onSelectMenuItem Called when the menu item is selected.
+                 * @param {boolean} checked Whether the menu item should be checked.
+                 * @param {boolean?} opt_disabled Whether the menu item should be disabled.
+                 */
+                var addMenuOption = function(label, onSelectMenuItem, checked, opt_disabled) {
+                  var menuItemObj = {
+                    label: label,
+                    nol10n: true,  // Use the label as-is, rather than looking in a
+                                   // properties file.
+                    command: onSelectMenuItem,
+                    type: 'checkbox',
+                    checked: checked,
+                    disabled: Boolean(opt_disabled)
+                  };
+                  menuOptions.push(menuItemObj);
+                };
+                
+                var hideStatusBarPref = 'extensions.firebug.pixelPerfect.hidestatusbar';
+                var hideWhenFocusLostPref = 'extensions.firebug.pixelPerfect.hidewhenfocuslost';
+                
+                /**
+                 * @param {string} prefName The name of a boolean preference.
+                 * @return {Function} A function that will toggle the value of that
+                 *     preference.
+                 */
+                var buildToggleBoolPrefFn = function(prefName) {
+                  return function() {
+                    var oldValue = pixelPerfect.utils.getBoolPref(prefName);
+                    pixelPerfect.utils.setBoolPref(prefName, !oldValue);
+                  };
+                };
+                
+                addMenuOption('Hide Statusbar Icon', buildToggleBoolPrefFn(hideStatusBarPref), pixelPerfect.utils.getBoolPref(hideStatusBarPref));
+                addMenuOption('Hide Overlay When Inspecting', buildToggleBoolPrefFn(hideWhenFocusLostPref), pixelPerfect.utils.getBoolPref(hideWhenFocusLostPref));
+                
+                return menuOptions;
+                
             }
         });
 

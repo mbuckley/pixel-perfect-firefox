@@ -1,3 +1,4 @@
+var pixelPerfect = pixelPerfect || {};
 if ( typeof pixelPerfect.utils == "undefined") {
 	pixelPerfect.utils = {};
 }
@@ -134,6 +135,54 @@ pixelPerfect.utils = function () {
 	            	evObj.initEvent( 'click', true, true );
 	            	fireOnThisEye.dispatchEvent(evObj);
             	}
+            },
+            
+            /**
+             * Get a handle to a service.
+             * @param {string} className The class name.
+             * @param {string} interfaceName The interface name.
+             */
+            CCSV: function(className, interfaceName) {
+              var classObj = Components.classes[className];
+              var ifaceObj = Components.interfaces[interfaceName];
+              if (!classObj || !ifaceObj) {
+                return null;
+              }
+              return classObj.getService(ifaceObj);
+            },
+            
+            /**
+             * Get the browser preferences object.
+             */
+            getPrefs: function() {
+              return pixelPerfect.utils.CCSV('@mozilla.org/preferences-service;1', 'nsIPrefBranch');
+            },
+            
+            /**
+             * Check if a boolean preference is set.  If so, return its value.
+             * If not, return the default value passed as an argument.
+             * @param {string} prefName The name of the preference to fetch.
+             * @param {boolean} opt_defaultValue The default value to use if the
+             *     pref is undefined or not a boolean.
+             * @return {boolean} The preference value.
+             */
+            getBoolPref: function(prefName, opt_defaultValue) {
+              var prefs = pixelPerfect.utils.getPrefs();
+              if (prefs.getPrefType(prefName) == prefs.PREF_BOOL) {
+                return prefs.getBoolPref(prefName);
+              } else {
+                return opt_defaultValue || false;
+              }
+            },
+            
+            /**
+             * Set a boolean preference.  Create the pref if necessary, and overwrite
+             * an existing pref if necessary.
+             * @param {string} prefName The name of the preference to set.
+             * @param {boolean|undefined|null} value The value to set the pref to.
+             */
+            setBoolPref: function(prefName, value) {
+              pixelPerfect.utils.getPrefs().setBoolPref(prefName, value);
             }
         };	
 }();

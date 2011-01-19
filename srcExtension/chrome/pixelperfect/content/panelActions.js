@@ -34,7 +34,7 @@ pixelPerfect.panelActions = function(){
             if (type == nsIPrefBranch.PREF_STRING) {
                 return prefs.getCharPref(prefName);
             }
-            else 
+            else {
                 if (type == nsIPrefBranch.PREF_INT) {
                     return prefs.getIntPref(prefName);
                 }
@@ -43,6 +43,7 @@ pixelPerfect.panelActions = function(){
                         return prefs.getBoolPref(prefName);
                     }
                }
+           }
         },
         
         setPrefValue: function(name, value){

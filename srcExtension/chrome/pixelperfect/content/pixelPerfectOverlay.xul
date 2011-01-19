@@ -5,7 +5,6 @@
     <stringbundleset id="stringbundleset"> 
         <stringbundle id="strings_pixelperfect" src="chrome://pixelperfect/locale/pixelperfect.properties"/>
     </stringbundleset>
-    <script type="application/x-javascript" src="chrome://pixelperfect/content/pixelperfect.js"/>
     <script type="application/x-javascript" src="chrome://pixelperfect/content/utils.js"/>
     <script type="application/x-javascript" src="chrome://pixelperfect/content/fileUtils.js"/>
     <script type="application/x-javascript" src="chrome://pixelperfect/content/PixelPerfectPanel.js"></script>
