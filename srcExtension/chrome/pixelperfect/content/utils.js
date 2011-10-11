@@ -34,7 +34,7 @@ pixelPerfect.utils = function () {
             
             loadCss: function(url, doc) {
                 if ( ! doc ) {
-                  doc = FirebugContext.pixelperfectContext.browserDoc;
+                  doc = Firebug.currentContext.pixelperfectContext.browserDoc;
                 }
 
                 var newCss = doc.createElement("link");
@@ -48,7 +48,7 @@ pixelPerfect.utils = function () {
             
             loadJs: function(url, doc) {
                 if ( ! doc ) {
-                   doc = FirebugContext.pixelPerfectContext.browserDoc;
+                   doc = Firebug.currentContext.pixelPerfectContext.browserDoc;
                 }
 
                 var element = doc.createElement("script");
