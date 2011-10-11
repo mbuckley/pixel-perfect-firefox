@@ -78,7 +78,6 @@ FBL.ns(function() {
             onClickIcon: function(context, event, ele)
             {
                  if (typeof FirebugContext !== 'undefined' || typeof Firebug.currentContext !== 'undefined') {
-		            //Firebug.YSlow.onClickStatusIcon();
 		            Firebug.toggleBar(undefined, "pixelPerfect");
 		            return;
 		        }
