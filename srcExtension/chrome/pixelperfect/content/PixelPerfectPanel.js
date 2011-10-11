@@ -25,18 +25,18 @@ FBL.ns(function() {
             },
 
             saveLastPositionListener: function(evt) {
-                this.saveLastPosition(evt.target.getAttribute("xPos"), evt.target.getAttribute("yPos"),FirebugContext.getPanel("pixelPerfect").document.getElementById("ctl-opacity-numbers").innerHTML);
+                this.saveLastPosition(evt.target.getAttribute("xPos"), evt.target.getAttribute("yPos"),Firebug.currentContext.getPanel("pixelPerfect").document.getElementById("ctl-opacity-numbers").innerHTML);
             },
             
             reloadLastOverlayListener: function(evt) {
-            	pixelPerfect.utils.fireEyeClickEvent("eye_" + Firebug.getPref(Firebug.prefDomain, "pixelPerfect.lastOverlayFileName"), FirebugContext.getPanel("pixelPerfect").document);
+            	pixelPerfect.utils.fireEyeClickEvent("eye_" + Firebug.getPref(Firebug.prefDomain, "pixelPerfect.lastOverlayFileName"), Firebug.currentContext.getPanel("pixelPerfect").document);
             },
 
             updateAbsolutePositionControls: function(xPos, yPos) {
-                var xPosNumber = FirebugContext.getPanel("pixelPerfect").document.getElementById("ctl-left-position");
+                var xPosNumber = Firebug.currentContext.getPanel("pixelPerfect").document.getElementById("ctl-left-position");
                 xPosNumber.innerHTML = xPos;
 
-                var yPosNumber = FirebugContext.getPanel("pixelPerfect").document.getElementById("ctl-top-position");
+                var yPosNumber = Firebug.currentContext.getPanel("pixelPerfect").document.getElementById("ctl-top-position");
                 yPosNumber.innerHTML = yPos;
             },
 
@@ -72,23 +72,18 @@ FBL.ns(function() {
             {
                 var sourceFile = pixelPerfect.fileUtils.chooseFile();
                 var fileName = pixelPerfect.fileUtils.copyFile(sourceFile);
-                pixelPerfect.utils.createOverlayEyeElement(fileName, FirebugContext.getPanel("pixelPerfect").document);
+                pixelPerfect.utils.createOverlayEyeElement(fileName, Firebug.currentContext.getPanel("pixelPerfect").document);
             },
 
             onClickIcon: function(context, event, ele)
             {
-                if (event.button != 0) {
-                    return;
-                }
-                else if (isControl(event)) {
-                    Firebug.toggleDetachBar(true);
-                }
-                else {
-                    Firebug.toggleBar();
-                    Firebug.tabBrowser.selectedBrowser.chrome.selectPanel('pixelPerfect');
-                }
+                 if (typeof FirebugContext !== 'undefined' || typeof Firebug.currentContext !== 'undefined') {
+		            //Firebug.YSlow.onClickStatusIcon();
+		            Firebug.toggleBar(undefined, "pixelPerfect");
+		            return;
+		        }
             },
-
+            
             saveLastPosition: function(xPos, yPos, opacity) {
                 Firebug.setPref(Firebug.prefDomain, "pixelPerfect.lastXPos", xPos);
                 Firebug.setPref(Firebug.prefDomain, "pixelPerfect.lastYPos", yPos);

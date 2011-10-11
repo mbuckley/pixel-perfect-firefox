@@ -7,8 +7,7 @@
   
   <statusbar id="status-bar">
     <statusbarpanel id="ppStatusBar" context="ppStatusContextMenu" insertafter="fbStatusBar">
-      <image id="pixelPerfectIcon" tooltiptext="&pixelperfect.statusbar.tooltip;" label=""
-             onmousedown="Firebug.PixelPerfectModule.onClickIcon(FirebugContext, event)"/>
+      <image id="pixelPerfectIcon" tooltiptext="&pixelperfect.statusbar.tooltip;" onclick="if(!event.button) { Firebug.PixelPerfectModule.onClickIcon() }" />
     </statusbarpanel>
   </statusbar>
 </overlay>
