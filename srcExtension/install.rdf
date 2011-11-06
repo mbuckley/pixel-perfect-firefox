@@ -6,7 +6,7 @@
     <em:iconURL>chrome://pixelperfect/content/images/logo_32x32.png</em:iconURL>
     <em:homepageURL>http://www.pixelperfectplugin.com/</em:homepageURL>
 		<em:id>pixelperfectplugin@openhouseconcepts.com</em:id>
-		<em:version>1.7.0</em:version>
+		<em:version>1.7.1</em:version>
 		<em:type>2</em:type>
 		<em:unpack>true</em:unpack>
 		<em:targetApplication>

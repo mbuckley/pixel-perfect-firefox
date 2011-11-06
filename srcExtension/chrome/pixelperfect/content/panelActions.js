@@ -1,5 +1,4 @@
-var pixelPerfect = pixelPerfect ||
-{};
+var pixelPerfect = pixelPerfect || {};
 
 if (typeof pixelPerfect.panelActions == "undefined") {
     pixelPerfect.panelActions = {};
@@ -146,14 +145,7 @@ pixelPerfect.panelActions = function(){
             var zIndexTextInputEle = document.getElementById('z-index-input');
             var savedZIndex = this.getPref("pixelPerfect.zIndex");
             zIndexTextInputEle.value = savedZIndex;
-            
-            // update overlayLocked Attribute from pref
-            var overlayLockedChkEle = document.getElementById('position-lock-chk');
-            overlayLocked = this.getPref("pixelPerfect.overlayLocked");
-            this.updateDragStatus();
-            overlayLockedChkEle.checked = overlayLocked;
-            
-            // update locked status from pref
+
             
             imageDimensions = this.getImageDimensions(chromeToOverlayUrl);
             var width = imageDimensions[0];
@@ -168,7 +160,7 @@ pixelPerfect.panelActions = function(){
             divPixelPerfect.style.position = 'absolute';
             divPixelPerfect.style.top = this.getPref("pixelPerfect.lastYPos") + 'px';
             divPixelPerfect.style.left = this.getPref("pixelPerfect.lastXPos") + 'px';
-			       divPixelPerfect.style.cursor = 'all-scroll';
+			divPixelPerfect.style.cursor = 'all-scroll';
             
             
             var draggableScriptId = "draggable-script";
@@ -176,6 +168,13 @@ pixelPerfect.panelActions = function(){
             var existingDraggableScript = x.document.getElementById(draggableScriptId);
             this.removeChildElement(existingDraggableScript, pageBody);
             pageBody.appendChild(divPixelPerfect);
+
+            // update overlayLocked Attribute from pref
+            var overlayLockedChkEle = document.getElementById('position-lock-chk');
+            overlayLocked = this.getPref("pixelPerfect.overlayLocked");
+            this.updateDragStatus();
+            this.togglePointerEvents();
+            overlayLockedChkEle.checked = overlayLocked;
             
             // opacity
             var savedOpacity = this.getPref("pixelPerfect.opacity");
@@ -317,6 +316,7 @@ pixelPerfect.panelActions = function(){
         togglePositionLock: function(chkEle) {
           overlayLocked = chkEle.checked;
           this.updateDragStatus();
+          this.togglePointerEvents();
           this.setPrefValue("pixelPerfect.overlayLocked", overlayLocked);
         },
         
@@ -324,6 +324,12 @@ pixelPerfect.panelActions = function(){
           var ppOverlayEle = x.document.getElementById(overlayDivId);
           ppOverlayEle.style.zIndex = zIndexInputEle.value;
           this.setPrefValue("pixelPerfect.zIndex", zIndexInputEle.value);
+        },
+
+        togglePointerEvents: function () {
+            var pp_overlay = x.document.getElementById(overlayDivId);
+            var pointerEventsVal = (overlayLocked) ? 'none' : 'auto'; 
+            pp_overlay.style.pointerEvents = pointerEventsVal;
         },
         
         updateDragStatus: function() {
