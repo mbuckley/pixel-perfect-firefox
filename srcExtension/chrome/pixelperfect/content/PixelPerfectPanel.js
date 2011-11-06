@@ -91,13 +91,13 @@ FBL.ns(function() {
 
             pixelPerfectHelp: function(menuitem) {
                 if ("Pixel Perfect Home" == menuitem.label) {
-                	gBrowser.selectedTab = gBrowser.addTab("http://openhouseconcept.com/projects/pixelperfect/");
+                	gBrowser.selectedTab = gBrowser.addTab("http://pixelperfectplugin.com/");
                 }
                 else if ("File an issue" == menuitem.label) {
                     gBrowser.selectedTab = gBrowser.addTab("https://github.com/openhouseconcept/PixelPerfect/issues");
                 }
                 else if ("Send Feedback" == menuitem.label) {
-                    gBrowser.selectedTab = gBrowser.addTab("http://openhouseconcept.com/projects/pixelperfect/contact");
+                    gBrowser.selectedTab = gBrowser.addTab("http://pixelperfectplugin.com/");
                 }
             }
         });
