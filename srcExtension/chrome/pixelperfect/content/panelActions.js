@@ -4,12 +4,25 @@ if (typeof pixelPerfect.panelActions == "undefined") {
     pixelPerfect.panelActions = {};
 }
 
-pixelPerfect.panelActions = function(){
+pixelPerfect.panelActions = (function(){
     // private
-    var x = window.content,
+    var documents = undefined,
         opacity = 0.5,
         overlayDivId = 'pp_overlay',
         overlayLocked = false;
+        
+    var self = this;
+    
+    function getDocuments () {
+		if(documents === undefined) {
+			mainDocument = window.content.document;
+			
+			var ppPanel = Firebug.currentContext.getPanel("pixelPerfect");
+			panelDocument = ppPanel.document;
+			documents = {main: mainDocument, panel: panelDocument};
+		}
+		return documents;
+	}
     
     // public
     return {
@@ -88,11 +101,13 @@ pixelPerfect.panelActions = function(){
             return ("undefined" == typeof(val) ? defaultval : val);
         },
         
-        toggleOverlay: function(eyeDivId, overlayUrl){
-        	var pixelperfect = x.document.getElementById(overlayDivId);
-            var eyeDiv = document.getElementById(eyeDivId);
-            var pageBody = x.document.getElementsByTagName("body")[0];
+        toggleOverlay: function(eyeDivId, overlayUrl) {
+        	var mainDocument = getDocuments().main,
+        		panelDocument = getDocuments().panel;
             
+        	var pixelperfect = mainDocument.getElementById(overlayDivId);
+            var eyeDiv = panelDocument.getElementById(eyeDivId);
+            var pageBody = mainDocument.getElementsByTagName("body")[0];
             var overlayUrlNoSpaces = overlayUrl.replace(/\s/g, "%20");
             var chromeToOverlayUrl = 'chrome://pixelperfect/content/user_overlays/' + overlayUrl;
             var chromeToOverlayUrlNoSpaces = 'chrome://pixelperfect/content/user_overlays/' + overlayUrlNoSpaces;
@@ -115,7 +130,7 @@ pixelPerfect.panelActions = function(){
                 // compose this if condition
                 if (currentOverlayBackgroundUrl.indexOf(overlayUrlNoSpaces) == -1) {
                     //'clicking on a different overlay..turn off all other eyes, and turn on new overlay...
-                    var overlayList = document.getElementById('overlay-list');
+                    var overlayList = panelDocument.getElementById('overlay-list');
                     var lis = overlayList.getElementsByTagName("li");
                     
                     for (var i = 0; i < lis.length; i++) {
@@ -138,15 +153,16 @@ pixelPerfect.panelActions = function(){
         },
         
         turnOnOverlay: function(chromeToOverlayUrl, chromeToOverlayUrlNoSpaces, pageBody, overlayUrl){
-            var divPixelPerfect = x.document.createElement("div");
+            var mainDocument = getDocuments().main,
+            	panelDocument = getDocuments().panel;
+            var divPixelPerfect = mainDocument.createElement("div");
             divPixelPerfect.setAttribute("id", overlayDivId);
             
             // updateZIndex from pref
-            var zIndexTextInputEle = document.getElementById('z-index-input');
+            var zIndexTextInputEle = panelDocument.getElementById('z-index-input');
             var savedZIndex = this.getPref("pixelPerfect.zIndex");
             zIndexTextInputEle.value = savedZIndex;
 
-            
             imageDimensions = this.getImageDimensions(chromeToOverlayUrl);
             var width = imageDimensions[0];
             var height = imageDimensions[1];
@@ -162,15 +178,14 @@ pixelPerfect.panelActions = function(){
             divPixelPerfect.style.left = this.getPref("pixelPerfect.lastXPos") + 'px';
 			divPixelPerfect.style.cursor = 'all-scroll';
             
-            
             var draggableScriptId = "draggable-script";
             
-            var existingDraggableScript = x.document.getElementById(draggableScriptId);
+            var existingDraggableScript = mainDocument.getElementById(draggableScriptId);
             this.removeChildElement(existingDraggableScript, pageBody);
             pageBody.appendChild(divPixelPerfect);
-
+			
             // update overlayLocked Attribute from pref
-            var overlayLockedChkEle = document.getElementById('position-lock-chk');
+            var overlayLockedChkEle = panelDocument.getElementById('position-lock-chk');
             overlayLocked = this.getPref("pixelPerfect.overlayLocked");
             this.updateDragStatus();
             this.togglePointerEvents();
@@ -181,14 +196,14 @@ pixelPerfect.panelActions = function(){
             opacity = this.roundNumber(savedOpacity, 1);
             this.updateOverlayOpacity();
             
-            var draggablePP = x.document.createElement("script");
+            var draggablePP = mainDocument.createElement("script");
             draggablePP.setAttribute("type", "text/javascript");
             draggablePP.setAttribute("id", draggableScriptId);
             draggablePP.innerHTML = "var overlayDiv = document.getElementById('" + overlayDivId + "');Drag.init(overlayDiv);overlayDiv.onDrag = function(x, y){pixelPerfect.publicDocument.notifyPanelOverlayPositionHasChanged();};overlayDiv.onDragEnd = function(x, y){pixelPerfect.publicDocument.notifyPanelOverlayPositionHasChanged(); pixelPerfect.publicDocument.notifyToSaveLastPosition();};"
-
             
             this.appendScriptElementAsChild(draggablePP, pageBody);
             this.updatePanelDisplayOfXAndY(this.getPref("pixelPerfect.lastXPos"), this.getPref("pixelPerfect.lastYPos"));
+            
             // save last overlay
             this.setPrefValue("pixelPerfect.lastOverlayFileName", overlayUrl);
         },
@@ -204,15 +219,17 @@ pixelPerfect.panelActions = function(){
         },
         
         deleteOverlay: function(eyeLiId, eyeDivId, fileName){
-            var eyeDiv = document.getElementById(eyeDivId);
+            var panelDocument = getDocuments().panel,
+            	mainDocument = getDocuments().main;
+            var eyeDiv = panelDocument.getElementById(eyeDivId);
             if (eyeDiv.className == "eye-on-img") {
-                var pageBody = x.document.getElementsByTagName("body")[0];
-                var pixelperfect = x.document.getElementById(overlayDivId);
+                var pageBody = mainDocument.getElementsByTagName("body")[0];
+                var pixelperfect = mainDocument.getElementById(overlayDivId);
                 pageBody.removeChild(pixelperfect);
             }
             
-            var eyeDiv = document.getElementById(eyeLiId);
-            document.getElementById("overlay-list").removeChild(eyeDiv);
+            var eyeDiv = panelDocument.getElementById(eyeLiId);
+            panelDocument.getElementById("overlay-list").removeChild(eyeDiv);
             this.deleteFile(fileName);
         },
         
@@ -261,7 +278,7 @@ pixelPerfect.panelActions = function(){
         },
         
         increaseOpacity: function(){
-            var opacityNumber = document.getElementById('ctl-opacity-numbers');
+            var opacityNumber = getDocuments().panel.getElementById('ctl-opacity-numbers');
             if (opacityNumber.innerHTML != "1") {
                 opacity = (opacity + 0.1);
                 opacity = this.roundNumber(opacity, 1);
@@ -270,7 +287,7 @@ pixelPerfect.panelActions = function(){
         },
         
         decreaseOpacity: function(){
-            var opacityNumber = document.getElementById('ctl-opacity-numbers');
+            var opacityNumber = getDocuments().panel.getElementById('ctl-opacity-numbers');
             if (opacityNumber.innerHTML != "0") {
                 opacity = (opacity - 0.1);
                 opacity = this.roundNumber(opacity, 1);
@@ -279,10 +296,13 @@ pixelPerfect.panelActions = function(){
         },
         
         updateOverlayOpacity: function(){
-            var pixelperfect = x.document.getElementById(overlayDivId);
+        	var mainDocument = getDocuments().main,
+        		panelDocument = getDocuments().panel;
+        		
+            var pixelperfect = mainDocument.getElementById(overlayDivId);
             pixelperfect.style.opacity = opacity;
             pixelperfect.style.MozOpacity = opacity;
-            var opacityNumber = document.getElementById('ctl-opacity-numbers');
+            var opacityNumber = panelDocument.getElementById('ctl-opacity-numbers');
             opacityNumber.innerHTML = opacity;
             // persist opacity
             this.setPrefValue("pixelPerfect.opacity", opacity);
@@ -321,26 +341,29 @@ pixelPerfect.panelActions = function(){
         },
         
         updateZIndex: function(zIndexInputEle) {
-          var ppOverlayEle = x.document.getElementById(overlayDivId);
+        	var zIndexInputEle = getDocuments().panel.getElementById('z-index-input'),
+          		ppOverlayEle = getDocuments().main.getElementById(overlayDivId);
           ppOverlayEle.style.zIndex = zIndexInputEle.value;
           this.setPrefValue("pixelPerfect.zIndex", zIndexInputEle.value);
         },
 
         togglePointerEvents: function () {
-            var pp_overlay = x.document.getElementById(overlayDivId);
+            var pp_overlay = getDocuments().main.getElementById(overlayDivId);
             var pointerEventsVal = (overlayLocked) ? 'none' : 'auto'; 
             pp_overlay.style.pointerEvents = pointerEventsVal;
         },
         
         updateDragStatus: function() {
-          var pageBody = x.document.getElementsByTagName("body")[0];
+          var mainDocument = getDocuments().main;
+          
+          var pageBody = mainDocument.getElementsByTagName("body")[0];
           //remove previous
           var updateDragStatusScriptID = "update-drag-status";
-          var existingDragStatusScript = x.document.getElementById(updateDragStatusScriptID);
+          var existingDragStatusScript = mainDocument.getElementById(updateDragStatusScriptID);
           this.removeChildElement(existingDragStatusScript, pageBody);
           
           // add new drag status (which will lock/unlock dragging based on state of overlayLocked instance)
-          var dragStatusScript = x.document.createElement("script");
+          var dragStatusScript = mainDocument.createElement("script");
           dragStatusScript.setAttribute("type", "text/javascript");
           dragStatusScript.setAttribute("id", updateDragStatusScriptID);
           dragStatusScript.innerHTML = "Drag.disabled = " + overlayLocked;
@@ -362,7 +385,7 @@ pixelPerfect.panelActions = function(){
               this.setPrefValue("pixelPerfect.lastXPos", xPos);
               this.setPrefValue("pixelPerfect.lastYPos", yPos);
               
-              pp_overlay = x.document.getElementById(overlayDivId);
+              pp_overlay = getDocuments().main.getElementById(overlayDivId);
               pp_overlay.style.top = yPos + 'px';
               pp_overlay.style.left = xPos + 'px';
             }
@@ -377,7 +400,7 @@ pixelPerfect.panelActions = function(){
         },
         
         findPixelPerfectPos: function(){
-            return this.findPos(x.document.getElementById(overlayDivId));
+            return this.findPos(getDocuments().main.getElementById(overlayDivId));
         },
         
         findPos: function(obj){
@@ -393,13 +416,13 @@ pixelPerfect.panelActions = function(){
         },
         
         updatePanelDisplayOfXAndY: function(xPos, yPos){
-            var xPosNumber = document.getElementById('ctl-left-position');
+            var xPosNumber = getDocuments().panel.getElementById('ctl-left-position');
             xPosNumber.innerHTML = xPos;
             
-            var yPosNumber = document.getElementById('ctl-top-position');
+            var yPosNumber = getDocuments().panel.getElementById('ctl-top-position');
             yPosNumber.innerHTML = yPos;
         }
         
         
     };
-}();
+})();

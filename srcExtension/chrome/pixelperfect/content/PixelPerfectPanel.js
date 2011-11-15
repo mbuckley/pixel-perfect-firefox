@@ -1,5 +1,7 @@
 FBL.ns(function() {
     with (FBL) {
+    	var panelName = "pixelPerfect";
+    	
         Firebug.PixelPerfectModule = extend(Firebug.Module,
         {
             // Called when browser starts.
@@ -72,7 +74,16 @@ FBL.ns(function() {
             {
                 var sourceFile = pixelPerfect.fileUtils.chooseFile();
                 var fileName = pixelPerfect.fileUtils.copyFile(sourceFile);
-                pixelPerfect.utils.createOverlayEyeElement(fileName, Firebug.currentContext.getPanel("pixelPerfect").document);
+                var newOverlayEyeData = pixelPerfect.utils.getOverlayElementLiteral(fileName);
+                var args = {
+                	item: newOverlayEyeData
+		        };
+		        var panel = Firebug.currentContext.getPanel(panelName);
+		        
+		        var existingEyeElement = panel.document.getElementById("li_" + newOverlayEyeData.id);
+		        if(existingEyeElement == null) {
+		        	pixelPerfectRep.newOverlayEyeTag.append(args, panel.document.getElementById("overlay-scroll"), pixelPerfectRep);
+		        }
             },
 
             onClickIcon: function(context, event, ele)
@@ -99,6 +110,10 @@ FBL.ns(function() {
                 else if ("Send Feedback" == menuitem.label) {
                     gBrowser.selectedTab = gBrowser.addTab("http://pixelperfectplugin.com/");
                 }
+            },
+            
+            initializeUI: function(detachArgs) {
+            	
             }
         });
 
@@ -107,37 +122,25 @@ FBL.ns(function() {
 
         PixelPerfectPanel.prototype = extend(Firebug.Panel,
         {
-            name: "pixelPerfect",
+            name: panelName,
             title: 'Pixel Perfect',
             searchable: false,
             editable: false,
 
             initialize: function(context, doc) {
-                this.context = context;
-                this.document = doc;
-                var existingEle = this.document.getElementById("pixelperfect-wrapper");
-                if(existingEle != undefined) {
-                	doc.removeChild(existingEle);
-                	existingEle.parentNode.removeChild(existingEle);
-                }
-                
-                this.panelNode = doc.createElement("div");
-                this.panelNode.setAttribute("id", "pixelperfect-wrapper");
-                this.panelNode.ownerPanel = this;
-                this.panelNode.innerHTML = pixelPerfect.fileUtils.readPanelHTML();
-                doc.body.appendChild(this.panelNode);
-
-                pixelPerfect.utils.loadCss("chrome://pixelperfect/content/pixelperfect.css", this.document);
-                pixelPerfect.utils.loadJs("chrome://pixelperfect/content/panelActions.js", this.document);
-
+                Firebug.Panel.initialize.apply(this, arguments);
                 pixelPerfect.utils.loadRequiredJsIntoToMainBrowserOverlay();
-                var currentOverlayFiles = pixelPerfect.fileUtils.getCurrentOverlayFiles();
-                for (i = 0; i < currentOverlayFiles.length; i++) {
-                    var currentOverlay = currentOverlayFiles[i];
-                    pixelPerfect.utils.createOverlayEyeElement(currentOverlay, this.document);
-                }
+                
+                // compose this into ui method
+                var ppPanel = Firebug.currentContext.getPanel(panelName);
+                var overlayEyeElements = pixelPerfect.utils.buildEyeElementData(ppPanel.document);
+                
+                var args = {
+                	overlayEyeElements: overlayEyeElements
+		        };
+		        pixelPerfectRep.panelTag.append(args, this.panelNode, pixelPerfectRep);
             },
-
+            
             getOptionsMenuItems: function() {
                 var menuOptions = [];
                 /**
@@ -184,8 +187,120 @@ FBL.ns(function() {
                 
             }
         });
-
-        Firebug.registerModule(Firebug.PixelPerfectModule);
+					    
+        /**
+		 * Main Panel domplate
+		 */
+		var pixelPerfectRep = domplate(
+		{
+		    panelTag:
+		    	DIV({class: "container_4"},
+			    	DIV({id: "comp", class: "grid_2"},
+			            H2("Overlays"),
+			            DIV({id: "overlay-scroll"},
+			            	FOR("item", "overlayEyeElements",
+					            TAG("$newOverlayEyeTag", {item: "$item"})
+					        )
+			            )
+			       ),
+			   		DIV({id: "options", class: "grid_1"},
+			    		H2("Options"),
+			    		H3("Opacity"),
+			    		DIV({id: "opacity-toggle"},
+			    			DIV({id: "ctl-opacity-down", class: "bt-left", onclick: "$decreaseOpacity"}),
+			    			DIV({id: "ctl-opacity-numbers", class: "numbers"}, "0.5"),
+			    			DIV({id: "ctl-opacity-up", class: "bt-right", onclick: "$increaseOpacity"})
+			    		),
+			    		HR(),
+			    		H3("Position (try dragging)"),
+			    		DIV({id: "position-toggle-y"},
+			    			DIV({class: "bt-left", onclick: "$leftArrowMove"}),
+			    			DIV({id: "ctl-left-position", class: "numbers"}, "0"),
+			    			DIV({class: "bt-right", onclick: "$rightArrowMove"})
+			    		),
+			    		DIV({id: "position-toggle-x"},
+			    			DIV({class: "bt-up", onclick: "$topArrowMove"}),
+			    			DIV({id: "ctl-top-position", class: "numbers"}, "0"),
+			    			DIV({class: "bt-down", onclick: "$bottomArrowMove"})
+			    		),
+			    		DIV({id: "position-lock"},
+			    			INPUT({id: "position-lock-chk", name: "position-lock", type: "checkbox", onclick: "$togglePositionLock"}),
+			    			H3("Lock?")
+			    		),
+			    		HR(),
+			    		DIV({id: "zindex-settings"},
+			    			H3("Z-Index"),
+			    			INPUT({id: "z-index-input", type: "text", value: "1000"}),
+			    			BUTTON({id: "set-z-index-btn", name: "set-z-index", onclick: "$updateZIndex"}, "Update")
+			    		)
+		    		),
+		    		DIV({id: "info", class: "grid_1"},
+		    			H2("Getting Started"),
+		    			P("Pixel Perfect is a firefox firebug extension that allows web developers to easily overlay a web composition over top of the developed html. Switching the composition on and off allows the developer to see how many pixels they are off while in development."),
+		    			P("To get started, click on the 'Add overlay' button to add your design composition."),
+		    			P("For more information, please refer to the 'Help' menu.")
+			    	)
+		    	),
+		    overlayEyeTag:
+			    LI({_myprop: "$item", id: "li_$item.id"},
+	                DIV({class: "eye"},
+	                	DIV({id: "eye_$item.id", class: "eye-off-img", dataId: "$item.file", onclick: "$toggleOverlay"})
+	               	),
+	            	DIV({class: "mini-comp"},
+	            		IMG({width: "31", height: "23", src: "$item.thumbPath"})
+	            	),
+	            	DIV({class: "comp-location"}, "$item.displayLabel"),
+	            	DIV({class: "comp-delete", dataParentId: "li_$item.id", dataEyeId: "eye_$item.id", dataFileName: "$item.file", onclick: "$deleteOverlay"})
+	            ),
+	        newOverlayEyeTag:
+			    DIV({_myprop: "$item", class: "li_$item.id"},
+			    	IMG({width: "31", height: "23", src: "$item.thumbPath"})
+	            ),
+		    decreaseOpacity: function(event)
+    		{
+    			pixelPerfect.panelActions.decreaseOpacity();
+    		},
+		    increaseOpacity: function(event)
+    		{
+        		pixelPerfect.panelActions.increaseOpacity();
+    		},
+		    leftArrowMove: function(event)
+    		{
+    			pixelPerfect.panelActions.leftArrowMove();
+    		},
+		    rightArrowMove: function(event)
+    		{
+    			pixelPerfect.panelActions.rightArrowMove();
+    		},
+		    topArrowMove: function(event)
+    		{
+    			pixelPerfect.panelActions.topArrowMove();
+    		},
+		    bottomArrowMove: function(event)
+    		{
+    			pixelPerfect.panelActions.bottomArrowMove();
+    		},
+		    togglePositionLock: function(event)
+    		{
+    			pixelPerfect.panelActions.togglePositionLock(event.target);
+    		},
+		    updateZIndex: function(event)
+    		{
+    			pixelPerfect.panelActions.updateZIndex();
+    		},
+    		toggleOverlay: function(event)
+    		{
+    			pixelPerfect.panelActions.toggleOverlay(event.target.id, event.target.getAttribute("dataId"));
+    		},
+    		deleteOverlay: function(event)
+    		{
+    			pixelPerfect.panelActions.deleteOverlay(event.target.getAttribute("dataParentId"),event.target.getAttribute("dataEyeId"),event.target.getAttribute("dataFileName"));
+    		}
+		});
+		
+		Firebug.registerStylesheet("chrome://pixelperfect/content/pixelperfect.css");
         Firebug.registerPanel(PixelPerfectPanel);
+        Firebug.registerModule(Firebug.PixelPerfectModule);
+        
     }
 });

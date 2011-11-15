@@ -1,12 +1,188 @@
+/*
+	Variable Grid System (Fluid Version).
+	Learn more ~ http://www.spry-soft.com/grids/
+	Based on 960 Grid System - http://960.gs/ & 960 Fluid - http://www.designinfluences.com/
+
+	Licensed under GPL and MIT.
+*/
+
+
+/* Containers
+----------------------------------------------------------------------------------------------------*/
+.container_4 {
+	width: 92%;
+	margin-left: 4%;
+	margin-right: 4%;
+}
+
+/* Grid >> Global
+----------------------------------------------------------------------------------------------------*/
+
+.grid_1,
+.grid_2,
+.grid_3,
+.grid_4 {
+	display:inline;
+	float: left;
+	position: relative;
+	margin-left: 1%;
+	margin-right: 1%;
+}
+
+/* Grid >> Children (Alpha ~ First, Omega ~ Last)
+----------------------------------------------------------------------------------------------------*/
+
+.alpha {
+	margin-left: 0;
+}
+
+.omega {
+	margin-right: 0;
+}
+
+/* Grid >> 4 Columns
+----------------------------------------------------------------------------------------------------*/
+
+
+.container_4 .grid_1 {
+	width:23.0%;
+}
+
+.container_4 .grid_2 {
+	width:48.0%;
+}
+
+.container_4 .grid_3 {
+	width:73.0%;
+}
+
+.container_4 .grid_4 {
+	width:98.0%;
+}
+
+
+
+/* Prefix Extra Space >> 4 Columns
+----------------------------------------------------------------------------------------------------*/
+
+
+.container_4 .prefix_1 {
+	padding-left:25.0%;
+}
+
+.container_4 .prefix_2 {
+	padding-left:50.0%;
+}
+
+.container_4 .prefix_3 {
+	padding-left:75.0%;
+}
+
+
+
+/* Suffix Extra Space >> 4 Columns
+----------------------------------------------------------------------------------------------------*/
+
+
+.container_4 .suffix_1 {
+	padding-right:25.0%;
+}
+
+.container_4 .suffix_2 {
+	padding-right:50.0%;
+}
+
+.container_4 .suffix_3 {
+	padding-right:75.0%;
+}
+
+
+
+/* Push Space >> 4 Columns
+----------------------------------------------------------------------------------------------------*/
+
+
+.container_4 .push_1 {
+	left:25.0%;
+}
+
+.container_4 .push_2 {
+	left:50.0%;
+}
+
+.container_4 .push_3 {
+	left:75.0%;
+}
+
+
+
+/* Pull Space >> 4 Columns
+----------------------------------------------------------------------------------------------------*/
+
+
+.container_4 .pull_1 {
+	left:-25.0%;
+}
+
+.container_4 .pull_2 {
+	left:-50.0%;
+}
+
+.container_4 .pull_3 {
+	left:-75.0%;
+}
+
+
+
+
+/* Clear Floated Elements
+----------------------------------------------------------------------------------------------------*/
+
+/* http://sonspring.com/journal/clearing-floats */
+
+.clear {
+	clear: both;
+	display: block;
+	overflow: hidden;
+	visibility: hidden;
+	width: 0;
+	height: 0;
+}
+
+/* http://perishablepress.com/press/2008/02/05/lessons-learned-concerning-the-clearfix-css-hack */
+
+.clearfix:after {
+	clear: both;
+	content: ' ';
+	display: block;
+	font-size: 0;
+	line-height: 0;
+	visibility: hidden;
+	width: 0;
+	height: 0;
+}
+
+.clearfix {
+	display: inline-block;
+}
+
+* html .clearfix {
+	height: 1%;
+}
+
+.clearfix {
+	display: block;
+}
+
 /* Pixel Perfect Styles
 ----------------------------------------------------------------------------------------------------*/
 #pixelPerfectIcon { list-style-image: url(chrome://pixelperfect/content/images/logo_16x16.png); cursor: pointer; }
 
-#pixelperfect-wrapper { margin:0px 0 0 0px; padding:0; overflow: auto; width: 100%; background: #F0F0F0; font-family: arial,sans-serif; font-size: 10px; }
-#pixelperfect-wrapper h2 {font-size: 11px;}
-#pixelperfect-wrapper h3 {margin:4px 0px 6px 0px; font-size: 11px; font-weight: normal;}
-#pixelperfect-wrapper p {font-size: 10px; color: #333; line-height: 1.3;}
-#comp {width: 300px; float: left;}
+.panelNode-pixelPerfect { background: #F0F0F0; font-family: arial,sans-serif; font-size: 10px; }
+.panelNode-pixelPerfect h2 {font-size: 11px;}
+.panelNode-pixelPerfect h3 {margin:4px 0px 6px 0px; font-size: 11px; font-weight: normal;}
+.panelNode-pixelPerfect p {font-size: 10px; color: #333; line-height: 1.3;}
+#comp {}
   #comp ul {width: 250px; background: #E1E1E1; list-style: none; margin:0; padding:0;}
   #comp ul li {width: 250px; height: 40px; background: url(chrome://pixelperfect/content/images/bg-comp-loc.gif) no-repeat top left;}
       .eye {width: 50px; float: left;}
@@ -16,7 +192,9 @@
           .mini-comp img {margin: 9px 0 0 1px;}
       .comp-location {padding:14px 0 0 0; float: left;}
       .comp-delete {padding: 25px 0 0 0; float: right; cursor: pointer; width: 10px; height: 11px; background: url(chrome://pixelperfect/content/images/trash.gif) no-repeat center left;}
-#options {width: 220px; float: left;}
+  #overlay-scroll {overflow-y: scroll; width: 100%; height: 200px;}
+  #overlay-scroll img {float: left; margin: 5px; width: 100px; height: 100px;}
+#options {}
   #opacity-toggle {height:18px; width:81px; background: url(chrome://pixelperfect/content/images/bg-opacity-toggle.gif) no-repeat top left;}
   #opacity-toggle:hover {background: url(chrome://pixelperfect/content/images/bg-opacity-toggle-over.gif) no-repeat top left;}
   
@@ -42,6 +220,4 @@
     #zindex-settings input {width: 50px; text-align: right;}
     #zindex-settings button {width: 60px; height: 25px;}
   #options hr {width: 75%; margin: 10px 0 10px 0; color: #C0C0C0; background-color: #C0C0C0;}
-#info {width: 380px; float: left;}
-
-#overlay-scroll{ width: 265px; height: 175px; overflow: auto; }
+#info {}

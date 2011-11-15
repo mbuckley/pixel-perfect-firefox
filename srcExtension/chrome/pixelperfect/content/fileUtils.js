@@ -69,7 +69,7 @@ pixelPerfect.fileUtils = function () {
                 
                 var userOverlayPathStr = this.getUserOverlayPath().path;
                 file.initWithPath(userOverlayPathStr);
-
+                
                 // file is the given directory (nsIFile)
                 var entries = file.directoryEntries;
                 var overlayArr = [];
@@ -88,6 +88,7 @@ pixelPerfect.fileUtils = function () {
                 return overlayArr;
             },
             
+            //TODO: update extension folder name from config settings
             getUserOverlayPath: function() {
                 var userOverlayPath = this.getFirefoxProfileRootFolder().clone();
                 userOverlayPath.append('extensions');

@@ -6,18 +6,28 @@
         <stringbundle id="strings_pixelperfect" src="chrome://pixelperfect/locale/pixelperfect.properties"/>
     </stringbundleset>
     <script type="application/x-javascript" src="chrome://pixelperfect/content/utils.js"/>
+    <script type="application/x-javascript" src="chrome://pixelperfect/content/panelActions.js"/>
     <script type="application/x-javascript" src="chrome://pixelperfect/content/fileUtils.js"/>
     <script type="application/x-javascript" src="chrome://pixelperfect/content/PixelPerfectPanel.js"></script>
             
     <commandset id="mainCommandSet"> 
         <command id="cmd_addOverlay" oncommand="Firebug.PixelPerfectModule.addOverlay();"/>
-    </commandset> 
+    </commandset>
     
     <toolbar id="fbToolbar" align="center">
         <hbox id="fbToolbarInner" insertbefore="fbDetachButton" flex="1" align="center"> 
             <hbox id="fbPixelPerfectPanelButtons" insertafter="fbNetButtons"> 
                 <toolbarbutton label="&pixelperfect.toolbarbutton.addoverlay.label;" class="toolbar-text-button" 
                                tooltiptext="&pixelperfect.toolbarbutton.addoverlay.hover;" command="cmd_addOverlay"/> 
+                <toolbarbutton label="Overlay Layout" id="pixelPerfectOverlayLayoutMenu" type="menu" class="toolbar-text-button">
+                    <menupopup>
+                        <menuitem label="List" oncommand=""/>
+                        <menuseparator/>
+                        <menuitem label="Medium Icons" oncommand=""/>
+                        <menuseparator/>
+                        <menuitem label="Large Icons" oncommand=""/>
+                    </menupopup>
+                 </toolbarbutton>
                 <toolbarbutton label="Help" id="pixelPerfectHelpMenu" type="menu" class="toolbar-text-button">
                     <menupopup>
                         <menuitem label="Pixel Perfect Home" oncommand="Firebug.PixelPerfectModule.pixelPerfectHelp(this)"/>
