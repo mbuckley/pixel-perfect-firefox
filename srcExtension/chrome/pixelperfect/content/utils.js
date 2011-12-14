@@ -28,6 +28,11 @@ pixelPerfect.utils = function () {
                 }
             },
             
+            roundNumber: function(num, dec){
+	            var result = Math.round(num * Math.pow(10, dec)) / Math.pow(10, dec);
+	            return result;
+	        },
+            
             toggleStatusBar: function(bHide) {
             	FirebugChrome.window.document.getElementById('ppStatusBar').hidden = bHide;
             },
@@ -79,53 +84,20 @@ pixelPerfect.utils = function () {
                 }
             },
             
-            createOverlayEyeElement: function(fileName, doc) {
-            	var liId = "li_eye_" + fileName;
-                var currentEyeElement = doc.getElementById(liId);
-                if(currentEyeElement == null) {
-                  var liElt = doc.createElement('li');
-
-                  liElt.setAttribute("id", liId);
-
-                  var outerEye = doc.createElement('div');
-                  outerEye.setAttribute('class', 'eye');
-
-                  var innerEye = doc.createElement('div');
-                  innerEye.setAttribute("class", "eye-off-img");
-                  innerEye.setAttribute("id", "eye_" + fileName);
-                  innerEye.setAttribute("onclick", "pixelPerfect.panelActions.toggleOverlay('eye_" + fileName + "','" + fileName + "');");
-
-
-                  outerEye.appendChild(innerEye);
-
-                  liElt.appendChild(outerEye);
-
-                  var minicomp = doc.createElement('div');
-                  minicomp.setAttribute("class", "mini-comp");
-
-                  var minicompimg = doc.createElement("img");
-                  minicompimg.setAttribute("width", "31");
-                  minicompimg.setAttribute("height", "23");
-                  minicompimg.setAttribute("alt", "");
-                  minicompimg.setAttribute("src", "chrome://pixelperfect/content/user_overlays/" + fileName);
-
-                  minicomp.appendChild(minicompimg);
-                  liElt.appendChild(minicomp);
-
-                  var comploc = doc.createElement('div');
-                  comploc.setAttribute("class", "comp-location");
-                  var fileNameForDisplay = this.shortenFileNameTo(fileName, 15, '***');
-                  comploc.innerHTML = fileNameForDisplay;
-                  liElt.appendChild(comploc);
-
-                  var compdel = doc.createElement("div");
-                  compdel.setAttribute("class", "comp-delete");
-                  compdel.setAttribute("onclick", "pixelPerfect.panelActions.deleteOverlay('" + liId + "','eye_" + fileName + "','" + fileName + "');");
-                  liElt.appendChild(compdel);
-
-                  var overlayList = doc.getElementById('overlay-list');
-                  overlayList.appendChild(liElt);
-                }
+            buildEyeElementData: function(doc) {
+            	var currentOverlayFiles = pixelPerfect.fileUtils.getCurrentOverlayFiles(),
+            		eyeElementData = [],
+            		currentOverlay;
+            	for (i = 0; i < currentOverlayFiles.length; i++) {
+                    eyeElementData.push(getOverlayElementLiteral(currentOverlayFiles[i]));
+            	}
+            	return eyeElementData;
+            },
+            
+            getOverlayElementLiteral: function(overlayName) {
+            	var formattedID = overlayName.replace(/(\.|\s|-)/gi, "_").toLowerCase(),
+            		fileNameForDisplay = this.shortenFileNameTo(overlayName, 15, '***');
+            	return {id: formattedID, file: overlayName, displayLabel: fileNameForDisplay, thumbPath: 'chrome://pixelperfect/content/user_overlays/' + overlayName};
             },
             
             fireEyeClickEvent: function(eyeEleId, doc) {
