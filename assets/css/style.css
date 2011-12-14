@@ -20,7 +20,7 @@ a:hover {color: #2C688D;}
 /* Site wide Layout
 ========================================================*/
 
-#site {margin:0 auto; width: 968px; background: url(images/layout/bg-site.png) no-repeat 0 112px;}
+#site {margin:0 auto; width: 968px; background: url(../images/layout/bg-site.png) no-repeat 0 112px;}
 
 #top {height: 126px;}
 	#logo {padding:34px 0 0 0;}
