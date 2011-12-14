@@ -1,0 +1,245 @@
+{
+	"auto_complete":
+	{
+		"selected_items":
+		[
+		]
+	},
+	"buffers":
+	[
+		{
+			"file": "/Users/mbuckley/projects/ohc/InvertColor/pixastic.custom.js",
+			"settings":
+			{
+				"buffer_size": 9224,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "/Users/mbuckley/projects/ohc/InvertColor/index.html",
+			"settings":
+			{
+				"buffer_size": 581,
+				"line_ending": "Unix"
+			}
+		}
+	],
+	"build_system": "",
+	"command_palette":
+	{
+		"height": 392.0,
+		"selected_items":
+		[
+		],
+		"width": 467.0
+	},
+	"console":
+	{
+		"height": 115.0
+	},
+	"distraction_free":
+	{
+		"menu_visible": true,
+		"show_minimap": false,
+		"show_open_files": false,
+		"show_tabs": false,
+		"side_bar_visible": false,
+		"status_bar_visible": false
+	},
+	"file_history":
+	[
+		"/Users/mbuckley/projects/ohc/InvertColor/index.html",
+		"/Users/mbuckley/projects/ohc/PixelPerfect/srcExtension/chrome/pixelperfect/content/PixelPerfectPanel.js",
+		"/Users/mbuckley/projects/ohc/PixelPerfect/srcExtension/install.rdf",
+		"/Users/mbuckley/projects/ohc/PixelPerfect/packageExtension.sh",
+		"/Users/mbuckley/projects/ohc/PixelPerfect/srcExtension/chrome/pixelperfect/content/panelActions.js",
+		"/Users/mbuckley/projects/ohc/PixelPerfect/.gitignore",
+		"/Users/mbuckley/projects/cmass/panels/api/pdo/predator.json",
+		"/Users/mbuckley/projects/cmass/panels/api/profanity/profanity.json",
+		"/Users/mbuckley/projects/cmass/panels/autotest/SpecRunner.html",
+		"/Users/mbuckley/projects/cmass/panels/core/js/mia.ui.dropdown.js",
+		"/Users/mbuckley/projects/cmass/panels/autotest/spec/SizeSpec.js",
+		"/Users/mbuckley/projects/cmass/panels/autotest/lib/jasmine-1.0.2/jasmine-html.js",
+		"/Users/mbuckley/projects/cmass/panels/core/js/mia.panel.js",
+		"/Users/mbuckley/projects/cmass/panels/autotest/spec/ConfigSpec.js",
+		"/Users/mbuckley/projects/cmass/panels/panels.sublime-project"
+	],
+	"find":
+	{
+		"height": 33.0
+	},
+	"find_in_files":
+	{
+		"height": 0.0,
+		"where_history":
+		[
+			""
+		]
+	},
+	"find_state":
+	{
+		"case_sensitive": false,
+		"find_history":
+		[
+			"jQuery",
+			"jquery",
+			"refresh",
+			"divPixelPerfect",
+			"toggle",
+			"alert",
+			"toggle",
+			"var x",
+			"togglePointerEvents",
+			"toggle",
+			"Firebug",
+			"pixelPerfect.overlayLocked",
+			"toggle",
+			".style.",
+			"lock",
+			"mi",
+			"click",
+			"ui-dropdown",
+			"container",
+			"footwearData",
+			"Dropdown",
+			"container",
+			"data",
+			"Dropdown",
+			"dropdown",
+			"ui-dropdown-options-option",
+			"console.log",
+			"Dropdown"
+		],
+		"highlight": true,
+		"in_selection": false,
+		"preserve_case": false,
+		"regex": false,
+		"replace_history":
+		[
+		],
+		"reverse": false,
+		"show_context": true,
+		"use_buffer2": true,
+		"whole_word": false,
+		"wrap": true
+	},
+	"groups":
+	[
+		{
+			"selected": 1,
+			"sheets":
+			[
+				{
+					"buffer": 0,
+					"file": "/Users/mbuckley/projects/ohc/InvertColor/pixastic.custom.js",
+					"settings":
+					{
+						"buffer_size": 9224,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage"
+						},
+						"translation.x": 46.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 1,
+					"file": "/Users/mbuckley/projects/ohc/InvertColor/index.html",
+					"settings":
+					{
+						"buffer_size": 581,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								565,
+								565
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/HTML/HTML.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				}
+			]
+		}
+	],
+	"incremental_find":
+	{
+		"height": 0.0
+	},
+	"input":
+	{
+		"height": 27.0
+	},
+	"layout":
+	{
+		"cells":
+		[
+			[
+				0,
+				0,
+				1,
+				1
+			]
+		],
+		"cols":
+		[
+			0.0,
+			1.0
+		],
+		"rows":
+		[
+			0.0,
+			1.0
+		]
+	},
+	"menu_visible": true,
+	"replace":
+	{
+		"height": 0.0
+	},
+	"save_all_on_build": true,
+	"select_file":
+	{
+		"height": 0.0,
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"select_project":
+	{
+		"height": 500.0,
+		"selected_items":
+		[
+		],
+		"width": 380.0
+	},
+	"show_minimap": true,
+	"show_open_files": false,
+	"show_tabs": true,
+	"side_bar_visible": true,
+	"side_bar_width": 224.0,
+	"status_bar_visible": true
+}
