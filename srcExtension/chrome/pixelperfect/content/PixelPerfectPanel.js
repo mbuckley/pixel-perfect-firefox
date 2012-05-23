@@ -8,7 +8,7 @@ FBL.ns(function() {
             initialize: function() {
                 this.initPrefs();
                 this.addEventListeners();
-                pixelPerfect.utils.toggleStatusBar(Firebug.getPref(Firebug.prefDomain, "pixelPerfect.hidestatusbar"));
+                //pixelPerfect.utils.toggleStatusBar(Firebug.getPref(Firebug.prefDomain, "pixelPerfect.hidestatusbar"));
             },
 
             initPrefs: function() {
@@ -23,6 +23,7 @@ FBL.ns(function() {
             },
 
             overlayMovementListener: function(evt) {
+                //Firebug.Console.log("overlay movement listener");
                 this.updateAbsolutePositionControls(evt.target.getAttribute("xPos"), evt.target.getAttribute("yPos"));
             },
 
@@ -98,6 +99,15 @@ FBL.ns(function() {
                 Firebug.setPref(Firebug.prefDomain, "pixelPerfect.lastXPos", xPos);
                 Firebug.setPref(Firebug.prefDomain, "pixelPerfect.lastYPos", yPos);
                 Firebug.setPref(Firebug.prefDomain, "pixelPerfect.opacity", opacity);
+            },
+
+            pixelPerfectSwitchLayout: function(menuItem) {
+                if ("List" == menuitem.label) {
+                }
+                else if ("Medium Icons" == menuitem.label) {
+                }
+                else if ("Large Icons" == menuitem.label) {
+                }
             },
 
             pixelPerfectHelp: function(menuitem) {
@@ -253,8 +263,8 @@ FBL.ns(function() {
 	            	DIV({class: "comp-delete", dataParentId: "li_$item.id", dataEyeId: "eye_$item.id", dataFileName: "$item.file", onclick: "$deleteOverlay"})
 	            ),
 	        newOverlayEyeTag:
-			    DIV({_myprop: "$item", class: "li_$item.id"},
-			    	IMG({width: "31", height: "23", src: "$item.thumbPath"})
+			    DIV({_myprop: "$item", class: "li_$item.id", onclick: "$toggleOverlay"},
+			    	IMG({width: "31", height: "23", src: "$item.thumbPath", id: "eye_$item.id", dataId: "$item.file"})
 	            ),
 		    decreaseOpacity: function(event)
     		{
@@ -290,6 +300,8 @@ FBL.ns(function() {
     		},
     		toggleOverlay: function(event)
     		{
+                //Firebug.Console.log(event.target);
+                //Firebug.Console.log("id => " + event.target.id + " :: dataId => " + event.target.getAttribute("dataId"));
     			pixelPerfect.panelActions.toggleOverlay(event.target.id, event.target.getAttribute("dataId"));
     		},
     		deleteOverlay: function(event)
