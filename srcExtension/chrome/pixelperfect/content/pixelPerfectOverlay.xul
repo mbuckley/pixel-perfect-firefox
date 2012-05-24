@@ -19,15 +19,6 @@
             <hbox id="fbPixelPerfectPanelButtons" insertafter="fbNetButtons"> 
                 <toolbarbutton label="&pixelperfect.toolbarbutton.addoverlay.label;" class="toolbar-text-button" 
                                tooltiptext="&pixelperfect.toolbarbutton.addoverlay.hover;" command="cmd_addOverlay"/> 
-                <toolbarbutton label="Overlay Layout" id="pixelPerfectOverlayLayoutMenu" type="menu" class="toolbar-text-button">
-                    <menupopup>
-                        <menuitem label="List" oncommand="Firebug.PixelPerfectModule.pixelPerfectSwitchLayout(this);" />
-                        <menuseparator/>
-                        <menuitem label="Medium Icons" oncommand="Firebug.PixelPerfectModule.pixelPerfectSwitchLayout(this);" />
-                        <menuseparator/>
-                        <menuitem label="Large Icons" oncommand="Firebug.PixelPerfectModule.pixelPerfectSwitchLayout(this);" />
-                    </menupopup>
-                 </toolbarbutton>
                 <toolbarbutton label="Help" id="pixelPerfectHelpMenu" type="menu" class="toolbar-text-button">
                     <menupopup>
                         <menuitem label="Pixel Perfect Home" oncommand="Firebug.PixelPerfectModule.pixelPerfectHelp(this);" />

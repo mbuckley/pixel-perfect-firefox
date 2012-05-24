@@ -182,18 +182,23 @@
 .panelNode-pixelPerfect h2 {font-size: 11px;}
 .panelNode-pixelPerfect h3 {margin:4px 0px 6px 0px; font-size: 11px; font-weight: normal;}
 .panelNode-pixelPerfect p {font-size: 10px; color: #333; line-height: 1.3;}
-#comp {}
-  #comp ul {width: 250px; background: #E1E1E1; list-style: none; margin:0; padding:0;}
-  #comp ul li {width: 250px; height: 40px; background: url(chrome://pixelperfect/content/images/bg-comp-loc.gif) no-repeat top left;}
-      .eye {width: 50px; float: left;}
+#overlay-container {}
+	#overlay-scroll {overflow-y: scroll; width: 100%; height: 200px;}
+		#overlay-list {width: 100%; list-style: none; margin:0; padding:0;}
+			#overlay-list li {width: 100px; height: 100px; float: left; margin: 0 5px 5px 0; margin: 0; padding: 0;}
+			.overlay-active {border: dashed 1px green;}
+			#overlay-list li img {float: left; width: 100px; height: 100px;}
+
+      /*.eye {width: 50px; float: left;}
           .eye-on-img {margin:12px 0 0 12px; width: 18px; height: 18px; background: url(chrome://pixelperfect/content/images/eye-on.gif) no-repeat top left;}
           .eye-off-img {margin:12px 0 0 12px; width: 18px; height: 18px; background: url(chrome://pixelperfect/content/images/eye-off.gif) no-repeat top left;}
       .mini-comp {width: 56px; height: 36px; background: url(chrome://pixelperfect/content/images/bg-comp-small.jpg) no-repeat 0 8px; float: left;}
           .mini-comp img {margin: 9px 0 0 1px;}
       .comp-location {padding:14px 0 0 0; float: left;}
-      .comp-delete {padding: 25px 0 0 0; float: right; cursor: pointer; width: 10px; height: 11px; background: url(chrome://pixelperfect/content/images/trash.gif) no-repeat center left;}
-  #overlay-scroll {overflow-y: scroll; width: 100%; height: 200px;}
-  #overlay-scroll img {float: left; margin: 5px; width: 100px; height: 100px;}
+      .comp-delete {padding: 25px 0 0 0; float: right; cursor: pointer; width: 10px; height: 11px; background: url(chrome://pixelperfect/content/images/trash.gif) no-repeat center left;}*/
+
+  /*#overlay-scroll {overflow-y: scroll; width: 100%; height: 200px;}
+  #overlay-scroll img {float: left; margin: 5px; width: 100px; height: 100px;}*/
 #options {}
   #opacity-toggle {height:18px; width:81px; background: url(chrome://pixelperfect/content/images/bg-opacity-toggle.gif) no-repeat top left;}
   #opacity-toggle:hover {background: url(chrome://pixelperfect/content/images/bg-opacity-toggle-over.gif) no-repeat top left;}

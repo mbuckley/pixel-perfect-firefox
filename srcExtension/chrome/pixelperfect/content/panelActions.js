@@ -115,7 +115,7 @@ pixelPerfect.panelActions = (function(){
             
             if (pixelperfect == null) {
                 this.turnOnOverlay(chromeToOverlayUrl, chromeToOverlayUrlNoSpaces, pageBody, overlayUrl);
-                eyeDiv.setAttribute("class", "eye-on-img");
+                eyeDiv.setAttribute("class", "overlay-active");
             }
             else {
                 // hide overlay
@@ -136,7 +136,7 @@ pixelPerfect.panelActions = (function(){
                     for (var i = 0; i < lis.length; i++) {
                         var currentEyeElement = lis[i];
                         var existingEyeDiv = currentEyeElement.getElementsByTagName("div")[1];
-                        existingEyeDiv.setAttribute("class", "eye-off-img");
+                        existingEyeDiv.setAttribute("class", "");
                     }
                     this.setPrefValue("pixelPerfect.lastXPos", '0');
                     this.setPrefValue("pixelPerfect.lastYPos", '0');
@@ -144,29 +144,30 @@ pixelPerfect.panelActions = (function(){
                     this.setPrefValue("pixelPerfect.zIndex", '1000');
                     this.setPrefValue("pixelPerfect.overlayLocked", false);
                     this.turnOnOverlay(chromeToOverlayUrl, chromeToOverlayUrlNoSpaces, pageBody, overlayUrl);
-                    eyeDiv.setAttribute("class", "eye-on-img");
+                    eyeDiv.setAttribute("class", "overlay-active");
                 }
                 else {
-                    eyeDiv.setAttribute("class", "eye-off-img");
+                    eyeDiv.setAttribute("class", "");
                 }
             }
         },
         
         turnOnOverlay: function(chromeToOverlayUrl, chromeToOverlayUrlNoSpaces, pageBody, overlayUrl){
+
             var mainDocument = getDocuments().main,
             	panelDocument = getDocuments().panel;
             var divPixelPerfect = mainDocument.createElement("div");
             divPixelPerfect.setAttribute("id", overlayDivId);
             
             // updateZIndex from pref
-            var zIndexTextInputEle = panelDocument.getElementById('z-index-input');
-            var savedZIndex = this.getPref("pixelPerfect.zIndex");
-            zIndexTextInputEle.value = savedZIndex;
+            // var zIndexTextInputEle = panelDocument.getElementById('z-index-input');
+            // var savedZIndex = this.getPref("pixelPerfect.zIndex");
+            // zIndexTextInputEle.value = savedZIndex;
 
             imageDimensions = this.getImageDimensions(chromeToOverlayUrl);
             var width = imageDimensions[0];
             var height = imageDimensions[1];
-            divPixelPerfect.setAttribute("style", "z-index: " + zIndexTextInputEle.value);
+            divPixelPerfect.setAttribute("style", "z-index: 10000");
             divPixelPerfect.style.background = 'url(' + chromeToOverlayUrlNoSpaces + ') no-repeat';
             divPixelPerfect.style.width = width;
             divPixelPerfect.style.height = height;
