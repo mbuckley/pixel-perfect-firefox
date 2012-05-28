@@ -319,7 +319,7 @@
         }
 .fd-slider-vertical .fd-slider-handle
         {
-        cursor:N-resize;
+        cursor:pointer;
         }
 /* :focus styles for browsers that support them (FF/Moz) and a .focused for IE */
 /*.fd-slider:focus .fd-slider-inner,
@@ -344,7 +344,7 @@
         height:20px;
         outline:0px none;
         background:transparent url(chrome://pixelperfect/content/images/slider-disabled.png) no-repeat 0px 0px;
-        cursor:W-resize;
+        cursor: pointer;
         -moz-user-select:none;
         -moz-user-focus:none;
         -moz-outline:0px none;
@@ -375,9 +375,9 @@ button.fd-slider-handle:focus::-moz-focus-inner { border-color: transparent; }
         }
 body.W-resize-s *
         {
-        cursor:W-resize !important;
+        cursor:pointer !important;
         }
 body.N-resize-s *
         {
-        cursor:N-resize !important;
+        cursor:pointer !important;
         }
