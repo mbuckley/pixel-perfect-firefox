@@ -85,15 +85,6 @@ FBL.ns(function() {
 		        	pixelPerfectRep.overlayTag.append(args, panel.document.getElementById("overlay-list"), pixelPerfectRep);
 		        }
             },
-
-            // @deprecated
-            onClickIcon: function(context, event, ele)
-            {
-                 if (typeof FirebugContext !== 'undefined' || typeof Firebug.currentContext !== 'undefined') {
-		            Firebug.toggleBar(undefined, "pixelPerfect");
-		            return;
-		        }
-            },
             
             saveLastPosition: function(xPos, yPos, opacity) {
                 Firebug.setPref(Firebug.prefDomain, "pixelPerfect.lastXPos", xPos);
@@ -211,20 +202,16 @@ FBL.ns(function() {
                         )
                     ),
 			   		DIV({id: "options", class: "grid_1"},
-			    		H2("Options"),
 			    		H3("Opacity"),
 			    		DIV({id: "opacity-toggle"},
                             INPUT({name: "opacity-slider", id: "opacity-slider", type: "text", title: "Range: 10 - 100", class: "fd_range_10_100 fd_hide_input fd_callback_pixelPerfect.panelActions.opacitySliderUpdate", value:"50"})
 			    		),
-			    		H3("Position (try dragging)"),
-			    		DIV({id: "position-toggle-y"},
+			    		DIV({id: "position-controls"},
 			    			DIV({class: "bt-left", onclick: "$leftArrowMove"}),
-			    			DIV({class: "bt-right", onclick: "$rightArrowMove"})
-			    		),
-			    		DIV({id: "position-toggle-x"},
+			    			DIV({class: "bt-right", onclick: "$rightArrowMove"}),
 			    			DIV({class: "bt-up", onclick: "$topArrowMove"}),
 			    			DIV({class: "bt-down", onclick: "$bottomArrowMove"})
-			    		),
+                        ),
 			    		DIV({id: "position-lock"},
 			    			INPUT({id: "position-lock-chk", name: "position-lock", type: "checkbox", onclick: "$togglePositionLock"}),
 			    			H3("Lock?")

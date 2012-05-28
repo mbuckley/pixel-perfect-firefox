@@ -203,18 +203,20 @@
   #opacity-toggle {height:18px; width:81px; background: url(chrome://pixelperfect/content/images/bg-opacity-toggle.gif) no-repeat top left;}
   #opacity-toggle:hover {background: url(chrome://pixelperfect/content/images/bg-opacity-toggle-over.gif) no-repeat top left;}
   
-  #position-toggle-y {float: left; height:18px; width:81px; background: url(chrome://pixelperfect/content/images/bg-opacity-toggle.gif) no-repeat top left;}
-  #position-toggle-y:hover {background: url(chrome://pixelperfect/content/images/bg-opacity-toggle-over.gif) no-repeat top left;}
+  /*#position-toggle-y {float: left; height:18px; width:81px; background: url(chrome://pixelperfect/content/images/bg-opacity-toggle.gif) no-repeat top left;}
+  #position-toggle-y:hover {background: url(chrome://pixelperfect/content/images/bg-opacity-toggle-over.gif) no-repeat top left;}*/
   
-  #position-toggle-x {float: left; height:18px; width:81px; margin:0; background: url(chrome://pixelperfect/content/images/bg-position-toggle.gif) no-repeat top left;}
-  #position-toggle-x:hover {background: url(chrome://pixelperfect/content/images/bg-position-toggle-over.gif) no-repeat top left;}
-      .bt-left  {height:18px; width: 12px; float: left; cursor: pointer;}
+  /*#position-toggle-x {float: left; height:18px; width:81px; margin:0; background: url(chrome://pixelperfect/content/images/bg-position-toggle.gif) no-repeat top left;}
+  #position-toggle-x:hover {background: url(chrome://pixelperfect/content/images/bg-position-toggle-over.gif) no-repeat top left;}*/
+
+	#position-controls {float: left; width: 100px; border: dashed 1px #000;}
+      .bt-left  {height:18px; width: 12px; float: left; cursor: pointer; background: url(chrome://pixelperfect/content/images/bg-left-arrow.gif) no-repeat top left;}
       .bt-left:hover {background: url(chrome://pixelperfect/content/images/bg-left-arrow.gif) no-repeat top left;}
-      .bt-right {height:18px; width: 12px; float: left; cursor: pointer;}
+      .bt-right {height:18px; width: 12px; float: left; cursor: pointer; background: url(chrome://pixelperfect/content/images/bg-right-arrow.gif) no-repeat top left;}
       .bt-right:hover {background: url(chrome://pixelperfect/content/images/bg-right-arrow.gif) no-repeat top left; cursor: pointer;}
-      .bt-up {height:18px; width: 12px; float: left; cursor: pointer;}
+      .bt-up {height:18px; width: 12px; float: left; cursor: pointer; background: url(chrome://pixelperfect/content/images/bg-up-arrow.gif) no-repeat top left;}
       .bt-up:hover {background: url(chrome://pixelperfect/content/images/bg-up-arrow.gif) no-repeat top left;}
-      .bt-down {height:18px; width: 12px; float: left; cursor: pointer;}
+      .bt-down {height:18px; width: 12px; float: left; cursor: pointer; background: url(chrome://pixelperfect/content/images/bg-down-arrow.gif) no-repeat top left;}
       .bt-down:hover {background: url(chrome://pixelperfect/content/images/bg-down-arrow.gif) no-repeat top left;}
       .numbers  {margin: 4px 0px 0 0; text-align: center; width: 44px; float: left;}
   #position-lock {height: 18px; width: 81px; margin: 10px 0 0 0; padding: 20px 0 0 0;}
