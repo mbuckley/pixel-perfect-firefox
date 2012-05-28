@@ -10,9 +10,9 @@
 /* Containers
 ----------------------------------------------------------------------------------------------------*/
 .container_4 {
-	width: 92%;
-	margin-left: 4%;
-	margin-right: 4%;
+	width: 98%;
+	/*margin-left: 4%;
+	margin-right: 4%;*/
 }
 
 /* Grid >> Global
@@ -178,16 +178,16 @@
 ----------------------------------------------------------------------------------------------------*/
 #pixelPerfectIcon { list-style-image: url(chrome://pixelperfect/content/images/logo_16x16.png); cursor: pointer; }
 
-.panelNode-pixelPerfect { background: #F0F0F0; font-family: arial,sans-serif; font-size: 10px; }
+.panelNode-pixelPerfect { background: #FFF; font-family: Arial,"Trebuchet MS",sans-serif; font-size: 12px;}
 .panelNode-pixelPerfect h2 {font-size: 11px;}
 .panelNode-pixelPerfect h3 {margin:4px 0px 6px 0px; font-size: 11px; font-weight: normal;}
 .panelNode-pixelPerfect p {font-size: 10px; color: #333; line-height: 1.3;}
 #overlay-container {}
-	#overlay-scroll {overflow-y: scroll; width: 100%; height: 200px;}
+	#overlay-scroll {overflow-y: scroll; width: 100%; height: 200px; margin-top: 5px;}
 		#overlay-list {width: 100%; list-style: none; margin:0; padding:0;}
-			#overlay-list li {width: 100px; height: 100px; float: left; margin: 0 5px 5px 0; margin: 0 5px 5px 0; padding: 0;}
-			.overlay-active {border: dashed 1px green;}
-			#overlay-list li img {float: left; width: 100px; height: 100px;}
+			#overlay-list li {width: 100px; height: 100px; float: left; margin: 0 5px 5px 0; margin: 0 5px 5px 0; padding: 0; }
+			#overlay-list li img {float: left; width: 100px; height: 100px; -moz-transition: all 0.5s ease; opacity: 0.5;}
+				#overlay-list li img:hover, #overlay-list li img.overlay-active {-moz-box-shadow: 0 0 5px rgba(0,0,0,0.5); box-shadow: 0 0 5px rgba(0,0,0,0.5); opacity: 1;}
 
 #options {}
   #opacity-toggle {height:18px; width:81px; background: url(chrome://pixelperfect/content/images/bg-opacity-toggle.gif) no-repeat top left;}
