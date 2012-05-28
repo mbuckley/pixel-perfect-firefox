@@ -2,5 +2,4 @@ content pixelperfect	chrome/pixelperfect/content/	contentaccessible=yes
 skin pixelperfect classic/1.0 chrome/pixelperfect/skin/global/
 
 locale pixelperfect en-US chrome/pixelperfect/locale/en-US/
-overlay	chrome://browser/content/browser.xul	 chrome://pixelperfect/content/browser.xul 
 overlay chrome://firebug/content/firebugOverlay.xul	 chrome://pixelperfect/content/pixelPerfectOverlay.xul

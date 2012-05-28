@@ -86,6 +86,7 @@ FBL.ns(function() {
 		        }
             },
 
+            // @deprecated
             onClickIcon: function(context, event, ele)
             {
                  if (typeof FirebugContext !== 'undefined' || typeof Firebug.currentContext !== 'undefined') {
