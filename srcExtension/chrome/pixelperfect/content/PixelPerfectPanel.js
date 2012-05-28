@@ -23,18 +23,17 @@ FBL.ns(function() {
             },
 
             overlayMovementListener: function(evt) {
-                //Firebug.Console.log("overlay movement listener");
-                this.updateAbsolutePositionControls(evt.target.getAttribute("xPos"), evt.target.getAttribute("yPos"));
             },
 
             saveLastPositionListener: function(evt) {
-                this.saveLastPosition(evt.target.getAttribute("xPos"), evt.target.getAttribute("yPos"),Firebug.currentContext.getPanel("pixelPerfect").document.getElementById("ctl-opacity-numbers").innerHTML);
+                //this.saveLastPosition(evt.target.getAttribute("xPos"), evt.target.getAttribute("yPos"),Firebug.currentContext.getPanel("pixelPerfect").document.getElementById("ctl-opacity-numbers").innerHTML);
             },
             
             reloadLastOverlayListener: function(evt) {
             	pixelPerfect.utils.fireEyeClickEvent("eye_" + Firebug.getPref(Firebug.prefDomain, "pixelPerfect.lastOverlayFileName"), Firebug.currentContext.getPanel("pixelPerfect").document);
             },
 
+            //@deprecated
             updateAbsolutePositionControls: function(xPos, yPos) {
                 var xPosNumber = Firebug.currentContext.getPanel("pixelPerfect").document.getElementById("ctl-left-position");
                 xPosNumber.innerHTML = xPos;
@@ -141,6 +140,10 @@ FBL.ns(function() {
                 	overlayEyeElements: overlayEyeElements
 		        };
 		        pixelPerfectRep.panelTag.append(args, this.panelNode, pixelPerfectRep);
+
+                //initialize opacity slider control
+                fdSliderController.onload();
+                fdSliderController.construct(null, ppPanel.document);
             },
             
             getOptionsMenuItems: function() {
@@ -210,20 +213,15 @@ FBL.ns(function() {
 			    		H2("Options"),
 			    		H3("Opacity"),
 			    		DIV({id: "opacity-toggle"},
-			    			DIV({id: "ctl-opacity-down", class: "bt-left", onclick: "$decreaseOpacity"}),
-			    			DIV({id: "ctl-opacity-numbers", class: "numbers"}, "0.5"),
-			    			DIV({id: "ctl-opacity-up", class: "bt-right", onclick: "$increaseOpacity"})
+                            INPUT({name: "opacity-slider", id: "opacity-slider", type: "text", title: "Range: 10 - 100", class: "fd_range_10_100 fd_hide_input fd_callback_pixelPerfect.panelActions.opacitySliderUpdate", value:"50"})
 			    		),
-			    		HR(),
 			    		H3("Position (try dragging)"),
 			    		DIV({id: "position-toggle-y"},
 			    			DIV({class: "bt-left", onclick: "$leftArrowMove"}),
-			    			DIV({id: "ctl-left-position", class: "numbers"}, "0"),
 			    			DIV({class: "bt-right", onclick: "$rightArrowMove"})
 			    		),
 			    		DIV({id: "position-toggle-x"},
 			    			DIV({class: "bt-up", onclick: "$topArrowMove"}),
-			    			DIV({id: "ctl-top-position", class: "numbers"}, "0"),
 			    			DIV({class: "bt-down", onclick: "$bottomArrowMove"})
 			    		),
 			    		DIV({id: "position-lock"},
@@ -236,14 +234,6 @@ FBL.ns(function() {
 			    LI({_myprop: "$item", class: "li_$item.id"},
 			    	IMG({width: "31", height: "23", src: "$item.thumbPath", id: "eye_$item.id", dataId: "$item.file", onclick: "$toggleOverlay"})
 	            ),
-		    decreaseOpacity: function(event)
-    		{
-    			pixelPerfect.panelActions.decreaseOpacity();
-    		},
-		    increaseOpacity: function(event)
-    		{
-        		pixelPerfect.panelActions.increaseOpacity();
-    		},
 		    leftArrowMove: function(event)
     		{
     			pixelPerfect.panelActions.leftArrowMove();

@@ -101,21 +101,20 @@ pixelPerfect.panelActions = (function(){
             return ("undefined" == typeof(val) ? defaultval : val);
         },
         
-        toggleOverlay: function(eyeDivId, overlayUrl) {
+        toggleOverlay: function(overlayIconDocumentId, overlayUrl) {
         	var mainDocument = getDocuments().main,
-        		panelDocument = getDocuments().panel;
-            
-        	var pixelperfect = mainDocument.getElementById(overlayDivId);
-            var eyeDiv = panelDocument.getElementById(eyeDivId);
-            var pageBody = mainDocument.getElementsByTagName("body")[0];
-            var overlayUrlNoSpaces = overlayUrl.replace(/\s/g, "%20");
-            var chromeToOverlayUrl = 'chrome://pixelperfect/content/user_overlays/' + overlayUrl;
-            var chromeToOverlayUrlNoSpaces = 'chrome://pixelperfect/content/user_overlays/' + overlayUrlNoSpaces;
+        		panelDocument = getDocuments().panel,
+                pixelperfect = mainDocument.getElementById(overlayDivId),
+                overlayIconEle = panelDocument.getElementById(overlayIconDocumentId),
+                pageBody = mainDocument.getElementsByTagName("body")[0],
+                overlayUrlNoSpaces = overlayUrl.replace(/\s/g, "%20"),
+                chromeToOverlayUrl = 'chrome://pixelperfect/content/user_overlays/' + overlayUrl,
+                chromeToOverlayUrlNoSpaces = 'chrome://pixelperfect/content/user_overlays/' + overlayUrlNoSpaces;
             
             
             if (pixelperfect == null) {
                 this.turnOnOverlay(chromeToOverlayUrl, chromeToOverlayUrlNoSpaces, pageBody, overlayUrl);
-                eyeDiv.setAttribute("class", "overlay-active");
+                overlayIconEle.setAttribute("class", "overlay-active");
             }
             else {
                 // hide overlay
@@ -127,28 +126,33 @@ pixelPerfect.panelActions = (function(){
                 var currentOverlayBackgroundUrl = pixelperfect.style.background;
                 
                 
-                // compose this if condition
+                // user has clicked on a different overlay
                 if (currentOverlayBackgroundUrl.indexOf(overlayUrlNoSpaces) == -1) {
-                    //'clicking on a different overlay..turn off all other eyes, and turn on new overlay...
-                    var overlayList = panelDocument.getElementById('overlay-list');
-                    var lis = overlayList.getElementsByTagName("li");
-                    
-                    for (var i = 0; i < lis.length; i++) {
-                        var currentEyeElement = lis[i];
-                        var existingEyeDiv = currentEyeElement.getElementsByTagName("div")[1];
-                        existingEyeDiv.setAttribute("class", "");
-                    }
                     this.setPrefValue("pixelPerfect.lastXPos", '0');
                     this.setPrefValue("pixelPerfect.lastYPos", '0');
                     this.setPrefValue("pixelPerfect.opacity", '0.5');
                     this.setPrefValue("pixelPerfect.zIndex", '1000');
                     this.setPrefValue("pixelPerfect.overlayLocked", false);
+
+                    this.resetOverlayIconsActiveState();
+                    overlayIconEle.setAttribute("class", "overlay-active");
+
+                    // turn on new overlay
                     this.turnOnOverlay(chromeToOverlayUrl, chromeToOverlayUrlNoSpaces, pageBody, overlayUrl);
-                    eyeDiv.setAttribute("class", "overlay-active");
                 }
+
                 else {
-                    eyeDiv.setAttribute("class", "");
+                    overlayIconEle.setAttribute("class", "");
                 }
+            }
+        },
+
+        resetOverlayIconsActiveState: function() {
+            var overlayList = getDocuments().panel.getElementById('overlay-list'),
+                overlayIcons = overlayList.getElementsByTagName("img");
+            
+            for(var i = 0, overlayIcon; overlayIcon = overlayIcons[i]; i++) {
+                overlayIcon.setAttribute("class", "");
             }
         },
         
@@ -195,7 +199,7 @@ pixelPerfect.panelActions = (function(){
             // opacity
             var savedOpacity = this.getPref("pixelPerfect.opacity");
             opacity = this.roundNumber(savedOpacity, 1);
-            this.updateOverlayOpacity();
+            //this.updateOverlayOpacity();
             
             var draggablePP = mainDocument.createElement("script");
             draggablePP.setAttribute("type", "text/javascript");
@@ -203,7 +207,7 @@ pixelPerfect.panelActions = (function(){
             draggablePP.innerHTML = "var overlayDiv = document.getElementById('" + overlayDivId + "');Drag.init(overlayDiv);overlayDiv.onDrag = function(x, y){pixelPerfect.publicDocument.notifyPanelOverlayPositionHasChanged();};overlayDiv.onDragEnd = function(x, y){pixelPerfect.publicDocument.notifyPanelOverlayPositionHasChanged(); pixelPerfect.publicDocument.notifyToSaveLastPosition();};"
             
             this.appendScriptElementAsChild(draggablePP, pageBody);
-            this.updatePanelDisplayOfXAndY(this.getPref("pixelPerfect.lastXPos"), this.getPref("pixelPerfect.lastYPos"));
+            //this.updatePanelDisplayOfXAndY(this.getPref("pixelPerfect.lastXPos"), this.getPref("pixelPerfect.lastYPos"));
             
             // save last overlay
             this.setPrefValue("pixelPerfect.lastOverlayFileName", overlayUrl);
@@ -277,38 +281,28 @@ pixelPerfect.panelActions = (function(){
             }
             return nsIFileObj;
         },
-        
-        increaseOpacity: function(){
-            var opacityNumber = getDocuments().panel.getElementById('ctl-opacity-numbers');
-            if (opacityNumber.innerHTML != "1") {
-                opacity = (opacity + 0.1);
-                opacity = this.roundNumber(opacity, 1);
-                this.updateOverlayOpacity();
+
+        opacitySliderUpdate: function() {
+            var sliderRawValue = getDocuments().panel.getElementById('opacity-slider').value,
+                opacitySliderValue = null;
+            
+            if (sliderRawValue == 0 || isNaN(sliderRawValue)) {
+                opacitySliderValue = 0;
+            } else {
+                opacitySliderValue = sliderRawValue / 100;
             }
-        },
-        
-        decreaseOpacity: function(){
-            var opacityNumber = getDocuments().panel.getElementById('ctl-opacity-numbers');
-            if (opacityNumber.innerHTML != "0") {
-                opacity = (opacity - 0.1);
-                opacity = this.roundNumber(opacity, 1);
-                this.updateOverlayOpacity();
-            }
-        },
-        
-        updateOverlayOpacity: function(){
-        	var mainDocument = getDocuments().main,
-        		panelDocument = getDocuments().panel;
-        		
-            var pixelperfect = mainDocument.getElementById(overlayDivId);
+
+            opacity = opacitySliderValue;
+
+            // update current overlay opacity
+            var pixelperfect = getDocuments().main.getElementById(overlayDivId);
             pixelperfect.style.opacity = opacity;
             pixelperfect.style.MozOpacity = opacity;
-            var opacityNumber = panelDocument.getElementById('ctl-opacity-numbers');
-            opacityNumber.innerHTML = opacity;
-            // persist opacity
+            
+            // persist opacity pref
             this.setPrefValue("pixelPerfect.opacity", opacity);
         },
-        
+
         roundNumber: function(num, dec){
             var result = Math.round(num * Math.pow(10, dec)) / Math.pow(10, dec);
             return result;
@@ -382,7 +376,7 @@ pixelPerfect.panelActions = (function(){
         
         moveElement: function(xPos, yPos){
             if(!overlayLocked) {
-              this.updatePanelDisplayOfXAndY(xPos, yPos);
+              //this.updatePanelDisplayOfXAndY(xPos, yPos);
               this.setPrefValue("pixelPerfect.lastXPos", xPos);
               this.setPrefValue("pixelPerfect.lastYPos", yPos);
               
@@ -416,12 +410,13 @@ pixelPerfect.panelActions = (function(){
             }
         },
         
+        //@deprecated
         updatePanelDisplayOfXAndY: function(xPos, yPos){
-            var xPosNumber = getDocuments().panel.getElementById('ctl-left-position');
-            xPosNumber.innerHTML = xPos;
+            // var xPosNumber = getDocuments().panel.getElementById('ctl-left-position');
+            // xPosNumber.innerHTML = xPos;
             
-            var yPosNumber = getDocuments().panel.getElementById('ctl-top-position');
-            yPosNumber.innerHTML = yPos;
+            // var yPosNumber = getDocuments().panel.getElementById('ctl-top-position');
+            // yPosNumber.innerHTML = yPos;
         }
         
         
