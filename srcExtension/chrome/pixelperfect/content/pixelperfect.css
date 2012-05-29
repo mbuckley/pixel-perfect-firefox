@@ -185,8 +185,8 @@
 #overlay-container {}
 	#overlay-scroll {overflow-y: scroll; width: 100%; height: 300px; margin-top: 5px;}
 		#overlay-list {width: 100%; list-style: none; margin:0; padding:0;}
-			#overlay-list li {width: 100px; height: 100px; float: left; margin: 0 5px 5px 0; margin: 0 5px 5px 0; padding: 0; }
-			#overlay-list li img {float: left; width: 100px; height: 100px; -moz-transition: all 0.5s ease; opacity: 0.5;}
+			#overlay-list li {width: 100px; height: 100px; float: left; margin: 0 5px 5px 0; margin: 0 5px 5px 0; padding: 0; cursor: pointer;}
+			#overlay-list li img {float: left; width: 100px; height: 100px; -moz-transition: all 0.5s ease; opacity: 0.5; cursor: pointer;}
 				#overlay-list li img:hover, #overlay-list li img.overlay-active {-moz-box-shadow: 0 0 5px rgba(0,0,0,0.5); box-shadow: 0 0 5px rgba(0,0,0,0.5); opacity: 1;}
 
 #options {}
