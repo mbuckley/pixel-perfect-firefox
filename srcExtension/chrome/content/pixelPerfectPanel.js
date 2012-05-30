@@ -4,7 +4,9 @@ define([
     "firebug/lib/locale",
     "firebug/lib/domplate",
     "pixelperfect/slider",
-    "pixelperfect/pixelPerfectModule"
+    "pixelperfect/pixelPerfectModule",
+    "pixelperfect/panelActions",
+    "pixelperfect/pixelPerfectUtilsModule"
 ],
 function(Obj, FBTrace, Locale, Domplate, PixelPerfectModule) {
 
@@ -25,6 +27,8 @@ function(Obj, FBTrace, Locale, Domplate, PixelPerfectModule) {
         initialize: function()
         {
             Firebug.Panel.initialize.apply(this, arguments);
+
+            Firebug.PixelPerfectUtilsModule.loadRequiredJsIntoToMainBrowserOverlay();
 
             if (FBTrace.DBG_PIXELPERFECT)
                 FBTrace.sysout("pixelPerfect; PixelPerfectPanel.initialize");
@@ -174,12 +178,13 @@ function(Obj, FBTrace, Locale, Domplate, PixelPerfectModule) {
 
         render: function(parentNode)
         {
+           var overlayEyeElements = Firebug.PixelPerfectUtilsModule.buildEyeElementData(Firebug.currentContext.getPanel(panelName));
+
             var args = {
-                overlayEyeElements: []
+                overlayEyeElements: overlayEyeElements
             };
+
             this.panelTag.replace(args, parentNode, this);
-            // this.panelTag.replace({}, parentNode);
-            // this.tag.replace({}, parentNode);
         },
 
         addOverlay: function(overlayData) {

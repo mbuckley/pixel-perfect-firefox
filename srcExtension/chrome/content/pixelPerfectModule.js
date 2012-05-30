@@ -2,7 +2,7 @@ define([
     "firebug/lib/object",
     "firebug/lib/trace",
     "pixelperfect/pixelPerfectFileModule",
-    "pixelperfect/utils",
+    "pixelperfect/pixelPerfectUtilsModule",
     "pixelperfect/pixelPerfectPanel"
 ],
 function(Obj, FBTrace) {
@@ -56,7 +56,7 @@ function(Obj, FBTrace) {
         },
         
         reloadLastOverlayListener: function(evt) {
-            pixelPerfect.utils.fireEyeClickEvent("eye_" + Firebug.getPref(Firebug.prefDomain, "pixelPerfect.lastOverlayFileName"), Firebug.currentContext.getPanel("pixelPerfect").document);
+            Firebug.PixelPerfectUtilsModule.fireEyeClickEvent("eye_" + Firebug.getPref(Firebug.prefDomain, "pixelPerfect.lastOverlayFileName"), Firebug.currentContext.getPanel("pixelperfect").document);
         },
 
         //@deprecated
@@ -75,7 +75,7 @@ function(Obj, FBTrace) {
         // When an option changes, this is called.
         updateOption: function(name, value) {
             if ("pixelPerfect.hidestatusbar" == name) {
-                pixelPerfect.utils.toggleStatusBar(value);
+                Firebug.PixelPerfectUtilsModule.toggleStatusBar(value);
             }
         },
 
@@ -91,7 +91,7 @@ function(Obj, FBTrace) {
             var isPixelPerfectExtension = panel && panel.name == "pixelPerfect";
             var PixelPerfectExtensionButtons = browser.chrome.$("fbPixelPerfectPanelButtons");
             if (Firebug.getPref(Firebug.prefDomain, "pixelPerfect.hidewhenfocuslost")) {
-                pixelPerfect.utils.setVisibilityForOverlay(isPixelPerfectExtension);
+                Firebug.PixelPerfectUtilsModule.setVisibilityForOverlay(isPixelPerfectExtension);
             }
             collapse(PixelPerfectExtensionButtons, !isPixelPerfectExtension);
         },
@@ -101,7 +101,7 @@ function(Obj, FBTrace) {
             var sourceFile = Firebug.PixelPerfectFileModule.chooseFile();
 
             var fileName = Firebug.PixelPerfectFileModule.copyFile(sourceFile);
-            var newOverlayData = pixelPerfect.utils.getOverlayElementLiteral(fileName);
+            var newOverlayData = Firebug.PixelPerfectUtilsModule.getOverlayElementLiteral(fileName);
 
             if (FBTrace.DBG_PIXELPERFECT)
                 FBTrace.sysout("pixelperfect; PixelPerfectModule.addOverlay");

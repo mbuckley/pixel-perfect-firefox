@@ -15,7 +15,7 @@ pixelPerfect.panelActions = (function(){
 		if(documents === undefined) {
 			mainDocument = window.content.document;
 			
-			var ppPanel = Firebug.currentContext.getPanel("pixelPerfect");
+			var ppPanel = Firebug.currentContext.getPanel("pixelperfect");
 			panelDocument = ppPanel.document;
 			documents = {main: mainDocument, panel: panelDocument};
 		}
