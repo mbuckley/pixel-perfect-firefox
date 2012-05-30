@@ -5,7 +5,7 @@ define([
     "firebug/lib/domplate",
     "pixelperfect/slider",
     "pixelperfect/pixelPerfectModule",
-    "pixelperfect/panelActions",
+    "pixelperfect/pixelPerfectPanelActionsModule",
     "pixelperfect/pixelPerfectUtilsModule"
 ],
 function(Obj, FBTrace, Locale, Domplate, PixelPerfectModule) {
@@ -123,7 +123,7 @@ function(Obj, FBTrace, Locale, Domplate, PixelPerfectModule) {
                 DIV({id: "options", class: "grid_1"},
                     H3("Opacity"),
                     DIV({id: "opacity-toggle"},
-                        INPUT({name: "opacity-slider", id: "opacity-slider", type: "text", title: "Range: 10 - 100", class: "fd_range_10_100 fd_hide_input fd_callback_pixelPerfect.panelActions.opacitySliderUpdate", value:"50"})
+                        INPUT({name: "opacity-slider", id: "opacity-slider", type: "text", title: "Range: 10 - 100", class: "fd_range_10_100 fd_hide_input fd_callback_Firebug.PixelPerfectPanelActionsModule.opacitySliderUpdate", value:"50"})
                     ),
                     DIV({id: "position-controls"},
                         DIV({class: "bt-left", onclick: "$leftArrowMove"}),
@@ -143,37 +143,35 @@ function(Obj, FBTrace, Locale, Domplate, PixelPerfectModule) {
             ),
         leftArrowMove: function(event)
         {
-            pixelPerfect.panelActions.leftArrowMove();
+            Firebug.PixelPerfectPanelActionsModule.leftArrowMove();
         },
         rightArrowMove: function(event)
         {
-            pixelPerfect.panelActions.rightArrowMove();
+            Firebug.PixelPerfectPanelActionsModule.rightArrowMove();
         },
         topArrowMove: function(event)
         {
-            pixelPerfect.panelActions.topArrowMove();
+            Firebug.PixelPerfectPanelActionsModule.topArrowMove();
         },
         bottomArrowMove: function(event)
         {
-            pixelPerfect.panelActions.bottomArrowMove();
+            Firebug.PixelPerfectPanelActionsModule.bottomArrowMove();
         },
         togglePositionLock: function(event)
         {
-            pixelPerfect.panelActions.togglePositionLock(event.target);
+            Firebug.PixelPerfectPanelActionsModule.togglePositionLock(event.target);
         },
         updateZIndex: function(event)
         {
-            pixelPerfect.panelActions.updateZIndex();
+            Firebug.PixelPerfectPanelActionsModule.updateZIndex();
         },
         toggleOverlay: function(event)
         {
-            // Firebug.Console.log(event.target);
-            // Firebug.Console.log("id => " + event.target.id + " :: dataId => " + event.target.getAttribute("dataId"));
-            pixelPerfect.panelActions.toggleOverlay(event.target.id, event.target.getAttribute("dataId"));
+            Firebug.PixelPerfectPanelActionsModule.toggleOverlay(event.target.id, event.target.getAttribute("dataId"));
         },
         deleteOverlay: function(event)
         {
-            pixelPerfect.panelActions.deleteOverlay(event.target.getAttribute("dataParentId"),event.target.getAttribute("dataEyeId"),event.target.getAttribute("dataFileName"));
+            Firebug.PixelPerfectPanelActionsModule.deleteOverlay(event.target.getAttribute("dataParentId"),event.target.getAttribute("dataEyeId"),event.target.getAttribute("dataFileName"));
         },
 
         render: function(parentNode)
