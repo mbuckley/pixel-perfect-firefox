@@ -1,8 +1,9 @@
 define([
     "firebug/lib/object",
     "firebug/lib/trace",
-    "pixelperfect/fileUtils",
-    "pixelperfect/utils"
+    "pixelperfect/pixelPerfectFileModule",
+    "pixelperfect/utils",
+    "pixelperfect/pixelPerfectPanel"
 ],
 function(Obj, FBTrace) {
 
@@ -97,23 +98,17 @@ function(Obj, FBTrace) {
 
         addOverlay: function()
         {
-            var sourceFile = pixelPerfect.fileUtils.chooseFile();
+            var sourceFile = Firebug.PixelPerfectFileModule.chooseFile();
 
-            var fileName = pixelPerfect.fileUtils.copyFile(sourceFile);
+            var fileName = Firebug.PixelPerfectFileModule.copyFile(sourceFile);
             var newOverlayData = pixelPerfect.utils.getOverlayElementLiteral(fileName);
-
-            // var args = {
-            //     item: newOverlayEyeData
-            // };
-            // var panel = Firebug.currentContext.getPanel(panelName);
-            
-            // var existingEyeElement = panel.document.getElementById("li_" + newOverlayEyeData.id);
-            // if(existingEyeElement == null) {
-            // }
-            Firebug.PixelPerfectPanel.PPTemplate.addOverlay(newOverlayData);
 
             if (FBTrace.DBG_PIXELPERFECT)
                 FBTrace.sysout("pixelperfect; PixelPerfectModule.addOverlay");
+            
+            //FIXME: This call is not working ATM
+            Firebug.PixelPerfectPanel.PPTemplate.addOverlay(newOverlayData);
+
         },
         
         saveLastPosition: function(xPos, yPos, opacity) {
