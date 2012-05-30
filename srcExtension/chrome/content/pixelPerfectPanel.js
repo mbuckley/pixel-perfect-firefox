@@ -84,7 +84,7 @@ function(Obj, FBTrace, Locale, Domplate, PixelPerfectModule) {
         onAddOverlay: function()
         {
 
-            Firebug.PixelPerfectModule.addOverlay();
+            Firebug.PixelPerfectModule.addOverlay(this);
 
              if (FBTrace.DBG_PIXELPERFECT)
                 FBTrace.sysout("pixelperfect; PixelPerfectPanel.onAddOverlay");
@@ -190,10 +190,10 @@ function(Obj, FBTrace, Locale, Domplate, PixelPerfectModule) {
                 item: overlayData
             };
             var ppPanel = Firebug.currentContext.getPanel(panelName);
-            
+
             var existingOverlayElement = ppPanel.document.getElementById("li_" + overlayData.id);
             if(existingOverlayElement == null) {
-                this.overlayTag.append(args, panel.document.getElementById("overlay-list"), this);
+                this.overlayTag.append(args, ppPanel.document.getElementById("overlay-list"), this);
                 FBTrace.sysout("pixelPerfect; PixelPerfectPanel.addOverlay. Added new overlay to grid");
             }
         }

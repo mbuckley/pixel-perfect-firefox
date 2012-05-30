@@ -96,7 +96,7 @@ function(Obj, FBTrace) {
             collapse(PixelPerfectExtensionButtons, !isPixelPerfectExtension);
         },
 
-        addOverlay: function()
+        addOverlay: function(pixelPerfectPanel)
         {
             var sourceFile = Firebug.PixelPerfectFileModule.chooseFile();
 
@@ -106,9 +106,7 @@ function(Obj, FBTrace) {
             if (FBTrace.DBG_PIXELPERFECT)
                 FBTrace.sysout("pixelperfect; PixelPerfectModule.addOverlay");
             
-            //FIXME: This call is not working ATM
-            Firebug.PixelPerfectPanel.PPTemplate.addOverlay(newOverlayData);
-
+            pixelPerfectPanel.PPTemplate.addOverlay(newOverlayData);
         },
         
         saveLastPosition: function(xPos, yPos, opacity) {
