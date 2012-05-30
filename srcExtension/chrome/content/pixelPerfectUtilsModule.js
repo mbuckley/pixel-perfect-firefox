@@ -86,6 +86,7 @@ Firebug.PixelPerfectUtilsModule = FBL.extend(Firebug.Module,
         return element;
     },
     
+    //FIXME: Make sure js element does not already exist to avoid duplicates
     loadRequiredJsIntoToMainBrowserOverlay: function() {
         var doc = window._content.document;
         var pageHead = doc.getElementsByTagName("head")[0];
