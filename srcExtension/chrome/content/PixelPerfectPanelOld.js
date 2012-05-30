@@ -122,22 +122,29 @@ FBL.ns(function() {
 
             initialize: function(context, doc) {
                 Firebug.Panel.initialize.apply(this, arguments);
+                
+                this.refresh();
+            },
+
+            refresh: function() {
                 pixelPerfect.utils.loadRequiredJsIntoToMainBrowserOverlay();
                 
                 // compose this into ui method
                 var ppPanel = Firebug.currentContext.getPanel(panelName);
-                var overlayEyeElements = pixelPerfect.utils.buildEyeElementData(ppPanel.document);
                 
+
+                var overlayEyeElements = pixelPerfect.utils.buildEyeElementData(ppPanel.document);
+
                 var args = {
-                	overlayEyeElements: overlayEyeElements
-		        };
-		        pixelPerfectRep.panelTag.append(args, this.panelNode, pixelPerfectRep);
+                    overlayEyeElements: overlayEyeElements
+                };
+                pixelPerfectRep.panelTag.append(args, this.panelNode, pixelPerfectRep);
 
                 //initialize opacity slider control
                 fdSliderController.onload();
                 fdSliderController.construct(null, ppPanel.document);
             },
-            
+
             getOptionsMenuItems: function() {
                 var menuOptions = [];
                 /**
@@ -261,6 +268,5 @@ FBL.ns(function() {
 		Firebug.registerStylesheet("chrome://pixelperfect/content/pixelperfect.css");
         Firebug.registerPanel(PixelPerfectPanel);
         Firebug.registerModule(Firebug.PixelPerfectModule);
-        
     }
 });

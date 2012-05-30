@@ -85,18 +85,23 @@ pixelPerfect.utils = function () {
             },
             
             buildEyeElementData: function(doc) {
-            	var currentOverlayFiles = pixelPerfect.fileUtils.getCurrentOverlayFiles(),
-            		eyeElementData = [],
-            		currentOverlay;
+             var currentOverlayFiles = pixelPerfect.fileUtils.getCurrentOverlayFiles(),
+            	     eyeElementData = [],
+            	     currentOverlay;
+             
             	for (i = 0; i < currentOverlayFiles.length; i++) {
-                    eyeElementData.push(getOverlayElementLiteral(currentOverlayFiles[i]));
+                    eyeElementData.push(this.getOverlayElementLiteral(currentOverlayFiles[i]));
             	}
+
             	return eyeElementData;
             },
             
             getOverlayElementLiteral: function(overlayName) {
             	var formattedID = overlayName.replace(/(\.|\s|-)/gi, "_").toLowerCase(),
-            		fileNameForDisplay = this.shortenFileNameTo(overlayName, 15, '***');
+            	   fileNameForDisplay = this.shortenFileNameTo(overlayName, 15, '***');
+
+
+
             	return {id: formattedID, file: overlayName, displayLabel: fileNameForDisplay, thumbPath: 'chrome://pixelperfect/content/user_overlays/' + overlayName};
             },
             

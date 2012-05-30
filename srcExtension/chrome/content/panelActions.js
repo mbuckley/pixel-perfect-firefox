@@ -11,8 +11,6 @@ pixelPerfect.panelActions = (function(){
         overlayDivId = 'pp_overlay',
         overlayLocked = false;
         
-    var self = this;
-    
     function getDocuments () {
 		if(documents === undefined) {
 			mainDocument = window.content.document;
@@ -36,10 +34,11 @@ pixelPerfect.panelActions = (function(){
             
             //Check if this is global firefox preference.
             var prefName;
-            if (name.indexOf("browser.") != -1) 
+            if (name.indexOf("browser.") != -1) { 
                 prefName = name;
-            else 
+            } else { 
                 prefName = prefDomain + "." + name;
+            }
             
             var type = prefs.getPrefType(prefName);
             
@@ -67,9 +66,9 @@ pixelPerfect.panelActions = (function(){
             
             //Check if this is global firefox preference.
             var prefName;
-            if (name.indexOf("browser.") != -1) 
+            if (name.indexOf("browser.") != -1) {
                 prefName = name;
-            else {
+            } else {
                 prefName = prefDomain + "." + name;
             }
             
@@ -102,48 +101,52 @@ pixelPerfect.panelActions = (function(){
         },
         
         toggleOverlay: function(overlayIconDocumentId, overlayUrl) {
-        	var mainDocument = getDocuments().main,
-        		panelDocument = getDocuments().panel,
-                pixelperfect = mainDocument.getElementById(overlayDivId),
-                overlayIconEle = panelDocument.getElementById(overlayIconDocumentId),
-                pageBody = mainDocument.getElementsByTagName("body")[0],
-                overlayUrlNoSpaces = overlayUrl.replace(/\s/g, "%20"),
-                chromeToOverlayUrl = 'chrome://pixelperfect/content/user_overlays/' + overlayUrl,
-                chromeToOverlayUrlNoSpaces = 'chrome://pixelperfect/content/user_overlays/' + overlayUrlNoSpaces;
-            
-            
-            if (pixelperfect == null) {
-                this.turnOnOverlay(chromeToOverlayUrl, chromeToOverlayUrlNoSpaces, pageBody, overlayUrl);
-                overlayIconEle.setAttribute("class", "overlay-active");
-            }
-            else {
-                // hide overlay
-                this.setPrefValue("pixelPerfect.lastXPos", this.findPixelPerfectXPos(overlayDivId));
-                this.setPrefValue("pixelPerfect.lastYPos", this.findPixelPerfectYPos(overlayDivId));
-                pageBody.removeChild(pixelperfect);
-                this.setPrefValue("pixelPerfect.lastOverlayFileName", '');
-                
-                var currentOverlayBackgroundUrl = pixelperfect.style.background;
+        	try {
+                var mainDocument = getDocuments().main,
+            		panelDocument = getDocuments().panel,
+                    pixelperfect = mainDocument.getElementById(overlayDivId),
+                    overlayIconEle = panelDocument.getElementById(overlayIconDocumentId),
+                    pageBody = mainDocument.getElementsByTagName("body")[0],
+                    overlayUrlNoSpaces = overlayUrl.replace(/\s/g, "%20"),
+                    chromeToOverlayUrl = 'chrome://pixelperfect/content/user_overlays/' + overlayUrl,
+                    chromeToOverlayUrlNoSpaces = 'chrome://pixelperfect/content/user_overlays/' + overlayUrlNoSpaces;
                 
                 
-                // user has clicked on a different overlay
-                if (currentOverlayBackgroundUrl.indexOf(overlayUrlNoSpaces) == -1) {
-                    this.setPrefValue("pixelPerfect.lastXPos", '0');
-                    this.setPrefValue("pixelPerfect.lastYPos", '0');
-                    this.setPrefValue("pixelPerfect.opacity", '0.5');
-                    this.setPrefValue("pixelPerfect.zIndex", '1000');
-                    this.setPrefValue("pixelPerfect.overlayLocked", false);
-
-                    this.resetOverlayIconsActiveState();
-                    overlayIconEle.setAttribute("class", "overlay-active");
-
-                    // turn on new overlay
+                if (pixelperfect == null) {
                     this.turnOnOverlay(chromeToOverlayUrl, chromeToOverlayUrlNoSpaces, pageBody, overlayUrl);
+                    overlayIconEle.setAttribute("class", "overlay-active");
                 }
-
                 else {
-                    overlayIconEle.setAttribute("class", "");
+                    // hide overlay
+                    this.setPrefValue("pixelPerfect.lastXPos", this.findPixelPerfectXPos(overlayDivId));
+                    this.setPrefValue("pixelPerfect.lastYPos", this.findPixelPerfectYPos(overlayDivId));
+                    pageBody.removeChild(pixelperfect);
+                    this.setPrefValue("pixelPerfect.lastOverlayFileName", '');
+                    
+                    var currentOverlayBackgroundUrl = pixelperfect.style.background;
+                    
+                    
+                    // user has clicked on a different overlay
+                    if (currentOverlayBackgroundUrl.indexOf(overlayUrlNoSpaces) == -1) {
+                        this.setPrefValue("pixelPerfect.lastXPos", '0');
+                        this.setPrefValue("pixelPerfect.lastYPos", '0');
+                        this.setPrefValue("pixelPerfect.opacity", '0.5');
+                        this.setPrefValue("pixelPerfect.zIndex", '1000');
+                        this.setPrefValue("pixelPerfect.overlayLocked", false);
+
+                        this.resetOverlayIconsActiveState();
+                        overlayIconEle.setAttribute("class", "overlay-active");
+
+                        // turn on new overlay
+                        this.turnOnOverlay(chromeToOverlayUrl, chromeToOverlayUrlNoSpaces, pageBody, overlayUrl);
+                    }
+
+                    else {
+                        overlayIconEle.setAttribute("class", "");
+                    }
                 }
+            } catch(err) {
+                Firebug.Console.log("exception => " + err);
             }
         },
 

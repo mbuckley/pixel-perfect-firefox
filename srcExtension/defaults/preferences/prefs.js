@@ -1,3 +1,5 @@
+pref("extensions.firebug.DBG_PIXELPERFECT", true);
+
 pref("extensions.firebug.pixelPerfect.hidestatusbar", false);
 pref("extensions.firebug.pixelPerfect.hidewhenfocuslost", false);
 pref("extensions.firebug.pixelPerfect.lastXPos", '0');

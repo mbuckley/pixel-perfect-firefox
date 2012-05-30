@@ -1,3 +1,5 @@
+//TODO: Convert this to a Firebug Module
+
 var pixelPerfect = pixelPerfect || {};
 if ( typeof pixelPerfect.fileUtils == "undefined") {
 	pixelPerfect.fileUtils = {};
@@ -94,46 +96,9 @@ pixelPerfect.fileUtils = function () {
                 userOverlayPath.append('extensions');
                 userOverlayPath.append('pixelperfectplugin@openhouseconcepts.com');
                 userOverlayPath.append('chrome');
-                userOverlayPath.append('pixelperfect');
                 userOverlayPath.append('content');
                 userOverlayPath.append('user_overlays');
                 return userOverlayPath;
-            },
-            
-            getPanelHTMLFilePath: function() {
-                var panelHTMLPath = this.getFirefoxProfileRootFolder().clone();
-                panelHTMLPath.append('extensions');
-                panelHTMLPath.append('pixelperfectplugin@openhouseconcepts.com');
-                panelHTMLPath.append('chrome');
-                panelHTMLPath.append('pixelperfect');
-                panelHTMLPath.append('content');
-                panelHTMLPath.append('panel.html');
-                return panelHTMLPath;
-            },
-            
-            readPanelHTML: function() {
-                var file = Components.classes["@mozilla.org/file/local;1"]
-                  .createInstance(Components.interfaces.nsILocalFile);
-                if (!file) return false;
-                file.initWithPath(this.getPanelHTMLFilePath().path);
-                
-                var data = "";
-                var fstream = Components.classes["@mozilla.org/network/file-input-stream;1"]
-                                        .createInstance(Components.interfaces.nsIFileInputStream);
-                var sstream = Components.classes["@mozilla.org/scriptableinputstream;1"]
-                                        .createInstance(Components.interfaces.nsIScriptableInputStream);
-                fstream.init(file, -1, 0, 0);
-                sstream.init(fstream); 
-
-                var str = sstream.read(4096);
-                while (str.length > 0) {
-                  data += str;
-                  str = sstream.read(4096);
-                }
-
-                sstream.close();
-                fstream.close();
-                return data;
             }
         };	
 }();

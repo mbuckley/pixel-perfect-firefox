@@ -186,7 +186,7 @@
 	#overlay-scroll {overflow-y: scroll; width: 100%; height: 300px; margin-top: 5px;}
 		#overlay-list {width: 100%; list-style: none; margin:0; padding:0;}
 			#overlay-list li {width: 100px; height: 100px; float: left; margin: 0 5px 5px 0; margin: 0 5px 5px 0; padding: 0; cursor: pointer;}
-			#overlay-list li img {float: left; width: 100px; height: 100px; -moz-transition: all 0.5s ease; opacity: 0.5; cursor: pointer;}
+			#overlay-list li img {float: left; width: 100px; height: 100px; -moz-transition: all 0.5s ease; opacity: 0.7; cursor: pointer;}
 				#overlay-list li img:hover, #overlay-list li img.overlay-active {-moz-box-shadow: 0 0 5px rgba(0,0,0,0.5); box-shadow: 0 0 5px rgba(0,0,0,0.5); opacity: 1;}
 
 #options {}
@@ -245,3 +245,14 @@ button.fd-slider-handle:focus::-moz-focus-inner { border-color: transparent; }
 .focused.fd-slider-hover .fd-slider-handle { background:transparent url(chrome://pixelperfect/content/images/slider-1.png) no-repeat 0px 0px;}
 /*body.W-resize-s * { cursor:pointer !important; }
 body.N-resize-s * { cursor:pointer !important; }*/
+
+
+/*************************************************************************************************/
+
+/* Firebug Tracing Console customization. All messages from this example use this color.
+   This helps to distinguish logs from those coming from Firebug
+   Rule syntax: .DBG_<ext-id>
+   See: http://getfirebug.com/wiki/index.php/FBTrace for more details */
+.DBG_PIXELPERFECT {
+    color: rgb(101, 0, 114);
+}

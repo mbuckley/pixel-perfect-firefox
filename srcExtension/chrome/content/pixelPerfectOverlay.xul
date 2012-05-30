@@ -8,7 +8,7 @@
     <script type="application/x-javascript" src="chrome://pixelperfect/content/utils.js"/>
     <script type="application/x-javascript" src="chrome://pixelperfect/content/panelActions.js"/>
     <script type="application/x-javascript" src="chrome://pixelperfect/content/fileUtils.js"/>
-    <script type="application/x-javascript" src="chrome://pixelperfect/content/PixelPerfectPanel.js"></script>
+    <script type="application/x-javascript" src="chrome://pixelperfect/content/PixelPerfectPanelNew.js"></script>
     <script type="application/x-javascript" src="chrome://pixelperfect/content/slider.js"></script>
 
             
