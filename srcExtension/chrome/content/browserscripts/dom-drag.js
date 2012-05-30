@@ -1,13 +1,3 @@
-/**************************************************
- * dom-drag.js
- * 09.25.2001
- * www.youngpup.net
- * Script featured on Dynamic Drive (http://www.dynamicdrive.com) 12.08.2005
- **************************************************
- * 10.28.2001 - fixed minor bug where events
- * sometimes fired off the handle, not the root.
- **************************************************/
-
 var Drag = {
 
 	obj : null,
