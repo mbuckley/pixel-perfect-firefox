@@ -1,19 +1,18 @@
 define([
     "firebug/lib/lib",
     "firebug/lib/trace",
+    "pixelperfect/pixelPerfectUtilsModule"
 ],
 function(FBL, FBTrace) {
 
 // ********************************************************************************************* //
 // Custom Module Implementation
+var overlayLocked = false;
 
 Firebug.PixelPerfectPanelActionsModule = FBL.extend(Firebug.Module,
 {
     // private
-    var documents = undefined,
-        opacity = 0.5,
-        overlayDivId = 'pp_overlay',
-        overlayLocked = false;
+    
     
     // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
     // Initialization
@@ -24,7 +23,7 @@ Firebug.PixelPerfectPanelActionsModule = FBL.extend(Firebug.Module,
 
         // TODO: Module initialization (there is one module instance per browser window)
 
-        if (FBTrace.DBG_HELLOAMD)
+        if (FBTrace.DBG_PIXELPERFECT)
             FBTrace.sysout("pixelperfect; PixelPerfectPanelActionsModule.initialize");
     },
 
@@ -32,11 +31,12 @@ Firebug.PixelPerfectPanelActionsModule = FBL.extend(Firebug.Module,
     {
         Firebug.Module.shutdown.apply(this, arguments);
 
-        if (FBTrace.DBG_HELLOAMD)
+        if (FBTrace.DBG_PIXELPERFECT)
             FBTrace.sysout("pixelperfect; PixelPerfectPanelActionsModule.shutdown");
     },
 
     getDocuments: function() {
+        var documents = undefined;
         if(documents === undefined) {
             mainDocument = window.content.document;
             
@@ -127,7 +127,7 @@ Firebug.PixelPerfectPanelActionsModule = FBL.extend(Firebug.Module,
         try {
             var mainDocument = this.getDocuments().main,
                 panelDocument = this.getDocuments().panel,
-                pixelperfect = mainDocument.getElementById(overlayDivId),
+                pixelperfect = mainDocument.getElementById('pp_overlay'),
                 overlayIconEle = panelDocument.getElementById(overlayIconDocumentId),
                 pageBody = mainDocument.getElementsByTagName("body")[0],
                 overlayUrlNoSpaces = overlayUrl.replace(/\s/g, "%20"),
@@ -141,8 +141,8 @@ Firebug.PixelPerfectPanelActionsModule = FBL.extend(Firebug.Module,
             }
             else {
                 // hide overlay
-                this.setPrefValue("pixelPerfect.lastXPos", this.findPixelPerfectXPos(overlayDivId));
-                this.setPrefValue("pixelPerfect.lastYPos", this.findPixelPerfectYPos(overlayDivId));
+                this.setPrefValue("pixelPerfect.lastXPos", this.findPixelPerfectXPos('pp_overlay'));
+                this.setPrefValue("pixelPerfect.lastYPos", this.findPixelPerfectYPos('pp_overlay'));
                 pageBody.removeChild(pixelperfect);
                 this.setPrefValue("pixelPerfect.lastOverlayFileName", '');
                 
@@ -187,7 +187,7 @@ Firebug.PixelPerfectPanelActionsModule = FBL.extend(Firebug.Module,
         var mainDocument = this.getDocuments().main,
             panelDocument = this.getDocuments().panel;
         var divPixelPerfect = mainDocument.createElement("div");
-        divPixelPerfect.setAttribute("id", overlayDivId);
+        divPixelPerfect.setAttribute("id", 'pp_overlay');
         
         // updateZIndex from pref
         // var zIndexTextInputEle = panelDocument.getElementById('z-index-input');
@@ -202,8 +202,8 @@ Firebug.PixelPerfectPanelActionsModule = FBL.extend(Firebug.Module,
         divPixelPerfect.style.width = width;
         divPixelPerfect.style.height = height;
 
-        divPixelPerfect.style.opacity = opacity;
-        divPixelPerfect.style.MozOpacity = opacity;
+        divPixelPerfect.style.opacity = 0.5;
+        divPixelPerfect.style.MozOpacity = 0.5;
         divPixelPerfect.style.position = 'absolute';
         divPixelPerfect.style.top = this.getPref("pixelPerfect.lastYPos") + 'px';
         divPixelPerfect.style.left = this.getPref("pixelPerfect.lastXPos") + 'px';
@@ -224,13 +224,13 @@ Firebug.PixelPerfectPanelActionsModule = FBL.extend(Firebug.Module,
         
         // opacity
         var savedOpacity = this.getPref("pixelPerfect.opacity");
-        opacity = this.roundNumber(savedOpacity, 1);
+        // opacity = this.roundNumber(savedOpacity, 1);
         //this.updateOverlayOpacity();
         
         var draggablePP = mainDocument.createElement("script");
         draggablePP.setAttribute("type", "text/javascript");
         draggablePP.setAttribute("id", draggableScriptId);
-        draggablePP.innerHTML = "var overlayDiv = document.getElementById('" + overlayDivId + "');Drag.init(overlayDiv);overlayDiv.onDrag = function(x, y){pixelPerfect.publicDocument.notifyPanelOverlayPositionHasChanged();};overlayDiv.onDragEnd = function(x, y){pixelPerfect.publicDocument.notifyPanelOverlayPositionHasChanged(); pixelPerfect.publicDocument.notifyToSaveLastPosition();};"
+        draggablePP.innerHTML = "var overlayDiv = document.getElementById('pp_overlay');Drag.init(overlayDiv);overlayDiv.onDrag = function(x, y){pixelPerfect.publicDocument.notifyPanelOverlayPositionHasChanged();};overlayDiv.onDragEnd = function(x, y){pixelPerfect.publicDocument.notifyPanelOverlayPositionHasChanged(); pixelPerfect.publicDocument.notifyToSaveLastPosition();};"
         
         this.appendScriptElementAsChild(draggablePP, pageBody);
         //this.updatePanelDisplayOfXAndY(this.getPref("pixelPerfect.lastXPos"), this.getPref("pixelPerfect.lastYPos"));
@@ -318,15 +318,15 @@ Firebug.PixelPerfectPanelActionsModule = FBL.extend(Firebug.Module,
             opacitySliderValue = sliderRawValue / 100;
         }
 
-        opacity = opacitySliderValue;
+        // opacity = opacitySliderValue;
 
         // update current overlay opacity
-        var pixelperfect = this.getDocuments().main.getElementById(overlayDivId);
-        pixelperfect.style.opacity = opacity;
-        pixelperfect.style.MozOpacity = opacity;
+        var pixelperfect = this.getDocuments().main.getElementById('pp_overlay');
+        pixelperfect.style.opacity = opacitySliderValue;
+        pixelperfect.style.MozOpacity = opacitySliderValue;
         
         // persist opacity pref
-        this.setPrefValue("pixelPerfect.opacity", opacity);
+        this.setPrefValue("pixelPerfect.opacity", opacitySliderValue);
     },
 
     roundNumber: function(num, dec){
@@ -363,13 +363,13 @@ Firebug.PixelPerfectPanelActionsModule = FBL.extend(Firebug.Module,
     
     updateZIndex: function(zIndexInputEle) {
         var zIndexInputEle = this.getDocuments().panel.getElementById('z-index-input'),
-            ppOverlayEle = this.getDocuments().main.getElementById(overlayDivId);
+            ppOverlayEle = this.getDocuments().main.getElementById('pp_overlay');
       ppOverlayEle.style.zIndex = zIndexInputEle.value;
       this.setPrefValue("pixelPerfect.zIndex", zIndexInputEle.value);
     },
 
     togglePointerEvents: function () {
-        var pp_overlay = this.getDocuments().main.getElementById(overlayDivId);
+        var pp_overlay = this.getDocuments().main.getElementById('pp_overlay');
         var pointerEventsVal = (overlayLocked) ? 'none' : 'auto'; 
         pp_overlay.style.pointerEvents = pointerEventsVal;
     },
@@ -406,7 +406,7 @@ Firebug.PixelPerfectPanelActionsModule = FBL.extend(Firebug.Module,
           this.setPrefValue("pixelPerfect.lastXPos", xPos);
           this.setPrefValue("pixelPerfect.lastYPos", yPos);
           
-          pp_overlay = this.getDocuments().main.getElementById(overlayDivId);
+          pp_overlay = this.getDocuments().main.getElementById('pp_overlay');
           pp_overlay.style.top = yPos + 'px';
           pp_overlay.style.left = xPos + 'px';
         }
@@ -421,7 +421,7 @@ Firebug.PixelPerfectPanelActionsModule = FBL.extend(Firebug.Module,
     },
     
     findPixelPerfectPos: function(){
-        return this.findPos(this.getDocuments().main.getElementById(overlayDivId));
+        return this.findPos(this.getDocuments().main.getElementById('pp_overlay'));
     },
     
     findPos: function(obj){

@@ -176,7 +176,7 @@
 
 /* Pixel Perfect Styles
 ----------------------------------------------------------------------------------------------------*/
-#pixelPerfectIcon { list-style-image: url(chrome://pixelperfect/content/images/logo_16x16.png); cursor: pointer; }
+#pixelPerfectIcon { list-style-image: url(chrome://pixelperfect/skin/images/logo_16x16.png); cursor: pointer; }
 
 .panelNode-pixelPerfect { background: #FFF; font-family: Arial,"Trebuchet MS",sans-serif; font-size: 12px;}
 .panelNode-pixelPerfect h2 {font-size: 11px;}
@@ -190,18 +190,18 @@
 				#overlay-list li img:hover, #overlay-list li img.overlay-active {-moz-box-shadow: 0 0 5px rgba(0,0,0,0.5); box-shadow: 0 0 5px rgba(0,0,0,0.5); opacity: 1;}
 
 #options {}
-  #opacity-toggle {height:18px; width:81px; background: url(chrome://pixelperfect/content/images/bg-opacity-toggle.gif) no-repeat top left;}
-  #opacity-toggle:hover {background: url(chrome://pixelperfect/content/images/bg-opacity-toggle-over.gif) no-repeat top left;}
+  #opacity-toggle {height:18px; width:81px; background: url(chrome://pixelperfect/skin/images/bg-opacity-toggle.gif) no-repeat top left;}
+  #opacity-toggle:hover {background: url(chrome://pixelperfect/skin/images/bg-opacity-toggle-over.gif) no-repeat top left;}
   
 	#position-controls {float: left; width: 100px; border: dashed 1px #000;}
-      .bt-left  {height:18px; width: 12px; float: left; cursor: pointer; background: url(chrome://pixelperfect/content/images/bg-left-arrow.gif) no-repeat top left;}
-      .bt-left:hover {background: url(chrome://pixelperfect/content/images/bg-left-arrow.gif) no-repeat top left;}
-      .bt-right {height:18px; width: 12px; float: left; cursor: pointer; background: url(chrome://pixelperfect/content/images/bg-right-arrow.gif) no-repeat top left;}
-      .bt-right:hover {background: url(chrome://pixelperfect/content/images/bg-right-arrow.gif) no-repeat top left; cursor: pointer;}
-      .bt-up {height:18px; width: 12px; float: left; cursor: pointer; background: url(chrome://pixelperfect/content/images/bg-up-arrow.gif) no-repeat top left;}
-      .bt-up:hover {background: url(chrome://pixelperfect/content/images/bg-up-arrow.gif) no-repeat top left;}
-      .bt-down {height:18px; width: 12px; float: left; cursor: pointer; background: url(chrome://pixelperfect/content/images/bg-down-arrow.gif) no-repeat top left;}
-      .bt-down:hover {background: url(chrome://pixelperfect/content/images/bg-down-arrow.gif) no-repeat top left;}
+      .bt-left  {height:18px; width: 12px; float: left; cursor: pointer; background: url(chrome://pixelperfect/skin/images/bg-left-arrow.gif) no-repeat top left;}
+      .bt-left:hover {background: url(chrome://pixelperfect/skin/images/bg-left-arrow.gif) no-repeat top left;}
+      .bt-right {height:18px; width: 12px; float: left; cursor: pointer; background: url(chrome://pixelperfect/skin/images/bg-right-arrow.gif) no-repeat top left;}
+      .bt-right:hover {background: url(chrome://pixelperfect/skin/images/bg-right-arrow.gif) no-repeat top left; cursor: pointer;}
+      .bt-up {height:18px; width: 12px; float: left; cursor: pointer; background: url(chrome://pixelperfect/skin/images/bg-up-arrow.gif) no-repeat top left;}
+      .bt-up:hover {background: url(chrome://pixelperfect/skin/images/bg-up-arrow.gif) no-repeat top left;}
+      .bt-down {height:18px; width: 12px; float: left; cursor: pointer; background: url(chrome://pixelperfect/skin/images/bg-down-arrow.gif) no-repeat top left;}
+      .bt-down:hover {background: url(chrome://pixelperfect/skin/images/bg-down-arrow.gif) no-repeat top left;}
       .numbers  {margin: 4px 0px 0 0; text-align: center; width: 44px; float: left;}
   #position-lock {height: 18px; width: 81px; margin: 10px 0 0 0; padding: 20px 0 0 0;}
     #position-lock input {padding: 0; margin: 0 5px 0 0;}
@@ -233,16 +233,16 @@
 .fd-slider-vertical:focus .fd-slider-inner,   */
 .focused .fd-slider-inner { background:#eee !important; border:1px solid #aaa !important;}
 /* black handle, no glow */
-.fd-slider-handle { position:absolute;display:block; padding:0; border:0 none; margin:0; z-index:3; top:0; left:0; width:20px; height:20px; outline:0px none; background:transparent url(chrome://pixelperfect/content/images/slider-disabled.png) no-repeat 0px 0px; cursor: pointer; -moz-user-select:none; -moz-user-focus:none; -moz-outline:0px none; }
+.fd-slider-handle { position:absolute;display:block; padding:0; border:0 none; margin:0; z-index:3; top:0; left:0; width:20px; height:20px; outline:0px none; background:transparent url(chrome://pixelperfect/skin/images/slider-disabled.png) no-repeat 0px 0px; cursor: pointer; -moz-user-select:none; -moz-user-focus:none; -moz-outline:0px none; }
 .fd-slider-handle:focus { outline:0px none; border:0 none; -moz-user-focus:normal; }
 button.fd-slider-handle:focus::-moz-focus-inner { border-color: transparent; }
 
 /* black handle, glow */
-.fd-slider-hover .fd-slider-handle { background:transparent url(chrome://pixelperfect/content/images/slider-disabled-1.png) no-repeat 0px 0px;}
+.fd-slider-hover .fd-slider-handle { background:transparent url(chrome://pixelperfect/skin/images/slider-disabled-1.png) no-repeat 0px 0px;}
 /* blue handle, no glow */
-.focused .fd-slider-handle { background:transparent url(chrome://pixelperfect/content/images/slider.png) no-repeat 0px 0px;}
+.focused .fd-slider-handle { background:transparent url(chrome://pixelperfect/skin/images/slider.png) no-repeat 0px 0px;}
 /* blue handle glow */
-.focused.fd-slider-hover .fd-slider-handle { background:transparent url(chrome://pixelperfect/content/images/slider-1.png) no-repeat 0px 0px;}
+.focused.fd-slider-hover .fd-slider-handle { background:transparent url(chrome://pixelperfect/skin/images/slider-1.png) no-repeat 0px 0px;}
 /*body.W-resize-s * { cursor:pointer !important; }
 body.N-resize-s * { cursor:pointer !important; }*/
 

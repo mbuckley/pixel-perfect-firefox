@@ -29,6 +29,9 @@ function(FBTrace, TraceModule, TraceListener) {
             // Unregister all registered Firebug components
             Firebug.unregisterPanel(Firebug.PixelPerfectPanel);
             Firebug.unregisterModule(Firebug.PixelPerfectModule);
+            Firebug.unregisterModule(Firebug.PixelPerfectFileModule);
+            Firebug.unregisterModule(Firebug.PixelPerfectPanelActionsModule);
+            Firebug.unregisterModule(Firebug.PixelPerfectUtilsModule);
             Firebug.unregisterStylesheet("chrome://pixelperfect/skin/pixelperfect.css");
             Firebug.unregisterStringBundle("chrome://pixelperfect/locale/pixelperfect.properties");
 
