@@ -14,11 +14,15 @@ function(FBTrace, TraceModule, TraceListener) {
     {
         initialize: function()
         {
+            
             this.traceListener = new TraceListener("pixelPerfect;", "DBG_PIXELPERFECT", true, "resource://pixelperfect/skin/pixelperfect.css");
             TraceModule.addListener(this.traceListener);
 
             if (FBTrace.DBG_PIXELPERFECT)
                 FBTrace.sysout("pixelPerfect; PixelPerfect extension initialize");
+            
+            // load scripts into main browser overlay (drag plugin, events, etc)
+            Firebug.PixelPerfectUtilsModule.loadRequiredJsIntoToMainBrowserOverlay();
         },
 
         shutdown: function()

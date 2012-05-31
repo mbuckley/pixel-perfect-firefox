@@ -1,7 +1,8 @@
 define([
     "firebug/lib/lib",
     "firebug/lib/trace",
-    "pixelperfect/pixelPerfectUtilsModule"
+    "pixelperfect/pixelPerfectUtilsModule",
+    "pixelperfect/ppLockAnimationModule"
 ],
 function(FBL, FBTrace) {
 
@@ -353,12 +354,14 @@ Firebug.PixelPerfectPanelActionsModule = FBL.extend(Firebug.Module,
         var newYPos = (this.findPixelPerfectYPos() + 1);
         this.moveY(newYPos);
     },
-    
+
     togglePositionLock: function(chkEle) {
-      overlayLocked = chkEle.checked;
-      this.updateDragStatus();
-      this.togglePointerEvents();
-      this.setPrefValue("pixelPerfect.overlayLocked", overlayLocked);
+        FBTrace.sysout("pixelPerfect; PixelPerfectPanelActionsModule.togglePositionLock");
+        //Firebug.PPLockAnimationModule.run();
+        overlayLocked = chkEle.checked;
+        this.updateDragStatus();
+        this.togglePointerEvents();
+        this.setPrefValue("pixelPerfect.overlayLocked", overlayLocked);
     },
     
     updateZIndex: function(zIndexInputEle) {

@@ -28,7 +28,7 @@ function(Obj, FBTrace, Locale, Domplate, PixelPerfectModule) {
         {
             Firebug.Panel.initialize.apply(this, arguments);
 
-            Firebug.PixelPerfectUtilsModule.loadRequiredJsIntoToMainBrowserOverlay();
+            // Firebug.PixelPerfectUtilsModule.loadRequiredJsIntoToMainBrowserOverlay();
 
             if (FBTrace.DBG_PIXELPERFECT)
                 FBTrace.sysout("pixelPerfect; PixelPerfectPanel.initialize");
@@ -126,10 +126,11 @@ function(Obj, FBTrace, Locale, Domplate, PixelPerfectModule) {
                         INPUT({name: "opacity-slider", id: "opacity-slider", type: "text", title: "Range: 10 - 100", class: "fd_range_10_100 fd_hide_input fd_callback_Firebug.PixelPerfectPanelActionsModule.opacitySliderUpdate", value:"50"})
                     ),
                     DIV({id: "position-controls"},
-                        DIV({class: "bt-left", onclick: "$leftArrowMove"}),
+                        DIV({class: "btn-lock", onclick: "$togglePositionLock"})
+                        /*DIV({class: "bt-left", onclick: "$leftArrowMove"}),
                         DIV({class: "bt-right", onclick: "$rightArrowMove"}),
                         DIV({class: "bt-up", onclick: "$topArrowMove"}),
-                        DIV({class: "bt-down", onclick: "$bottomArrowMove"})
+                        DIV({class: "bt-down", onclick: "$bottomArrowMove"})*/
                     ),
                     DIV({id: "position-lock"},
                         INPUT({id: "position-lock-chk", name: "position-lock", type: "checkbox", onclick: "$togglePositionLock"}),
