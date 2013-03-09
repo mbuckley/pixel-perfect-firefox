@@ -1,0 +1,37 @@
+<?xml version="1.0"?> 
+<!DOCTYPE window SYSTEM "chrome://pixelperfect/locale/pixelperfect.dtd">
+<?xml-stylesheet href="chrome://pixelperfect/content/pixelperfect.css"?>
+<overlay xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
+    <stringbundleset id="stringbundleset"> 
+        <stringbundle id="strings_pixelperfect" src="chrome://pixelperfect/locale/pixelperfect.properties"/>
+    </stringbundleset>
+    <script type="application/x-javascript" src="chrome://pixelperfect/content/utils.js"/>
+    <script type="application/x-javascript" src="chrome://pixelperfect/content/panelActions.js"/>
+    <script type="application/x-javascript" src="chrome://pixelperfect/content/fileUtils.js"/>
+    <script type="application/x-javascript" src="chrome://pixelperfect/content/PixelPerfectPanelNew.js"></script>
+    <script type="application/x-javascript" src="chrome://pixelperfect/content/slider.js"></script>
+
+            
+    <commandset id="mainCommandSet"> 
+        <command id="cmd_addOverlay" oncommand="Firebug.PixelPerfectModule.addOverlay();" />
+    </commandset>
+    
+    <toolbar id="fbToolbar" align="center">
+        <hbox id="fbToolbarInner" insertbefore="fbDetachButton" flex="1" align="center"> 
+            <hbox id="fbPixelPerfectPanelButtons" insertafter="fbNetButtons"> 
+                <toolbarbutton label="&pixelperfect.toolbarbutton.addoverlay.label;" class="toolbar-text-button" 
+                               tooltiptext="&pixelperfect.toolbarbutton.addoverlay.hover;" command="cmd_addOverlay"/> 
+                <toolbarbutton label="Help" id="pixelPerfectHelpMenu" type="menu" class="toolbar-text-button">
+                    <menupopup>
+                        <menuitem label="Pixel Perfect Home" oncommand="Firebug.PixelPerfectModule.pixelPerfectHelp(this);" />
+                        <menuseparator/>
+                        <menuitem label="File an issue" oncommand="Firebug.PixelPerfectModule.pixelPerfectHelp(this);" />
+                        <menuseparator/>
+                        <menuitem label="Send Feedback" oncommand="Firebug.PixelPerfectModule.pixelPerfectHelp(this);" />
+                    </menupopup>
+                 </toolbarbutton>
+            </hbox>
+            
+        </hbox>
+    </toolbar>
+</overlay>

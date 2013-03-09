@@ -3,16 +3,16 @@
 		<em:name>Pixel Perfect</em:name>
     <em:description>Make your web development Pixel Perfect</em:description>
     <em:creator>Mike Buckley</em:creator>
-    <em:iconURL>chrome://pixelperfect/skin/images/logo_32x32.png</em:iconURL>
+    <em:iconURL>chrome://pixelperfect/content/images/logo_32x32.png</em:iconURL>
     <em:homepageURL>http://www.pixelperfectplugin.com/</em:homepageURL>
 		<em:id>pixelperfectplugin@openhouseconcepts.com</em:id>
-		<em:version>2.0.1</em:version>
+		<em:version>1.7.1</em:version>
 		<em:type>2</em:type>
 		<em:unpack>true</em:unpack>
 		<em:targetApplication>
 			<RDF:Description>
 				<em:id>{ec8030f7-c20a-464f-9b0e-13a3a9e97384}</em:id>
-				<em:maxVersion>12.0</em:maxVersion>
+				<em:maxVersion>9.*</em:maxVersion>
 				<em:minVersion>3.0</em:minVersion>
 			</RDF:Description>
 		</em:targetApplication>

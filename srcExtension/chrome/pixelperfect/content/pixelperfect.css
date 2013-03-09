@@ -1,0 +1,47 @@
+/* Pixel Perfect Styles
+----------------------------------------------------------------------------------------------------*/
+#pixelPerfectIcon { list-style-image: url(chrome://pixelperfect/content/images/logo_16x16.png); cursor: pointer; }
+
+#pixelperfect-wrapper { margin:0px 0 0 0px; padding:0; overflow: auto; width: 100%; background: #F0F0F0; font-family: arial,sans-serif; font-size: 10px; }
+#pixelperfect-wrapper h2 {font-size: 11px;}
+#pixelperfect-wrapper h3 {margin:4px 0px 6px 0px; font-size: 11px; font-weight: normal;}
+#pixelperfect-wrapper p {font-size: 10px; color: #333; line-height: 1.3;}
+#comp {width: 300px; float: left;}
+  #comp ul {width: 250px; background: #E1E1E1; list-style: none; margin:0; padding:0;}
+  #comp ul li {width: 250px; height: 40px; background: url(chrome://pixelperfect/content/images/bg-comp-loc.gif) no-repeat top left;}
+      .eye {width: 50px; float: left;}
+          .eye-on-img {margin:12px 0 0 12px; width: 18px; height: 18px; background: url(chrome://pixelperfect/content/images/eye-on.gif) no-repeat top left;}
+          .eye-off-img {margin:12px 0 0 12px; width: 18px; height: 18px; background: url(chrome://pixelperfect/content/images/eye-off.gif) no-repeat top left;}
+      .mini-comp {width: 56px; height: 36px; background: url(chrome://pixelperfect/content/images/bg-comp-small.jpg) no-repeat 0 8px; float: left;}
+          .mini-comp img {margin: 9px 0 0 1px;}
+      .comp-location {padding:14px 0 0 0; float: left;}
+      .comp-delete {padding: 25px 0 0 0; float: right; cursor: pointer; width: 10px; height: 11px; background: url(chrome://pixelperfect/content/images/trash.gif) no-repeat center left;}
+#options {width: 220px; float: left;}
+  #opacity-toggle {height:18px; width:81px; background: url(chrome://pixelperfect/content/images/bg-opacity-toggle.gif) no-repeat top left;}
+  #opacity-toggle:hover {background: url(chrome://pixelperfect/content/images/bg-opacity-toggle-over.gif) no-repeat top left;}
+  
+  #position-toggle-y {float: left; height:18px; width:81px; background: url(chrome://pixelperfect/content/images/bg-opacity-toggle.gif) no-repeat top left;}
+  #position-toggle-y:hover {background: url(chrome://pixelperfect/content/images/bg-opacity-toggle-over.gif) no-repeat top left;}
+  
+  #position-toggle-x {float: left; height:18px; width:81px; margin:0; background: url(chrome://pixelperfect/content/images/bg-position-toggle.gif) no-repeat top left;}
+  #position-toggle-x:hover {background: url(chrome://pixelperfect/content/images/bg-position-toggle-over.gif) no-repeat top left;}
+      .bt-left  {height:18px; width: 12px; float: left; cursor: pointer;}
+      .bt-left:hover {background: url(chrome://pixelperfect/content/images/bg-left-arrow.gif) no-repeat top left;}
+      .bt-right {height:18px; width: 12px; float: left; cursor: pointer;}
+      .bt-right:hover {background: url(chrome://pixelperfect/content/images/bg-right-arrow.gif) no-repeat top left; cursor: pointer;}
+      .bt-up {height:18px; width: 12px; float: left; cursor: pointer;}
+      .bt-up:hover {background: url(chrome://pixelperfect/content/images/bg-up-arrow.gif) no-repeat top left;}
+      .bt-down {height:18px; width: 12px; float: left; cursor: pointer;}
+      .bt-down:hover {background: url(chrome://pixelperfect/content/images/bg-down-arrow.gif) no-repeat top left;}
+      .numbers  {margin: 4px 0px 0 0; text-align: center; width: 44px; float: left;}
+  #position-lock {height: 18px; width: 81px; margin: 10px 0 0 0; padding: 20px 0 0 0;}
+    #position-lock input {padding: 0; margin: 0 5px 0 0;}
+    #position-lock h3 {padding: 0; margin: 0; display: inline;}
+  #zindex-settings {}
+    #zindex-settings h3 {display: inline;}
+    #zindex-settings input {width: 50px; text-align: right;}
+    #zindex-settings button {width: 60px; height: 25px;}
+  #options hr {width: 75%; margin: 10px 0 10px 0; color: #C0C0C0; background-color: #C0C0C0;}
+#info {width: 380px; float: left;}
+
+#overlay-scroll{ width: 265px; height: 175px; overflow: auto; }

@@ -1,0 +1,260 @@
+/*
+	Variable Grid System (Fluid Version).
+	Learn more ~ http://www.spry-soft.com/grids/
+	Based on 960 Grid System - http://960.gs/ & 960 Fluid - http://www.designinfluences.com/
+
+	Licensed under GPL and MIT.
+*/
+
+
+/* Containers
+----------------------------------------------------------------------------------------------------*/
+.container_4 {
+	width: 98%;
+	/*margin-left: 4%;
+	margin-right: 4%;*/
+}
+
+/* Grid >> Global
+----------------------------------------------------------------------------------------------------*/
+
+.grid_1,
+.grid_2,
+.grid_3,
+.grid_4 {
+	display:inline;
+	float: left;
+	position: relative;
+	margin-left: 1%;
+	margin-right: 1%;
+}
+
+/* Grid >> Children (Alpha ~ First, Omega ~ Last)
+----------------------------------------------------------------------------------------------------*/
+
+.alpha {
+	margin-left: 0;
+}
+
+.omega {
+	margin-right: 0;
+}
+
+/* Grid >> 4 Columns
+----------------------------------------------------------------------------------------------------*/
+
+
+.container_4 .grid_1 {
+	width:23.0%;
+}
+
+.container_4 .grid_2 {
+	width:48.0%;
+}
+
+.container_4 .grid_3 {
+	width:73.0%;
+}
+
+.container_4 .grid_4 {
+	width:98.0%;
+}
+
+
+
+/* Prefix Extra Space >> 4 Columns
+----------------------------------------------------------------------------------------------------*/
+
+
+.container_4 .prefix_1 {
+	padding-left:25.0%;
+}
+
+.container_4 .prefix_2 {
+	padding-left:50.0%;
+}
+
+.container_4 .prefix_3 {
+	padding-left:75.0%;
+}
+
+
+
+/* Suffix Extra Space >> 4 Columns
+----------------------------------------------------------------------------------------------------*/
+
+
+.container_4 .suffix_1 {
+	padding-right:25.0%;
+}
+
+.container_4 .suffix_2 {
+	padding-right:50.0%;
+}
+
+.container_4 .suffix_3 {
+	padding-right:75.0%;
+}
+
+
+
+/* Push Space >> 4 Columns
+----------------------------------------------------------------------------------------------------*/
+
+
+.container_4 .push_1 {
+	left:25.0%;
+}
+
+.container_4 .push_2 {
+	left:50.0%;
+}
+
+.container_4 .push_3 {
+	left:75.0%;
+}
+
+
+
+/* Pull Space >> 4 Columns
+----------------------------------------------------------------------------------------------------*/
+
+
+.container_4 .pull_1 {
+	left:-25.0%;
+}
+
+.container_4 .pull_2 {
+	left:-50.0%;
+}
+
+.container_4 .pull_3 {
+	left:-75.0%;
+}
+
+
+
+
+/* Clear Floated Elements
+----------------------------------------------------------------------------------------------------*/
+
+/* http://sonspring.com/journal/clearing-floats */
+
+.clear {
+	clear: both;
+	display: block;
+	overflow: hidden;
+	visibility: hidden;
+	width: 0;
+	height: 0;
+}
+
+/* http://perishablepress.com/press/2008/02/05/lessons-learned-concerning-the-clearfix-css-hack */
+
+.clearfix:after {
+	clear: both;
+	content: ' ';
+	display: block;
+	font-size: 0;
+	line-height: 0;
+	visibility: hidden;
+	width: 0;
+	height: 0;
+}
+
+.clearfix {
+	display: inline-block;
+}
+
+* html .clearfix {
+	height: 1%;
+}
+
+.clearfix {
+	display: block;
+}
+
+/* Pixel Perfect Styles
+----------------------------------------------------------------------------------------------------*/
+#pixelPerfectIcon { list-style-image: url(chrome://pixelperfect/skin/images/logo_16x16.png); cursor: pointer; }
+
+.panelNode-pixelPerfect { background: #FFF; font-family: Arial,"Trebuchet MS",sans-serif; font-size: 12px;}
+.panelNode-pixelPerfect h2 {font-size: 11px;}
+.panelNode-pixelPerfect h3 {margin:4px 0px 6px 0px; font-size: 11px; font-weight: normal;}
+.panelNode-pixelPerfect p {font-size: 10px; color: #333; line-height: 1.3;}
+#overlay-container {}
+	#overlay-scroll {overflow-y: scroll; width: 100%; height: 300px; margin-top: 5px;}
+		#overlay-list {width: 100%; list-style: none; margin:0; padding:0;}
+			#overlay-list li {width: 100px; height: 100px; float: left; margin: 0 5px 5px 0; margin: 0 5px 5px 0; padding: 0; cursor: pointer;}
+			#overlay-list li img {float: left; width: 100px; height: 100px; -moz-transition: all 0.5s ease; opacity: 0.7; cursor: pointer;}
+				#overlay-list li img:hover, #overlay-list li img.overlay-active {-moz-box-shadow: 0 0 5px rgba(0,0,0,0.5); box-shadow: 0 0 5px rgba(0,0,0,0.5); opacity: 1;}
+
+#options {position: relative;}
+  #opacity-toggle {height:18px; width:81px; background: url(chrome://pixelperfect/skin/images/bg-opacity-toggle.gif) no-repeat top left;}
+  #opacity-toggle:hover {background: url(chrome://pixelperfect/skin/images/bg-opacity-toggle-over.gif) no-repeat top left;}
+  
+  	#position-controls {background: url(chrome://pixelperfect/skin/images/position-controls-sprite.png) no-repeat; float: left; width: 160px; height: 160px;}
+	/*#position-controls {float: left; width: 100px; border: dashed 1px #000;}*/
+      .btn-lock {position: absolute; top: 112px; left: 52px; width: 50px; height: 50px; cursor: pointer; outline: none;}
+      .bt-left  {height:18px; width: 12px; float: left; cursor: pointer; background: url(chrome://pixelperfect/skin/images/bg-left-arrow.gif) no-repeat top left;}
+      .bt-left:hover {background: url(chrome://pixelperfect/skin/images/bg-left-arrow.gif) no-repeat top left;}
+      .bt-right {height:18px; width: 12px; float: left; cursor: pointer; background: url(chrome://pixelperfect/skin/images/bg-right-arrow.gif) no-repeat top left;}
+      .bt-right:hover {background: url(chrome://pixelperfect/skin/images/bg-right-arrow.gif) no-repeat top left; cursor: pointer;}
+      .bt-up {height:18px; width: 12px; float: left; cursor: pointer; background: url(chrome://pixelperfect/skin/images/bg-up-arrow.gif) no-repeat top left;}
+      .bt-up:hover {background: url(chrome://pixelperfect/skin/images/bg-up-arrow.gif) no-repeat top left;}
+      .bt-down {height:18px; width: 12px; float: left; cursor: pointer; background: url(chrome://pixelperfect/skin/images/bg-down-arrow.gif) no-repeat top left;}
+      .bt-down:hover {background: url(chrome://pixelperfect/skin/images/bg-down-arrow.gif) no-repeat top left;}
+      .numbers  {margin: 4px 0px 0 0; text-align: center; width: 44px; float: left;}
+  #position-lock {height: 18px; width: 81px; margin: 10px 0 0 0; padding: 20px 0 0 0;}
+    #position-lock input {padding: 0; margin: 0 5px 0 0;}
+    #position-lock h3 {padding: 0; margin: 0; display: inline;}
+  #zindex-settings {}
+    #zindex-settings h3 {display: inline;}
+    #zindex-settings input {width: 50px; text-align: right;}
+    #zindex-settings button {width: 60px; height: 25px;}
+  #options hr {width: 75%; margin: 10px 0 10px 0; color: #C0C0C0; background-color: #C0C0C0;}
+#info {}
+
+
+/* Opacity Slider */
+
+
+#opacity-slider {}
+
+/* Styles for the horizontal slider */
+.fd-slider { position:relative; width:100%; height:20px; text-align:center; border:0 none; text-decoration:none; display:block; -moz-user-select:none; -khtml-user-select:none cursor:pointer;}
+.fd-slider-inner { position:relative; display:block; z-index:1; height:18px; text-align:left; background:#fcfcfc; border:1px solid #ccc;}
+.fd-slider-bar { position:absolute; display:block; z-index:2; height:2px; border:1px solid #bbb; border-bottom:1px solid #aaa; border-right:1px solid #aaa; background:#ddd; margin:0; overflow:hidden; line-height:4px;}
+/* Styles for the vertical slider */
+.fd-slider-vertical { position:relative; border:0 none; text-decoration:none; display:block; width:20px; height:100%; text-align:center; -moz-user-select:none; -khtml-user-select:none cursor:pointer; cursor:hand;}
+.fd-slider-vertical .fd-slider-inner { display:block; width:18px; height:100%; text-align:left; background:#fcfcfc; border:1px solid #ccc;}
+.fd-slider-vertical .fd-slider-bar { display:block; width:2px; border:1px solid #bbb; border-bottom:1px solid #aaa; border-right:1px solid #aaa; background:#ddd; margin:0; padding:0; overflow:hidden; line-height:2px;}
+.fd-slider-vertical .fd-slider-handle { cursor:pointer;}
+/* :focus styles for browsers that support them (FF/Moz) and a .focused for IE */
+/*.fd-slider:focus .fd-slider-inner,
+.fd-slider-vertical:focus .fd-slider-inner,   */
+.focused .fd-slider-inner { background:#eee !important; border:1px solid #aaa !important;}
+/* black handle, no glow */
+.fd-slider-handle { position:absolute;display:block; padding:0; border:0 none; margin:0; z-index:3; top:0; left:0; width:20px; height:20px; outline:0px none; background:transparent url(chrome://pixelperfect/skin/images/slider-disabled.png) no-repeat 0px 0px; cursor: pointer; -moz-user-select:none; -moz-user-focus:none; -moz-outline:0px none; }
+.fd-slider-handle:focus { outline:0px none; border:0 none; -moz-user-focus:normal; }
+button.fd-slider-handle:focus::-moz-focus-inner { border-color: transparent; }
+
+/* black handle, glow */
+.fd-slider-hover .fd-slider-handle { background:transparent url(chrome://pixelperfect/skin/images/slider-disabled-1.png) no-repeat 0px 0px;}
+/* blue handle, no glow */
+.focused .fd-slider-handle { background:transparent url(chrome://pixelperfect/skin/images/slider.png) no-repeat 0px 0px;}
+/* blue handle glow */
+.focused.fd-slider-hover .fd-slider-handle { background:transparent url(chrome://pixelperfect/skin/images/slider-1.png) no-repeat 0px 0px;}
+/*body.W-resize-s * { cursor:pointer !important; }
+body.N-resize-s * { cursor:pointer !important; }*/
+
+
+/*************************************************************************************************/
+
+/* Firebug Tracing Console customization. All messages from this example use this color.
+   This helps to distinguish logs from those coming from Firebug
+   Rule syntax: .DBG_<ext-id>
+   See: http://getfirebug.com/wiki/index.php/FBTrace for more details */
+.DBG_PIXELPERFECT {
+    color: rgb(101, 0, 114);
+}

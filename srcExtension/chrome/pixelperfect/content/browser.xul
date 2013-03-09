@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE overlay SYSTEM "chrome://pixelperfect/locale/pixelperfect.dtd">
+
+
+<overlay id="status-bar-sample-1-overlay"
+         xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
+  
+  <statusbar id="status-bar">
+    <statusbarpanel id="ppStatusBar" context="ppStatusContextMenu" insertafter="fbStatusBar">
+      <image id="pixelPerfectIcon" tooltiptext="&pixelperfect.statusbar.tooltip;" onclick="if(!event.button) { Firebug.PixelPerfectModule.onClickIcon() }" />
+    </statusbarpanel>
+  </statusbar>
+</overlay>
