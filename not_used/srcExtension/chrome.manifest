@@ -1,7 +1,0 @@
-content  pixelperfect chrome/content/
-skin     pixelperfect classic/1.0   chrome/skin/classic/
-locale   pixelperfect en-US         chrome/locale/en-US/
-
-resource pixelperfect chrome/
-
-overlay chrome://firebug/content/firebugOverlay.xul         chrome://pixelperfect/content/mainOverlay.xul
