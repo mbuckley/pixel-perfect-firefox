@@ -177,9 +177,9 @@ FBL.ns(function() {
                   };
                 };
                 
-                addMenuOption('Hide Statusbar Icon', buildToggleBoolPrefFn(hideStatusBarPref), pixelPerfect.utils.getBoolPref(hideStatusBarPref));
-                addMenuOption('Hide Overlay When Inspecting', buildToggleBoolPrefFn(hideWhenFocusLostPref), pixelPerfect.utils.getBoolPref(hideWhenFocusLostPref));
-                
+                // addMenuOption('Hide Statusbar Icon', buildToggleBoolPrefFn(hideStatusBarPref), pixelPerfect.utils.getBoolPref(hideStatusBarPref));
+                // addMenuOption('Hide Overlay When Inspecting', buildToggleBoolPrefFn(hideWhenFocusLostPref), pixelPerfect.utils.getBoolPref(hideWhenFocusLostPref));
+                addMenuOption('Add Overlay', Firebug.PixelPerfectModule.addOverlay, false);
                 return menuOptions;
                 
             }
