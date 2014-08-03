@@ -1,3 +1,4 @@
 .project
 .DS_Store
-pixel-perfect.sublime-workspace
+*.sublime-workspace
+*.sublime-project
