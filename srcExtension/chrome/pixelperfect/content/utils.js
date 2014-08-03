@@ -10,11 +10,11 @@ pixelPerfect.utils = function () {
             element.src = url;
             return element;
         }
-        
+
         var overlayDivId = 'pp_overlay';
-        
+
         // public
-        return {             
+        return {
             shortenFileNameTo: function(fileName, length, ellipsesStr) {
                 if(fileName.length < length) {
                     return fileName;
@@ -27,11 +27,11 @@ pixelPerfect.utils = function () {
                     return newFileName;
                 }
             },
-            
+
             toggleStatusBar: function(bHide) {
             	FBL.window.document.getElementById('ppStatusBar').hidden = bHide;
             },
-            
+
             loadCss: function(url, doc) {
                 if ( ! doc ) {
                   doc = Firebug.currentContext.pixelperfectContext.browserDoc;
@@ -45,7 +45,7 @@ pixelPerfect.utils = function () {
 
                 return newCss;
             },
-            
+
             loadJs: function(url, doc) {
                 if ( ! doc ) {
                    doc = Firebug.currentContext.pixelPerfectContext.browserDoc;
@@ -57,7 +57,7 @@ pixelPerfect.utils = function () {
 
                 return element;
             },
-            
+
             loadRequiredJsIntoToMainBrowserOverlay: function() {
                 var doc = window._content.document;
                 var pageHead = doc.getElementsByTagName("head")[0];
@@ -66,7 +66,7 @@ pixelPerfect.utils = function () {
                     pageHead.appendChild(createJsElement('chrome://pixelperfect/content/browserscripts/' + scripts[i], doc));
                 }
             },
-            
+
             setVisibilityForOverlay: function(thePanelIsPixelPerfect) {
                 var x = window.content;
                 var pixelperfect = x.document.getElementById(overlayDivId);
@@ -78,7 +78,7 @@ pixelPerfect.utils = function () {
                   }
                 }
             },
-            
+
             createOverlayEyeElement: function(fileName, doc) {
             	var liId = "li_eye_" + fileName;
                 var currentEyeElement = doc.getElementById(liId);
@@ -127,7 +127,7 @@ pixelPerfect.utils = function () {
                   overlayList.appendChild(liElt);
                 }
             },
-            
+
             fireEyeClickEvent: function(eyeEleId, doc) {
             	var fireOnThisEye = doc.getElementById(eyeEleId);
             	if(fireOnThisEye != null && eyeEleId != undefined && eyeEleId != '') {
@@ -136,7 +136,7 @@ pixelPerfect.utils = function () {
 	            	fireOnThisEye.dispatchEvent(evObj);
             	}
             },
-            
+
             /**
              * Get a handle to a service.
              * @param {string} className The class name.
@@ -150,14 +150,14 @@ pixelPerfect.utils = function () {
               }
               return classObj.getService(ifaceObj);
             },
-            
+
             /**
              * Get the browser preferences object.
              */
             getPrefs: function() {
               return pixelPerfect.utils.CCSV('@mozilla.org/preferences-service;1', 'nsIPrefBranch');
             },
-            
+
             /**
              * Check if a boolean preference is set.  If so, return its value.
              * If not, return the default value passed as an argument.
@@ -174,7 +174,7 @@ pixelPerfect.utils = function () {
                 return opt_defaultValue || false;
               }
             },
-            
+
             /**
              * Set a boolean preference.  Create the pref if necessary, and overwrite
              * an existing pref if necessary.
@@ -184,5 +184,5 @@ pixelPerfect.utils = function () {
             setBoolPref: function(prefName, value) {
               pixelPerfect.utils.getPrefs().setBoolPref(prefName, value);
             }
-        };	
+        };
 }();

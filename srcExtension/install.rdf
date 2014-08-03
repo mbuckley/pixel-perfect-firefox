@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?><RDF xmlns="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:RDF="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:em="http://www.mozilla.org/2004/em-rdf#">
 	<RDF:Description about="urn:mozilla:install-manifest">
-		<em:name>Pixel Perfect</em:name>
+	<em:name>Pixel Perfect</em:name>
     <em:description>Make your web development Pixel Perfect</em:description>
     <em:creator>Mike Buckley</em:creator>
     <em:iconURL>chrome://pixelperfect/content/images/logo_32x32.png</em:iconURL>
-    <em:homepageURL>http://www.pixelperfectplugin.com/</em:homepageURL>
+    <em:homepageURL>https://github.com/ibuck/pixel-perfect-firefox/</em:homepageURL>
 		<em:id>pixelperfectplugin@openhouseconcepts.com</em:id>
 		<em:version>1.8.1</em:version>
 		<em:type>2</em:type>
