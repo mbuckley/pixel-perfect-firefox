@@ -29,7 +29,7 @@ pixelPerfect.utils = function () {
             },
             
             toggleStatusBar: function(bHide) {
-            	FirebugChrome.window.document.getElementById('ppStatusBar').hidden = bHide;
+            	FBL.window.document.getElementById('ppStatusBar').hidden = bHide;
             },
             
             loadCss: function(url, doc) {
