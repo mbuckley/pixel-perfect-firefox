@@ -1,4 +1,4 @@
-## Pixel Perfect Firebug Extension
+Pixel Perfect Firebug Extension
 
 Pixel Perfect is a Firefox/Firebug extension that allows web developers and designers to easily overlay a web
 composition over top of the developed HTML.
@@ -6,6 +6,6 @@ composition over top of the developed HTML.
 
 Pixel Perfect extension has been originally introduced for Firebug. This new version is built on top of native Firefox developer tools with improved user experience and features. Among other things, remote devices such as mobile phones also supported. Enjoy!
 
-[New PixelPerfect GitHub Home](https://github.com/firebug/pixel-perfect)
+New PixelPerfect GitHub Home - https://github.com/firebug/pixel-perfect
 
-(Official Mozilla Addons Page)[https://addons.mozilla.org/en-US/firefox/addon/7943]
+Official Mozilla Addons Page - https://addons.mozilla.org/en-US/firefox/addon/7943
